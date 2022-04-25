@@ -1,0 +1,34 @@
+# OS
+.DS_Store
+
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+build.gradle
+changelog.txt
+.gradle
+gradle
+gradle.properties
+gradlew
+gradlew.bat
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
