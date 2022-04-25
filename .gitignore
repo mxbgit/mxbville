@@ -29,6 +29,8 @@ gradlew.bat
 # other
 eclipse
 run
+CREDITS.txt
+LICENSE*
 
 # Files from Forge MDK
 forge*changelog.txt
