@@ -1,6 +1,7 @@
 package mxbville.common.events;
 
 import mxbville.common.calc.math.MxRand;
+import mxbville.common.config.MxBvilleConfig;
 import mxbville.common.items.ModItems;
 import mxbville.common.player.ExtendedPlayerProperties;
 import net.minecraft.entity.monster.EntityMob;
@@ -43,12 +44,12 @@ public class EventCoinsFound {
 			event.getEntityLiving() instanceof EntityMob && 
 			event.getSource().getTrueSource() instanceof EntityPlayer)
 		{
-			//if( CONFIG_FILE.DropCoinsOnKill){
+			if(MxBvilleConfig.killMobsDropCoins){
 				int l =  ExtendedPlayerProperties.get((EntityPlayer)event.getSource().getTrueSource()).treasureHuntLevel;
 				int base = l * 2 + 1;
 				int add = l + 3;
 				event.getEntityLiving().dropItem(ModItems.COIN_BRONZE, MxRand.get().nextInt(add) + base);
-			//}
+			}
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class EventCoinsFound {
 	{
 		if(!event.getWorld().isRemote && event.getHarvester() != null)
 		{
-			//if( CONFIG_FILE.DropCoinsOnKill){
+			if(MxBvilleConfig.destroyBlocksDropCoins){
 				// arbitrary 1 out of 5 calculation
 				if(MxRand.get().nextInt(5) == 0)
 				{
@@ -77,7 +78,7 @@ public class EventCoinsFound {
 						event.getDrops().add(new ItemStack(ModItems.COIN_BRONZE, MxRand.get().nextInt(add) + base));
 					}
 				}
-			//}
+			}
 		}
 	}
 }

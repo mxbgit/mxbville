@@ -1,4 +1,5 @@
 package mxbville.common;
+import mxbville.common.config.MxBvilleConfig;
 import mxbville.common.events.EventCoinsFound;
 import mxbville.common.events.EventEntity;
 import mxbville.common.player.CapExPlayerProperties;
@@ -14,6 +15,8 @@ public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		//config
+		MxBvilleConfig.load(event.getModConfigurationDirectory());
 		
 		//capability
 		CapExPlayerProperties.register();
