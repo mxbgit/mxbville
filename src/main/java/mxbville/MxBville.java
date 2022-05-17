@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import mxbville.common.CommonProxy;
 import mxbville.util.MxRef;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,7 +18,10 @@ public class MxBville {
 	
 	public static MxBville instance;
 	
-	//tabs
+	public static CreativeTabs BLOCKTAB 	= new MxBVilleTabs(CreativeTabs.getNextID(), "blocktab", 1);
+	public static CreativeTabs ITEMTAB 		= new MxBVilleTabs(CreativeTabs.getNextID(), "itemtab", 2);
+	public static CreativeTabs SPECIALTAB 	= new MxBVilleTabs(CreativeTabs.getNextID(), "specialtab", 3);
+
 	
     public static final Logger LOGGER = LogManager.getLogger(MxRef.MOD_ID);
 

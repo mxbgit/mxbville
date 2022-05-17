@@ -13,7 +13,7 @@ public class ItemBase extends Item implements IHasModel {
 	{
 		this.setUnlocalizedName(MxRef.MOD_ID + "." + name);
 		this.setRegistryName(name);
-		this.setCreativeTab(CreativeTabs.REDSTONE);
+		this.setCreativeTab(MxBville.ITEMTAB);
 		ModelRegister.LIST.add(this);
 	}
 	
