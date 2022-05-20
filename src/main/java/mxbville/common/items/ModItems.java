@@ -1,6 +1,7 @@
 package mxbville.common.items;
 
 import mxbville.common.items.coins.ItemCoin;
+import mxbville.common.items.coins.ItemWalletSmall;
 import mxbville.util.MxRef;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,6 +16,9 @@ public class ModItems {
 	public static final Item COIN_SILVER = null;
 	public static final Item COIN_GOLD	 = null;
 	
+	public static final Item WALLET_SMALL = null;
+	
+	
 	@EventBusSubscriber(modid = MxRef.MOD_ID)
 	public static class RegistrationHandler
 	{
@@ -25,7 +29,8 @@ public class ModItems {
 						final Item[] items = {
 							new ItemCoin("coin_bronze"),
 							new ItemCoin("coin_silver"),
-							new ItemCoin("coin_gold"),	
+							new ItemCoin("coin_gold"),
+							new ItemWalletSmall("wallet_small")
 						};
 						
 						event.getRegistry().registerAll(items);
