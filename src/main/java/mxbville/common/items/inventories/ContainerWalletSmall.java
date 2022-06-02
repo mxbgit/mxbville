@@ -18,8 +18,8 @@ public class ContainerWalletSmall extends Container {
     private static final int NUM_ROWS = 2;
     private static final int NUM_COLS = 5;
     
-    private final static int X_START = 30;
-    private final static int Y_START = 10;
+    private final static int X_START = 42;
+    private final static int Y_START = 32;
     private final static int SLOTSIZE_OFFSET = 18;
     
 	public ContainerWalletSmall(EntityPlayer par1Player, InventoryPlayer playerInventory, IItemHandler itemInventory)

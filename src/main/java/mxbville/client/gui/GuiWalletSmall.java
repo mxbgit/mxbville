@@ -9,7 +9,7 @@ public class GuiWalletSmall extends GuiContainer {
     public static final int WIDTH = 175;
     public static final int HEIGHT = 160;
     // Location of the gui
-    private static final ResourceLocation background = new ResourceLocation(MxRef.MOD_ID, "textures/gui/wallet/wallet_small.png");
+    private static final ResourceLocation background = new ResourceLocation(MxRef.MOD_ID, "textures/gui/wallet/wallet_small_gui.png");
 
 	public GuiWalletSmall(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
