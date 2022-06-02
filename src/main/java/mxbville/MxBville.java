@@ -8,6 +8,7 @@ import mxbville.util.MxRef;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = MxRef.MOD_ID, name = MxRef.NAME, version = MxRef.VERSION, acceptedMinecraftVersions = MxRef.MC_VERSION)
 public class MxBville {
 	
+	@Instance
 	public static MxBville instance;
 	
 	public static CreativeTabs BLOCKTAB 	= new MxBVilleTabs(CreativeTabs.getNextID(), "blocktab", 1);

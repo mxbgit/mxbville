@@ -1,3 +1,7 @@
+language.name=English
+language.region=US
+language.code=en_US
+
 item.mxbville.coin_bronze.name=Bronze Coin
 item.mxbville.coin_silver.name=Silver Coin
 item.mxbville.coin_gold.name=Gold Coin
@@ -7,3 +11,5 @@ item.mxbville.wallet_small.name=Purse
 itemGroup.blocktab=Blocks
 itemGroup.itemtab=Items
 itemGroup.specialtab=Specials
+
+mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
