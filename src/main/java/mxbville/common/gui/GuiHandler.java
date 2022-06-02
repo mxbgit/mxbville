@@ -1,8 +1,9 @@
 package mxbville.common.gui;
 
-import mxbville.client.gui.GuiWalletSmall;
+import mxbville.client.gui.GuiWallet;
+import mxbville.common.items.coins.ItemWallet;
 import mxbville.common.items.coins.ItemWalletSmall;
-import mxbville.common.items.inventories.ContainerWalletSmall;
+import mxbville.common.items.inventories.ContainerWallet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -24,12 +25,16 @@ public class GuiHandler implements IGuiHandler{
 			
 			switch(ID) {
 				case GUIIDList.WALLET_SMALL: 
-					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWalletSmall)
-			        {
+				case GUIIDList.WALLET_LARGE: 
+					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWallet)
+					 {
+						int rows 	= ((ItemWallet) heldItemStack.getItem()).getInventoryRows();
+						int columns = ((ItemWallet) heldItemStack.getItem()).getInventoryCols();
+
 					    IItemHandler walletInventory = heldItemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 			            if (walletInventory != null)
 			            {
-			                return new ContainerWalletSmall(player, player.inventory, walletInventory);
+			                return new ContainerWallet(player.inventory, walletInventory, rows, columns);
 			            }
 			        }
 					break;
@@ -50,12 +55,16 @@ public class GuiHandler implements IGuiHandler{
 			
 			switch(ID) {
 				case GUIIDList.WALLET_SMALL: 
-					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWalletSmall)
+				case GUIIDList.WALLET_LARGE: 
+					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWallet)
 			        {
+						int rows 	= ((ItemWallet) heldItemStack.getItem()).getInventoryRows();
+						int columns = ((ItemWallet) heldItemStack.getItem()).getInventoryCols();
+
 					    ItemStackHandler walletInventory = (ItemStackHandler) heldItemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 				        if (walletInventory != null)
 				        {
-				        	return new GuiWalletSmall(new ContainerWalletSmall(player, player.inventory, walletInventory));
+				        	return new GuiWallet(new ContainerWallet(player.inventory, walletInventory, rows, columns), ID);
 				        }
 			        }
 					break;

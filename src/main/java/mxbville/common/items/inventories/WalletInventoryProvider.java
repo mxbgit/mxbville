@@ -14,8 +14,8 @@ public class WalletInventoryProvider implements ICapabilitySerializable {
 
 	private final ItemStackHandler inventory;
 
-	public WalletInventoryProvider(int size) {
-		inventory = new ItemStackHandler(size);
+	public WalletInventoryProvider(int inventoryRows, int inventoryColumns) {
+		inventory = new ItemStackHandler(inventoryRows * inventoryColumns);
 	}
 	
 	@Override

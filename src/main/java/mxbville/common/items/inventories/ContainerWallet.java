@@ -12,18 +12,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerWalletSmall extends Container {
+public class ContainerWallet extends Container {
 
-	// fixed row and column count
-    private static final int NUM_ROWS = 2;
-    private static final int NUM_COLS = 5;
+    private int numRows;
+    private int numCols;
     
     private final static int X_START = 42;
     private final static int Y_START = 32;
     private final static int SLOTSIZE_OFFSET = 18;
     
-	public ContainerWalletSmall(EntityPlayer par1Player, InventoryPlayer playerInventory, IItemHandler itemInventory)
+	public ContainerWallet(InventoryPlayer playerInventory, IItemHandler itemInventory, int numRows, int numCols)
 	{
+		this.numRows = numRows;
+		this.numCols = numCols;
 		
 		addStorageSlots(itemInventory);
         addPlayerSlots(playerInventory);
@@ -55,9 +56,11 @@ public class ContainerWalletSmall extends Container {
     {
     	int slotIndex = 0;
         
-        for (int i = 0; i < NUM_ROWS; i++)
+    	// TODO: adjust Start Coords depending on the number of rows and cols
+    	
+        for (int i = 0; i < this.numRows; i++)
         {
-            for (int j = 0; j < NUM_COLS; j++)
+            for (int j = 0; j < this.numCols; j++)
             {
                 int x = X_START + (SLOTSIZE_OFFSET * j);
                 int y = Y_START + (SLOTSIZE_OFFSET * i);
@@ -73,7 +76,7 @@ public class ContainerWalletSmall extends Container {
     {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-        int inventoryMaxSize = NUM_ROWS * NUM_COLS;
+        int inventoryMaxSize = this.numRows * this.numCols;
         
 
         if (slot != null && slot.getHasStack()) {
