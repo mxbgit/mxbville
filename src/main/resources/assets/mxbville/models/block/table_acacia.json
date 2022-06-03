@@ -1,0 +1,9 @@
+{
+	"parent": "mxbville:block/table",
+    "textures": {
+		"particle": "blocks/log_acacia_top",
+        "surface_top": "blocks/log_acacia_top",
+		"surface_side": "blocks/planks_acacia",
+        "leg": "blocks/planks_acacia"
+    }
+}

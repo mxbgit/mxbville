@@ -1,0 +1,9 @@
+{
+	"parent": "mxbville:block/table",
+    "textures": {
+		"particle": "blocks/log_jungle_top",
+        "surface_top": "blocks/log_jungle_top",
+		"surface_side": "blocks/planks_jungle",
+        "leg": "blocks/planks_jungle"
+    }
+}

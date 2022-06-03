@@ -1,0 +1,8 @@
+{
+  "parent": "mxbville:custom/barspanel_top",
+  "textures": {
+    "particle": "mxbville:blocks/barspanel_side",
+    "side": "mxbville:blocks/barspanel_side",
+    "end": "mxbville:blocks/barspanel_end"
+  }
+}

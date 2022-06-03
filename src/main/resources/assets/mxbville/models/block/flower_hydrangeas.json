@@ -1,0 +1,7 @@
+{
+    "parent": "mxbville:block/flower_in_pot",
+    "textures": {
+        "plant": "mxbville:blocks/flower_hydrangeas",
+		"flowerpot": "blocks/quartz_block_lines"
+    }
+}

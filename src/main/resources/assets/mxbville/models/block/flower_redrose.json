@@ -1,0 +1,7 @@
+{
+    "parent": "mxbville:block/flower_in_pot",
+    "textures": {
+        "plant": "mxbville:blocks/flower_redrose",
+		"flowerpot": "blocks/log_birch"
+    }
+}

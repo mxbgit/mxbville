@@ -1,15 +1,42 @@
 language.name=English
 language.region=US
 language.code=en_US
-
+================================================================================
+	PROFESSIONS 
+================================================================================
+================================================================================
+	ITEMS 
+================================================================================
 item.mxbville.coin_bronze.name=Bronze Coin
 item.mxbville.coin_silver.name=Silver Coin
 item.mxbville.coin_gold.name=Gold Coin
 item.mxbville.wallet_small.name=Purse
-
-
+================================================================================
+	BLOCKS 
+================================================================================
+tile.mxbville:barspanel.name=Steel Bars
+tile.mxbville:table_acacia.name=Acacia Table
+tile.mxbville:table_oak.name=Oak Table
+tile.mxbville:table_darkoak.name=Darkoak Table
+tile.mxbville:table_jungle.name=Junglewood Table
+tile.mxbville:table_birch.name=BirchTable
+tile.mxbville:table_spruce.name=Spruce Table
+tile.mxbville:flower_redrose.name=Red Rose
+tile.mxbville:flower_heartmushroom.name=Heart Mushroom
+tile.mxbville:flower_hydrangeas.name=Hydrangeas
+tile.mxbville:flower_plumblossom.name=Plumblossom
+tile.mxbville:flower_ranunculus.name=Ranunculus
+tile.mxbville:flower_rosyspiraea.name=Rosyspiraea
+tile.mxbville:flower_gardenia.name=Gardenia
+tile.mxbville:flower_bonsai.name=Bonsai
+================================================================================
+	GUI 
+================================================================================
 itemGroup.blocktab=Blocks
 itemGroup.itemtab=Items
 itemGroup.specialtab=Specials
 
+================================================================================
+	INFO
+================================================================================
 mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
