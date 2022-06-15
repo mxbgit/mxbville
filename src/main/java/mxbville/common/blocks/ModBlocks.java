@@ -2,6 +2,7 @@ package mxbville.common.blocks;
 
 import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
+import mxbville.common.blocks.decorative.BlockStep;
 import mxbville.common.blocks.decorative.BlockTable;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
@@ -32,6 +33,15 @@ public class ModBlocks {
 	public static final BlockTable TABLE_OAK 					= null;
 	public static final BlockTable TABLE_SPRUCE 				= null;
 	
+	public static final BlockStep STEP_ACACIA 				= null;
+	public static final BlockStep STEP_BIRCH 				= null;
+	public static final BlockStep STEP_DARK_OAK 			= null;
+	public static final BlockStep STEP_JUNGLE 				= null;
+	public static final BlockStep STEP_OAK 					= null;
+	public static final BlockStep STEP_SPRUCE 				= null; 
+	
+
+	
 	@EventBusSubscriber(modid = MxRef.MOD_ID)
 	public static class BlockFullRegistrationHandler {
 	
@@ -52,7 +62,13 @@ public class ModBlocks {
 					new BlockTable("table_darkoak"),
 					new BlockTable("table_jungle"),
 					new BlockTable("table_oak"), 	
-					new BlockTable("table_spruce")
+					new BlockTable("table_spruce"),
+					new BlockStep("step_acacia"),
+					new BlockStep("step_birch"),
+					new BlockStep("step_dark_oak"),
+					new BlockStep("step_jungle"),
+					new BlockStep("step_oak"),
+					new BlockStep("step_spruce") 
 			};
 			
 			event.getRegistry().registerAll(blocks);
@@ -75,7 +91,14 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.TABLE_DARKOAK).setRegistryName(ModBlocks.TABLE_DARKOAK.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_JUNGLE).setRegistryName(ModBlocks.TABLE_JUNGLE.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_OAK).setRegistryName(ModBlocks.TABLE_OAK.getRegistryName()),
-					new ItemBlock(ModBlocks.TABLE_SPRUCE).setRegistryName(ModBlocks.TABLE_SPRUCE.getRegistryName())
+					new ItemBlock(ModBlocks.TABLE_SPRUCE).setRegistryName(ModBlocks.TABLE_SPRUCE.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_ACACIA).setRegistryName(ModBlocks.STEP_ACACIA.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_BIRCH).setRegistryName(ModBlocks.STEP_BIRCH.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_DARK_OAK).setRegistryName(ModBlocks.STEP_DARK_OAK.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_JUNGLE).setRegistryName(ModBlocks.STEP_JUNGLE.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_OAK).setRegistryName(ModBlocks.STEP_OAK.getRegistryName()),
+					new ItemBlock(ModBlocks.STEP_SPRUCE).setRegistryName(ModBlocks.STEP_SPRUCE.getRegistryName()) 
+					
 			};
 			
 			event.getRegistry().registerAll(block_items);

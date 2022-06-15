@@ -1,0 +1,7 @@
+{
+  "parent": "mxbville:custom/step_blockitem",
+  "textures": {
+    "particle": "mxbville:blocks/step_birch",
+    "texture": "mxbville:blocks/step_birch"
+  }
+}
