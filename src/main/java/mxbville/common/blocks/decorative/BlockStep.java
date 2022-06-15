@@ -37,14 +37,13 @@ public class BlockStep extends BlockFacing {
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
 		EnumFacing facing = state.getValue(FACING);
-	    
 	    boolean attached = state.getValue(ATTACHED);
-        switch (facing){
-            case NORTH:case SOUTH:
-               return (attached) ? SEAT_SHAPE_NS : JOIST_SHAPE_NS;
-            case EAST:case WEST:
-               return (attached) ? SEAT_SHAPE_EW : JOIST_SHAPE_EW;
-        }
+	    if (facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ) {
+	    	return (attached) ? SEAT_SHAPE_NS : JOIST_SHAPE_NS;
+	    }
+	    if (facing == EnumFacing.EAST || facing == EnumFacing.WEST ) {
+	    	return (attached) ? SEAT_SHAPE_EW : JOIST_SHAPE_EW;
+	    }
         return SEAT_SHAPE_NS;
     }
 	

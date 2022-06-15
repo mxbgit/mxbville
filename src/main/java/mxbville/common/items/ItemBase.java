@@ -4,7 +4,6 @@ import mxbville.MxBville;
 import mxbville.util.IHasModel;
 import mxbville.util.ModelRegister;
 import mxbville.util.MxRef;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ItemBase extends Item implements IHasModel {
