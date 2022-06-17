@@ -4,8 +4,10 @@ import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
 import mxbville.common.blocks.decorative.BlockStep;
 import mxbville.common.blocks.decorative.BlockTable;
+import mxbville.common.blocks.food.BlockMxBCake;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -32,6 +34,8 @@ public class ModBlocks {
 	public static final BlockTable TABLE_JUNGLE 				= null;
 	public static final BlockTable TABLE_OAK 					= null;
 	public static final BlockTable TABLE_SPRUCE 				= null;
+	
+	public static final BlockMxBCake CAKE_DOMINO				= null;
 	
 	public static final BlockStep STEP_ACACIA 				= null;
 	public static final BlockStep STEP_BIRCH 				= null;
@@ -63,6 +67,7 @@ public class ModBlocks {
 					new BlockTable("table_jungle"),
 					new BlockTable("table_oak"), 	
 					new BlockTable("table_spruce"),
+					new BlockMxBCake("domino").setFoodLevel(4).setSaturationLevel(6.0F).setPositiveEffect(MobEffects.SPEED),
 					new BlockStep("step_acacia"),
 					new BlockStep("step_birch"),
 					new BlockStep("step_dark_oak"),
@@ -92,6 +97,7 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.TABLE_JUNGLE).setRegistryName(ModBlocks.TABLE_JUNGLE.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_OAK).setRegistryName(ModBlocks.TABLE_OAK.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_SPRUCE).setRegistryName(ModBlocks.TABLE_SPRUCE.getRegistryName()),
+					new ItemBlock(ModBlocks.CAKE_DOMINO).setRegistryName(ModBlocks.CAKE_DOMINO.getRegistryName()),
 					new ItemBlock(ModBlocks.STEP_ACACIA).setRegistryName(ModBlocks.STEP_ACACIA.getRegistryName()),
 					new ItemBlock(ModBlocks.STEP_BIRCH).setRegistryName(ModBlocks.STEP_BIRCH.getRegistryName()),
 					new ItemBlock(ModBlocks.STEP_DARK_OAK).setRegistryName(ModBlocks.STEP_DARK_OAK.getRegistryName()),
