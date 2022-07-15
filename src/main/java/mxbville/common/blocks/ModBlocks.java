@@ -4,6 +4,9 @@ import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
 import mxbville.common.blocks.decorative.BlockStep;
 import mxbville.common.blocks.decorative.BlockTable;
+import mxbville.common.blocks.food.BlockCornplant;
+import mxbville.common.blocks.food.BlockCornplantMid;
+import mxbville.common.blocks.food.BlockCornplantTop;
 import mxbville.common.blocks.food.BlockMxBCake;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
@@ -19,6 +22,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 public class ModBlocks {
 
 	public static final BlockBarsPanel BARSPANEL				= null;
+	
+	public static final BlockCornplant CORNPLANT			= null; 
+	public static final BlockCornplantMid CORNPLANT_MID 	= null; 
+	public static final BlockCornplantTop CORNPLANT_TOP 	= null;
+	
 	public static final BlockFlowerInPot FLOWER_REDROSE			= null; 	
 	public static final BlockFlowerInPot FLOWER_HEARTMUSHROOM	= null; 
 	public static final BlockFlowerInPot FLOWER_HYDRANGEAS		= null; 
@@ -53,6 +61,9 @@ public class ModBlocks {
 		public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 			final Block[] blocks = {
 					new BlockBarsPanel(),
+					new BlockCornplant().setRegistryName("cornplant").setUnlocalizedName(MxRef.MOD_ID + ":cornplant"), 
+					new BlockCornplantMid().setRegistryName("cornplant_mid").setUnlocalizedName(MxRef.MOD_ID + ":cornplant_mid"), 
+					new BlockCornplantTop().setRegistryName("cornplant_top").setUnlocalizedName(MxRef.MOD_ID + ":cornplant_top"), 
 					new BlockFlowerInPot("flower_redrose"),	
 					new BlockFlowerInPot("flower_heartmushroom"), 
 					new BlockFlowerInPot("flower_hydrangeas"), 

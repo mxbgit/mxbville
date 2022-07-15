@@ -98,7 +98,6 @@ public class BlockMxBCake extends BlockCake implements IHasModel
 	@Override
 	public void registerModels() {
 		MxBville.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0);
-		
 	}
 
 }

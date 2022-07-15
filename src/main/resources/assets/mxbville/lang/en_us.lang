@@ -7,9 +7,13 @@ language.code=en_US
 ================================================================================
 	ITEMS 
 ================================================================================
+item.mxbville.apple_slice.name=Apple Slice
 item.mxbville.coin_bronze.name=Bronze Coin
 item.mxbville.coin_silver.name=Silver Coin
 item.mxbville.coin_gold.name=Gold Coin
+item.mxbville.corn_seed.name=Corn Seeds
+item.mxbville.corn_horse.name=Corn
+item.mxbville.sugar_lumps.name=Sugar lumps
 item.mxbville.wallet_small.name=Purse
 ================================================================================
 	BLOCKS 
@@ -29,6 +33,7 @@ tile.mxbville:flower_ranunculus.name=Ranunculus
 tile.mxbville:flower_rosyspiraea.name=Rosyspiraea
 tile.mxbville:flower_gardenia.name=Gardenia
 tile.mxbville:flower_bonsai.name=Bonsai
+tile.mxbville:cake_domino.name=Chocolate Cake
 ================================================================================
 	GUI 
 ================================================================================
@@ -40,3 +45,6 @@ itemGroup.specialtab=Specials
 	INFO
 ================================================================================
 mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
+mxbville:corn_horse.item.info=§7Especially good food for horses§7.
+mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§7.
+mxbville:apple_slice.item.info=§7Makes horselegs stronger§7.
