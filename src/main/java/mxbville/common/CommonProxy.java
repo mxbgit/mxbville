@@ -1,9 +1,11 @@
 package mxbville.common;
 import mxbville.MxBville;
 import mxbville.common.config.MxBvilleConfig;
+import mxbville.common.config.jsondata.JsonDataManager;
 import mxbville.common.events.EventCoinsFound;
 import mxbville.common.events.EventEntity;
 import mxbville.common.gui.GuiHandler;
+import mxbville.common.network.ModNetwork;
 import mxbville.common.player.CapExPlayerProperties;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,6 +22,12 @@ public class CommonProxy {
 	{
 		//config
 		MxBvilleConfig.load(event.getModConfigurationDirectory());
+		
+		// load villager data from json
+		JsonDataManager.LoadData(event.getModConfigurationDirectory());
+		
+		//messages
+		ModNetwork.init();
 		
 		//gui
 		NetworkRegistry.INSTANCE.registerGuiHandler(MxBville.instance, new GuiHandler());
