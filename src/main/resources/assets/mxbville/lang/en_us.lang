@@ -7,6 +7,8 @@ language.code=en_US
 ================================================================================
 	ITEMS 
 ================================================================================
+item.mxbville.letter_invitation.name=Invitation Letter
+item.mxbville.letter_reply.name=Reply Letter
 item.mxbville.apple_slice.name=Apple Slice
 item.mxbville.coin_bronze.name=Bronze Coin
 item.mxbville.coin_silver.name=Silver Coin
@@ -48,3 +50,4 @@ mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
 mxbville:corn_horse.item.info=§7Especially good food for horses§7.
 mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§7.
 mxbville:apple_slice.item.info=§7Makes horselegs stronger§7.
+mxbville:invitation.item.info=§7"Dear Unknown Friend, welcome..."

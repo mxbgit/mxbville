@@ -1,0 +1,153 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "canopy_texture": "mxbville:blocks/mailboxtexture",
+        "particle": "mxbville:blocks/mailboxtexture"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.4, 0.4, 0.4 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "top_4",
+            "from": [ 4, 7, 0 ], 
+            "to": [ 12, 8, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 1 ] },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 1 ] },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 16 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 16 ] }
+            }
+        },
+        {
+            "name": "top_3",
+            "from": [ 5, 8, 0 ], 
+            "to": [ 11, 9, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 6, 1 ] },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 6, 1 ] },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 6, 16 ] }
+            }
+        },
+        {
+            "name": "top_last",
+            "from": [ 6, 9, 0 ], 
+            "to": [ 10, 10, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 4, 1 ] },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 4, 16 ] }
+            }
+        },
+        {
+            "name": "frame_bot",
+            "from": [ 4, 0, 0 ], 
+            "to": [ 12, 1, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 1 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 1 ] },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 16 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 16 ] }
+            }
+        },
+        {
+            "name": "frame_w",
+            "from": [ 3, 0, 0 ], 
+            "to": [ 4, 7, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 7 ], "rotation": 90 },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 7 ], "rotation": 90 },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 7 ], "rotation": 90 },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 7 ], "rotation": 90 },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 16 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 16 ] }
+            }
+        },
+        {
+            "name": "frame_e",
+            "from": [ 12, 0, 0 ], 
+            "to": [ 13, 7, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 8, 2, 9, 9 ], "rotation": 90 },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 7 ], "rotation": 90 },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 6, 1, 13 ], "rotation": 90 },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 7 ], "rotation": 90 },
+                "up": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 16 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 16 ] }
+            }
+        },
+        {
+            "name": "frame_corner_w",
+            "from": [ 4, 6, 0 ], 
+            "to": [ 5, 7, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 8, 3, 9, 4 ], "tintindex": 0 },
+                "east": { "texture": "#canopy_texture", "uv": [ 0, 6, 16, 7 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 2, 4, 3, 5 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 10, 0, 11, 16 ] }
+            }
+        },
+        {
+            "name": "frame_corner_e",
+            "from": [ 11, 6, 0 ], 
+            "to": [ 12, 7, 16 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 1 ] },
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#canopy_texture", "uv": [ 0, 0, 16, 1 ] },
+                "down": { "texture": "#canopy_texture", "uv": [ 0, 0, 1, 16 ] }
+            }
+        },
+        {
+            "name": "back_inner",
+            "from": [ 4, 1, 1 ], 
+            "to": [ 12, 7, 2 ], 
+            "faces": {
+                "north": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 6 ] }
+            }
+        },
+        {
+            "name": "front_inner",
+            "from": [ 4, 1, 14 ], 
+            "to": [ 12, 7, 15 ], 
+            "faces": {
+                "south": { "texture": "#canopy_texture", "uv": [ 0, 0, 8, 6 ] }
+            }
+        }
+    ]
+}

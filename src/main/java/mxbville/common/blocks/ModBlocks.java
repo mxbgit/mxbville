@@ -1,7 +1,9 @@
 package mxbville.common.blocks;
 
+import mxbville.common.blocks.crafting.BlockLetterStation;
 import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
+import mxbville.common.blocks.decorative.BlockMailBox;
 import mxbville.common.blocks.decorative.BlockStep;
 import mxbville.common.blocks.decorative.BlockTable;
 import mxbville.common.blocks.food.BlockCornplant;
@@ -21,7 +23,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(MxRef.MOD_ID)
 public class ModBlocks {
 
-	public static final BlockBarsPanel BARSPANEL				= null;
+	public static final BlockBarsPanel BARSPANEL			= null;
 	
 	public static final BlockCornplant CORNPLANT			= null; 
 	public static final BlockCornplantMid CORNPLANT_MID 	= null; 
@@ -36,6 +38,10 @@ public class ModBlocks {
 	public static final BlockFlowerInPot FLOWER_ROSYSPIRAEA		= null; 
 	public static final BlockFlowerInPot FLOWER_GARDENIA		= null; 
 	public static final BlockFlowerInPot FLOWER_BONSAI 			= null; 
+	
+	public static final BlockLetterStation LETTERSTATION 		= null;
+	public static final Block MAILBOX 							= null;
+	
 	public static final BlockTable TABLE_ACACIA 				= null;
 	public static final BlockTable TABLE_BIRCH 					= null;	
 	public static final BlockTable TABLE_DARKOAK 				= null;
@@ -72,6 +78,8 @@ public class ModBlocks {
 					new BlockFlowerInPot("flower_rosyspiraea"), 
 					new BlockFlowerInPot("flower_gardenia"),
 					new BlockFlowerInPot("flower_bonsai"),
+					new BlockLetterStation(),
+					new BlockMailBox(),
 					new BlockTable("table_acacia"), 
 					new BlockTable("table_birch"), 
 					new BlockTable("table_darkoak"),
@@ -102,6 +110,8 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.FLOWER_ROSYSPIRAEA).setRegistryName(ModBlocks.FLOWER_ROSYSPIRAEA.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_GARDENIA).setRegistryName(ModBlocks.FLOWER_GARDENIA.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_BONSAI).setRegistryName(ModBlocks.FLOWER_BONSAI.getRegistryName()),
+					new ItemBlock(ModBlocks.LETTERSTATION).setRegistryName(ModBlocks.LETTERSTATION.getRegistryName()),
+					new ItemBlock(ModBlocks.MAILBOX).setRegistryName(ModBlocks.MAILBOX.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_ACACIA).setRegistryName(ModBlocks.TABLE_ACACIA.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_BIRCH).setRegistryName(ModBlocks.TABLE_BIRCH.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_DARKOAK).setRegistryName(ModBlocks.TABLE_DARKOAK.getRegistryName()),
@@ -115,7 +125,6 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.STEP_JUNGLE).setRegistryName(ModBlocks.STEP_JUNGLE.getRegistryName()),
 					new ItemBlock(ModBlocks.STEP_OAK).setRegistryName(ModBlocks.STEP_OAK.getRegistryName()),
 					new ItemBlock(ModBlocks.STEP_SPRUCE).setRegistryName(ModBlocks.STEP_SPRUCE.getRegistryName()) 
-					
 			};
 			
 			event.getRegistry().registerAll(block_items);
