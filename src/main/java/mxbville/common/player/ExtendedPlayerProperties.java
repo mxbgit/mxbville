@@ -10,10 +10,10 @@ import net.minecraft.world.World;
 
 public class ExtendedPlayerProperties {
 	
-	public static final ResourceLocation key = new ResourceLocation(MxRef.MOD_ID + ".expp");
+	public static final ResourceLocation key 				= new ResourceLocation(MxRef.MOD_ID + ".expp");
+	public static final int 			 NewMailTimerTotal 	= 800; // Default 2000
 	public EntityPlayer 	player;
 	public int 				treasureHuntLevel;
-	public static final int NewMailTimerTotal = 2000;
 	public boolean 			hasSentInvitation;
 	public int 				newMailTimer;
 

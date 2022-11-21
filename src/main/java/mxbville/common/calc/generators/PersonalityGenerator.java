@@ -1,5 +1,9 @@
 package mxbville.common.calc.generators;
+import java.util.ArrayList;
 import java.util.Random;
+
+import mxbville.common.calc.math.MxRand;
+import mxbville.common.config.jsondata.JsonDataManager;
 
 
 public class PersonalityGenerator {
@@ -363,7 +367,8 @@ public class PersonalityGenerator {
 		return femaleNames[rand.nextInt(femaleNames.length)];
 	}
 	
-	public static int getRandomTrait(){
-		return rand.nextInt(14);
+	public static String getRandomTrait(){
+		ArrayList<String> list = JsonDataManager.GetProfessionList();
+		return list.get(MxRand.get().nextInt(list.size()));
 	}
 }

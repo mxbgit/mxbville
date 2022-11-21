@@ -7,6 +7,7 @@ import mxbville.common.events.EventEntity;
 import mxbville.common.gui.GuiHandler;
 import mxbville.common.network.ModNetwork;
 import mxbville.common.player.CapExPlayerProperties;
+import mxbville.common.village.profession.Profession;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -42,7 +43,7 @@ public class CommonProxy {
 	
 	public void init(FMLInitializationEvent event)
 	{
-
+		Profession.init();
 	}
 	
 	public void postInit(FMLPostInitializationEvent event)

@@ -48,7 +48,7 @@ public class BlockMailBox extends BlockFacing
 									float hitY, 
 									float hitZ) 
 	{
-		if(!worldIn.isRemote){
+		if(!worldIn.isRemote) {
 			// Invitation in Mainhand
 			if (playerIn.getHeldItem(hand) != null && playerIn.getHeldItem(hand).getItem() == ModItems.LETTER_INVITATION)
 			{
@@ -72,25 +72,8 @@ public class BlockMailBox extends BlockFacing
 				if(ExtendedPlayerProperties.get(playerIn).hasNewVillagerMail()){
 					// reset the "hasNewVillagerMail" property
 					ExtendedPlayerProperties.get(playerIn).receiveNewVillagerMail();
-					// generate mail
-					ItemStack mail = ReplyMailGenerator.generate(); 
-					// drop mail item
-					double x = (double)pos.getX() + 0.5D;
-					double y = (double)pos.getY() + 0.5D;
-					double z = (double)pos.getZ() + 0.5D;
-					EntityItem entityitem = new EntityItem(worldIn, x, y, z, mail);
-	            
-					double d1 = playerIn.posX - x;
-					double d3 = playerIn.posY - y;
-					double d5 = playerIn.posZ - z;
-					double d7 = (double)MathHelper.sqrt(d1 * d1 + d3 * d3 + d5 * d5);
-					double d9 = 0.08D;
-					entityitem.motionX = d1 * d9;
-					entityitem.motionY = d3 * d9 + (double)MathHelper.sqrt(d7) * 0.05D;
-					entityitem.motionZ = d5 * d9;
-                
-					entityitem.setDefaultPickupDelay();
-					worldIn.spawnEntity(entityitem);    		
+					// spawn item
+					spawnReplyLetter(worldIn, pos, playerIn);
 				} else {	
 					// If no Invitation was send
 					playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.nomail"));
@@ -98,6 +81,29 @@ public class BlockMailBox extends BlockFacing
 			}
 		}
 		return true;
+	}
+
+	private void spawnReplyLetter(World worldIn, BlockPos pos, EntityPlayer playerIn) 
+	{
+		// generate mail
+		ItemStack mail = ReplyMailGenerator.generate(); 
+		// drop mail item
+		double x = (double)pos.getX() + 0.5D;
+		double y = (double)pos.getY() + 0.5D;
+		double z = (double)pos.getZ() + 0.5D;
+		EntityItem entityitem = new EntityItem(worldIn, x, y, z, mail);
+    
+		double d1 = playerIn.posX - x;
+		double d3 = playerIn.posY - y;
+		double d5 = playerIn.posZ - z;
+		double d7 = (double)MathHelper.sqrt(d1 * d1 + d3 * d3 + d5 * d5);
+		double d9 = 0.08D;
+		entityitem.motionX = d1 * d9;
+		entityitem.motionY = d3 * d9 + (double)MathHelper.sqrt(d7) * 0.05D;
+		entityitem.motionZ = d5 * d9;
+    
+		entityitem.setDefaultPickupDelay();
+		worldIn.spawnEntity(entityitem);
 	}
 	
 	@Override
@@ -121,7 +127,7 @@ public class BlockMailBox extends BlockFacing
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		int facingindex = ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
@@ -132,6 +138,5 @@ public class BlockMailBox extends BlockFacing
 		{
 			return MAILBOX_AABB_W_E;
 		}
-
 	}
 }

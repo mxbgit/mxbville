@@ -1,11 +1,15 @@
 package mxbville.common.items.documents;
 
+import mxbville.MxBville;
+import mxbville.common.gui.GUIIDList;
 import mxbville.common.items.ItemBase;
 import mxbville.common.items.ModItems;
-import mxbville.util.MxRef;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 
 public class ItemReplyLetter extends ItemBase
 {
@@ -19,26 +23,40 @@ public class ItemReplyLetter extends ItemBase
 	}
 	
 	/**
-	 *  Generiert die Persoenlichkeit eines neuen Villegers und bindet die Daten an ein ItemMail Objekt, das hier erschaffen wird
-	 * @param sender	Name des Villegers
-	 * @param content	Begruessungstext des Villegers
-	 * @param traitID	ACHTUNG: ID, die auf einen Persoenlichkeitszweig hinweist. Mussueberall dort, wo ein String verlangt ist, uebersetzt werden
-	 * @param mailtype	Intwert zwischen 0 und 2. 1 := Maennlich, 2:= Weiblich
+	 * Generates the mail Item with certain villager personality information
+	 * @param sender		Name of the villager
+	 * @param introduction	one of fife possible introduction texts for the mail
+	 * @param traitHint		text that contains information about the villager and hints at its traitID
+	 * @param traitID		name of the villagers potential profession
+	 * @param mailtype		number that indicates gender. 1 := male, 2:= female
 	 * @return
 	 */
-	public static ItemStack generateMail(String sender, String content, int traitID, int mailtype)
+	public static ItemStack generateMail(String sender, String introduction, String traitHint, String traitID, int mailtype)
 	{
 		ItemStack mail = new ItemStack(ModItems.LETTER_REPLY);
 		setMailSender(mail, sender);
-		setMailContent(mail, content);
+		setMailContent(mail, introduction, traitHint);
 		setMailTraitID(mail, traitID);
 		setMailType(mail, mailtype);
 		return mail;
 	}
 	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	{
+		ItemStack itemstack = playerIn.getHeldItem(hand);
+		
+		if(!worldIn.isRemote){
+			playerIn.openGui(MxBville.instance, GUIIDList.MAIL_REPLY, worldIn, 0, 0, 0);
+		} 
+		
+		return super.onItemRightClick(worldIn, playerIn, hand);
+	}
+	
 
-	private static boolean checkStack(ItemStack stack){
-		if(stack.getItem() == ModItems.LETTER_REPLY){
+	private static boolean checkStack(ItemStack stack)
+	{
+		if(stack.getItem() == ModItems.LETTER_REPLY) {
 			if(!stack.hasTagCompound()){
 				stack.setTagCompound(new NBTTagCompound());
 			}
@@ -47,33 +65,39 @@ public class ItemReplyLetter extends ItemBase
 		return false;
 	}
 
-	public static void setMailContent(ItemStack stack, String content){
-		if(checkStack(stack)){
-			stack.getTagCompound().setString("content", content);
+	public static void setMailContent(ItemStack stack, String content, String traitHint)
+	{
+		if(checkStack(stack)) {
+			stack.getTagCompound().setString("content", content + " " + traitHint);
 		}
 	}
 	
-	public static void setMailTraitID(ItemStack stack, int traitID){
-		if(checkStack(stack)){
-			stack.getTagCompound().setInteger("trait", traitID);
+	
+	public static void setMailTraitID(ItemStack stack, String traitID)
+	{
+		if(checkStack(stack)) {
+			stack.getTagCompound().setString("trait", traitID);
 		}
 	}
 	
-	public static void setMailSender(ItemStack stack, String sender){
-		if(checkStack(stack)){
+	public static void setMailSender(ItemStack stack, String sender)
+	{
+		if(checkStack(stack)) {
 			stack.getTagCompound().setString("sender", sender);
 		}
 	}
 	
-	public static void setMailType(ItemStack stack, int mailType){
-		if(checkStack(stack)){
+	public static void setMailType(ItemStack stack, int mailType)
+	{
+		if(checkStack(stack)) {
 			stack.getTagCompound().setInteger("mailtype", mailType);
 		}
 	}
 	
 	
-	public static String getMailContent(ItemStack stack){
-		if(checkStack(stack)){
+	public static String getMailContent(ItemStack stack)
+	{
+		if(checkStack(stack)) {
 			String content = stack.getTagCompound().getString("content");
 			if(content != null && content != "") 
 				return content;
@@ -81,8 +105,9 @@ public class ItemReplyLetter extends ItemBase
 		return "???";
 	}
 	
-	public static String getMailSender(ItemStack stack){
-		if(checkStack(stack)){
+	public static String getMailSender(ItemStack stack)
+	{
+		if(checkStack(stack)) {
 			String sender = stack.getTagCompound().getString("sender");
 			if(sender != null && sender != "") 
 				return sender;
@@ -90,25 +115,16 @@ public class ItemReplyLetter extends ItemBase
 		return "???";
 	}
 	
-	public static int getMailTraitId(ItemStack stack){
-		if(checkStack(stack)){
-			return stack.getTagCompound().getInteger("trait");
-		}
-		return 0;
-	}
-	
-	public static String getMailTraitString(ItemStack stack){
-		if(checkStack(stack)){
-			String traitString = I18n.format(MxRef.MOD_ID + ":mail.trait" + ItemReplyLetter.getMailTraitId(stack) + ".content");
-			if(traitString != null && traitString != "") 
-				return traitString;
+	public static String getMailTraitId(ItemStack stack)
+	{
+		if(checkStack(stack)) {
+			return stack.getTagCompound().getString("trait");
 		}
 		return "???";
 	}
 	
-	
 	public static int getMailType(ItemStack stack){
-		if(checkStack(stack)){
+		if(checkStack(stack)) {
 			return stack.getTagCompound().getInteger("mailtype");
 		}
 		return MailType_Common;

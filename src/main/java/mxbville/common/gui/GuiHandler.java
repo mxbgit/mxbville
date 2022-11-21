@@ -1,6 +1,8 @@
 package mxbville.common.gui;
 
 import mxbville.client.gui.GuiWalletSmall;
+import mxbville.client.gui.itemgui.GuiMail;
+import mxbville.common.gui.common.ContainerEmpty;
 import mxbville.common.items.coins.ItemWalletSmall;
 import mxbville.common.items.inventories.ContainerWalletSmall;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,6 +35,7 @@ public class GuiHandler implements IGuiHandler{
 			            }
 			        }
 					break;
+				case GUIIDList.MAIL_REPLY: return new ContainerEmpty();
 				default:break;
 			}
 		}
@@ -59,6 +62,7 @@ public class GuiHandler implements IGuiHandler{
 				        }
 			        }
 					break;
+				case GUIIDList.MAIL_REPLY: return new GuiMail(player);
 				default:break;
 			}
 		}

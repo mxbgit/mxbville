@@ -51,3 +51,14 @@ mxbville:corn_horse.item.info=§7Especially good food for horses§7.
 mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§7.
 mxbville:apple_slice.item.info=§7Makes horselegs stronger§7.
 mxbville:invitation.item.info=§7"Dear Unknown Friend, welcome..."
+================================================================================
+	MAILS
+================================================================================
+mxbville:reply.newvillager.0.intro=I heard you are building a village, do I have a chance to help building? 
+mxbville:reply.newvillager.1.intro=Are you looking for villagers? Please consider me!
+mxbville:reply.newvillager.2.intro=I lost my home to invaders. But i'm willing to rebuild it from the ground up! 
+mxbville:reply.newvillager.3.intro=I'm so tired about the current life and looking for a new place to live. 
+mxbville:reply.newvillager.4.intro=I recieved a letter from you and would like to help building a new village.
+
+mxbville:reply.newvillager. .content=
+
