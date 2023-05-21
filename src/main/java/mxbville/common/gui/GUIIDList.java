@@ -6,7 +6,9 @@ public class GUIIDList {
 	public static final int WALLET_SMALL 	= 210;
 	public static final int WALLET_LARGE 	= 211;
 	
-	public static final int MAIL_REPLY 	= 200;
+	
+	public static final int LETTER_STATION = 200;
+	public static final int MAIL_REPLY 	= 201;
 	/*
 	public static final int VillagerMain 		= 100;
 	public static final int VillagerTrading 	= 101;

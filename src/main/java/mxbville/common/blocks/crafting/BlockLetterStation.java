@@ -2,6 +2,7 @@ package mxbville.common.blocks.crafting;
 
 import mxbville.MxBville;
 import mxbville.common.blocks.misc.BlockFacing;
+import mxbville.common.gui.GUIIDList;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -33,18 +34,25 @@ public class BlockLetterStation extends BlockFacing {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, 
-									BlockPos pos, 
-									IBlockState state, 
-									EntityPlayer playerIn,
-									EnumHand hand, 
-									EnumFacing side, 
+	public boolean onBlockActivated(World parWorld, 
+									BlockPos parBlockpos, 
+									IBlockState parBlockstate, 
+									EntityPlayer parPlayer,
+									EnumHand parHand, 
+									EnumFacing parFacingside, 
 									float hitX, 
 									float hitY, 
 									float hitZ) 
 	{
-		if(!worldIn.isRemote){
-			// TODO: Gui for writing letters
+		if(!parWorld.isRemote){
+			parPlayer.openGui(
+					MxBville.instance,
+					GUIIDList.LETTER_STATION,
+					parWorld,
+					parBlockpos.getX(),
+					parBlockpos.getY(),
+					parBlockpos.getZ()
+			);
 		}
 		return true;
 	}

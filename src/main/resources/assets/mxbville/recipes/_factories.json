@@ -1,0 +1,5 @@
+{ 
+  "recipes": {
+    "letterstation": "mxbville.common.blocks.crafting.CLASSNAME"
+  }
+}

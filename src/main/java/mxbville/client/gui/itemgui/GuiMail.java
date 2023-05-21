@@ -54,13 +54,11 @@ public class GuiMail extends GuiContainer{
         }
 	}
 	
-	
 	@Override
     public boolean doesGuiPauseGame()
     {
         return false;
     }
-	
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -102,5 +100,4 @@ public class GuiMail extends GuiContainer{
 			this.mc.player.closeScreen();
 		}
 	}
-	
 }

@@ -21,7 +21,6 @@ public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		//config
 		MxBvilleConfig.load(event.getModConfigurationDirectory());
 		
 		// load villager data from json

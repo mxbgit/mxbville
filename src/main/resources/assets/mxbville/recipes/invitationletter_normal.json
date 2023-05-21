@@ -1,0 +1,16 @@
+{ 
+  "result": {
+    "item": "mxbville:letter_invitation"
+  },
+  "pattern": [
+    "A",
+    "B",
+    "C"
+  ],
+  "type": "mxbville:letterstation",
+  "key": {
+    "A" : { "item": "minecraft:paper "  },
+    "B" : { "item": "minecraft:dye "    },
+    "C" : { "item": "minecraft:feather" }
+  }
+}
