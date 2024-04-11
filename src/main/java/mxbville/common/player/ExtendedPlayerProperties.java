@@ -18,6 +18,11 @@ public class ExtendedPlayerProperties {
 		return player.getCapability(CapExPlayerProperties.EXTENDED_PLAYER_PROPERTIES_CAPABILITY, null);
 	}
 	
+	public void upgradeTreasureHuntLevelTo(int level)
+	{
+		if(level > 0)
+			this.treasureHuntLevel = level;
+	}
 	
 	public ExtendedPlayerProperties(EntityPlayer player)
 	{
