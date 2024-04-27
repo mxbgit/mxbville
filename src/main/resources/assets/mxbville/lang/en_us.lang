@@ -48,3 +48,9 @@ mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
 mxbville:corn_horse.item.info=§7Especially good food for horses§7.
 mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§7.
 mxbville:apple_slice.item.info=§7Makes horselegs stronger§7.
+
+================================================================================
+	COMMANDS
+================================================================================
+command.mx_settreasurehuntlevel.usage=/mx_settreasurehuntlevel <LEVEL>
+
