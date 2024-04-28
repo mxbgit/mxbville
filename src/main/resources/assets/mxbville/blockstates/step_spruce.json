@@ -1,0 +1,47 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "attached": "true"
+      },
+      "apply": {
+        "model": "mxbville:step_post_spruce"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "mxbville:step_top_spruce"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "mxbville:step_top_spruce",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "mxbville:step_top_spruce",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "mxbville:step_top_spruce",
+        "y": 270
+      }
+    }
+  ]
+}

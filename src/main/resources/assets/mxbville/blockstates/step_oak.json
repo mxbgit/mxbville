@@ -1,0 +1,47 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "attached": "true"
+      },
+      "apply": {
+        "model": "mxbville:step_post_oak"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "mxbville:step_top_oak"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "mxbville:step_top_oak",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "mxbville:step_top_oak",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "mxbville:step_top_oak",
+        "y": 270
+      }
+    }
+  ]
+}

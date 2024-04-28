@@ -1,0 +1,35 @@
+{
+   "forge_marker": 1,
+   "defaults":{
+        "textures": {
+            "particle": "mxbville:blocks/cake_domino_side",
+            "bottom": "mxbville:blocks/cake_domino_bottom",
+            "top": "mxbville:blocks/cake_domino_top",
+            "side": "mxbville:blocks/cake_domino_side",
+            "inside": "mxbville:blocks/cake_domino_inner"
+        }
+    },
+    "variants": {
+        "bites=0": [
+            { "model": "mxbville:cake_uneaten" }
+        ],
+        "bites=1": [
+            { "model": "mxbville:cake_slice1" }
+        ],
+        "bites=2": [
+            { "model": "mxbville:cake_slice2" }
+        ],
+        "bites=3": [
+            { "model": "mxbville:cake_slice3" }
+        ],
+        "bites=4": [
+            { "model": "mxbville:cake_slice4" }
+        ],
+        "bites=5": [
+            { "model": "mxbville:cake_slice5" }
+        ],
+        "bites=6": [
+            { "model": "mxbville:cake_slice6" }
+        ]
+    }
+}

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mxbville.common.CommonProxy;
+import mxbville.common.commands.CommandSetTreasureHuntLevel;
 import mxbville.util.MxRef;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = MxRef.MOD_ID, name = MxRef.NAME, version = MxRef.VERSION, acceptedMinecraftVersions = MxRef.MC_VERSION)
 public class MxBville {
@@ -49,4 +51,9 @@ public class MxBville {
     	this.proxy.postInit(event);
     }
     
+    @EventHandler
+    public void serverInit(FMLServerStartingEvent event)
+    {
+    	event.registerServerCommand(new CommandSetTreasureHuntLevel());
+    }
 }

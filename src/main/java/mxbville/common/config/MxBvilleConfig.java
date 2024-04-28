@@ -25,8 +25,8 @@ public class MxBvilleConfig {
 		pt.setComment("Does destroying blocks drop coins? (default: true)");
 		destroyBlocksDropCoins = pt.getBoolean();
 		
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "KillMobsDropCoins", true);
-		pt.setComment("Does killing mobs drop coins? (default: true)");
+		pt = conf.get(Configuration.CATEGORY_GENERAL, "KillMobsDropCoins", false);
+		pt.setComment("Does killing mobs drop coins? (default: false)");
 		killMobsDropCoins = pt.getBoolean();
 		
 		conf.save();

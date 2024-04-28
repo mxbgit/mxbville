@@ -1,0 +1,41 @@
+{  
+   "forge_marker":1,
+   "defaults":{  
+      "model":"mxbville:densecrop",
+      "transform":"forge:default-block"
+   },
+   "variants":{  
+      "age":{  
+         "0":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_9"
+            }
+         },
+         "1":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_12"
+            }
+         },
+         "2":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_1"
+            }
+         },
+         "3":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_1"
+            }
+         },
+         "4":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_1"
+            }
+         },
+         "5":{  
+            "textures":{  
+               "crop": "mxbville:blocks/Corn_1"
+            }
+         }
+      }
+   }
+}

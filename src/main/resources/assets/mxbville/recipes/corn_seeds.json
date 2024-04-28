@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mxbville:corn_horse",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "mxbville:corn_seed",
+    "data": 0,
+    "count": 3
+  }
+}

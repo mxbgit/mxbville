@@ -1,0 +1,7 @@
+{
+  "parent": "mxbville:custom/step_top",
+  "textures": {
+    "particle": "mxbville:blocks/step_jungle",
+    "texture": "mxbville:blocks/step_jungle"
+  }
+}
