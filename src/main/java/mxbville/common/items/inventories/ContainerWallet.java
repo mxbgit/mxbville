@@ -17,7 +17,7 @@ public class ContainerWallet extends Container {
     private int numRows;
     private int numCols;
     
-    private final static int XSTART_OFFSET_SMALL = 61;
+    private final static int XSTART_OFFSET_SMALL = 62;
     private final static int YSTART_OFFSET_SMALL = 36;
     
     private final static int XSTART_OFFSET_LARGE = 44;
