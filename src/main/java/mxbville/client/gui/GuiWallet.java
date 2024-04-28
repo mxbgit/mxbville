@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiWallet extends GuiContainer {
     public static final int WIDTH = 175;
-    public static final int HEIGHT = 160;
+    public static final int HEIGHT = 176;
     
     private static final ResourceLocation backgroundSmall = new ResourceLocation(MxRef.MOD_ID, "textures/gui/wallet/wallet_small_gui.png");
     private static final ResourceLocation backgroundLarge = new ResourceLocation(MxRef.MOD_ID, "textures/gui/wallet/wallet_large_gui.png");

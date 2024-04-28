@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class ItemWalletSmall extends ItemWallet {
 
     private static final int INVENTORY_ROWS		= 2;
-    private static final int INVENTORY_COLUMNS 	= 5;
+    private static final int INVENTORY_COLUMNS 	= 3;
    
 	public ItemWalletSmall(String name) {
 		super(name, INVENTORY_ROWS, INVENTORY_COLUMNS);

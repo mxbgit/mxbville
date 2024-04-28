@@ -17,8 +17,12 @@ public class ContainerWallet extends Container {
     private int numRows;
     private int numCols;
     
-    private final static int X_START = 42;
-    private final static int Y_START = 32;
+    private final static int XSTART_OFFSET_SMALL = 61;
+    private final static int YSTART_OFFSET_SMALL = 36;
+    
+    private final static int XSTART_OFFSET_LARGE = 44;
+    private final static int YSTART_OFFSET_LARGE = 19;
+    
     private final static int SLOTSIZE_OFFSET = 18;
     
 	public ContainerWallet(InventoryPlayer playerInventory, IItemHandler itemInventory, int numRows, int numCols)
@@ -51,25 +55,44 @@ public class ContainerWallet extends Container {
         }
     }
 	
-	// Slots for the container inventory
+	// Places slots for the container inventory
+	// Determines slot placement according to the row count of the inventory
+	// 2 = small
+	// 3 = large
     private void addStorageSlots(IItemHandler inventory) 
     {
-    	int slotIndex = 0;
-        
-    	// TODO: adjust Start Coords depending on the number of rows and cols
     	
+       	int slotIndex 	= 0;
+    	int x_offset 	= 0;
+    	int y_offset 	= 0;
+    	
+    	// set the offsets for the container slot placement according to the intended gui size
+    	switch(this.numRows) {
+    	case 2:
+    		x_offset = XSTART_OFFSET_SMALL;
+    		y_offset = YSTART_OFFSET_SMALL;
+    		break;
+    	case 3:
+    		x_offset = XSTART_OFFSET_LARGE;
+    		y_offset = YSTART_OFFSET_LARGE;
+    		break;
+    	default:
+    		break;
+    	}
+    	
+    	// place the slots
         for (int i = 0; i < this.numRows; i++)
         {
             for (int j = 0; j < this.numCols; j++)
             {
-                int x = X_START + (SLOTSIZE_OFFSET * j);
-                int y = Y_START + (SLOTSIZE_OFFSET * i);
+                int x = x_offset + (SLOTSIZE_OFFSET * j);
+                int y = y_offset + (SLOTSIZE_OFFSET * i);
                 this.addSlotToContainer(new SlotWallet(inventory, slotIndex, x, y));
                 slotIndex++;
             }
         }
     }
-
+    
     @Nullable
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) 
