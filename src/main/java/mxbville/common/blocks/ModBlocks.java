@@ -1,5 +1,6 @@
 package mxbville.common.blocks;
 
+import mxbville.common.blocks.crafting.BlockLetterStation;
 import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
 import mxbville.common.blocks.decorative.BlockStep;
@@ -10,6 +11,7 @@ import mxbville.common.blocks.food.BlockCornplantTop;
 import mxbville.common.blocks.food.BlockMxBCake;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -35,7 +37,10 @@ public class ModBlocks {
 	public static final BlockFlowerInPot FLOWER_RANUNCULUS		= null; 
 	public static final BlockFlowerInPot FLOWER_ROSYSPIRAEA		= null; 
 	public static final BlockFlowerInPot FLOWER_GARDENIA		= null; 
-	public static final BlockFlowerInPot FLOWER_BONSAI 			= null; 
+	public static final BlockFlowerInPot FLOWER_BONSAI 			= null;
+	
+	public static final Block LETTERSTATION	= Blocks.AIR; 
+	
 	public static final BlockTable TABLE_ACACIA 				= null;
 	public static final BlockTable TABLE_BIRCH 					= null;	
 	public static final BlockTable TABLE_DARKOAK 				= null;
@@ -72,6 +77,7 @@ public class ModBlocks {
 					new BlockFlowerInPot("flower_rosyspiraea"), 
 					new BlockFlowerInPot("flower_gardenia"),
 					new BlockFlowerInPot("flower_bonsai"),
+					new BlockLetterStation(),
 					new BlockTable("table_acacia"), 
 					new BlockTable("table_birch"), 
 					new BlockTable("table_darkoak"),
@@ -102,6 +108,7 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.FLOWER_ROSYSPIRAEA).setRegistryName(ModBlocks.FLOWER_ROSYSPIRAEA.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_GARDENIA).setRegistryName(ModBlocks.FLOWER_GARDENIA.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_BONSAI).setRegistryName(ModBlocks.FLOWER_BONSAI.getRegistryName()),
+					new ItemBlock(ModBlocks.LETTERSTATION).setRegistryName(ModBlocks.LETTERSTATION.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_ACACIA).setRegistryName(ModBlocks.TABLE_ACACIA.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_BIRCH).setRegistryName(ModBlocks.TABLE_BIRCH.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_DARKOAK).setRegistryName(ModBlocks.TABLE_DARKOAK.getRegistryName()),

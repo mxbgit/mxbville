@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "mxbville:letterstation", "y": 180 },
+        "facing=south": { "model": "mxbville:letterstation"},
+        "facing=west":  { "model": "mxbville:letterstation", "y": 90 },
+        "facing=east":  { "model": "mxbville:letterstation", "y": 270 } 
+    }
+}

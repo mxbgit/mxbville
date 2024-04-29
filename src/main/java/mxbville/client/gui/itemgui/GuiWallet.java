@@ -1,4 +1,4 @@
-package mxbville.client.gui;
+package mxbville.client.gui.itemgui;
 
 import mxbville.common.gui.GUIIDList;
 import mxbville.util.MxRef;

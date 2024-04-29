@@ -1,0 +1,22 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:feather",
+      "data": 0
+    },
+      {
+      "item": "minecraft:paper",
+      "data": 0
+    },
+      {
+      "item": "minecraft:dye",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "mxbville:letterstation",
+    "data": 0,
+    "count": 1
+  }
+}
