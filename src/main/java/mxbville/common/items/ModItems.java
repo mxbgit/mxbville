@@ -3,6 +3,7 @@ package mxbville.common.items;
 import mxbville.common.items.coins.ItemCoin;
 import mxbville.common.items.coins.ItemWalletLarge;
 import mxbville.common.items.coins.ItemWalletSmall;
+import mxbville.common.items.documents.ItemInvitation;
 import mxbville.common.items.food.ItemCornSeeds;
 import mxbville.common.items.food.ItemHorseAppleSlice;
 import mxbville.common.items.food.ItemHorseCorn;
@@ -27,6 +28,8 @@ public class ModItems {
 	public static final Item CORN_SEED = null; 
 	public static final Item CORN_HORSE = null; 
 	
+	public static final Item LETTER_INVITATION = null;
+	
 	public static final Item SUGAR_LUMPS = null; 
 	public static final Item WALLET_SMALL = null;
 	public static final Item WALLET_LARGE = null;
@@ -47,6 +50,7 @@ public class ModItems {
 				new ItemCornSeeds("corn_seed"),
 				new ItemHorseCorn(),
 				new ItemHorseSugar(),
+				new ItemInvitation("letter_invitation"),
 				new ItemWalletSmall("wallet_small"),
 				new ItemWalletLarge("wallet_large")
 			};

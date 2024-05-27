@@ -1,7 +1,9 @@
 package mxbville.common.gui;
 
+import mxbville.client.gui.blockgui.GuiLetterStation;
 import mxbville.client.gui.itemgui.GuiWallet;
 import mxbville.common.blocks.crafting.BlockLetterStation;
+import mxbville.common.blocks.inventories.ContainerLetterStation;
 import mxbville.common.items.coins.ItemWallet;
 import mxbville.common.items.inventories.ContainerWallet;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +32,7 @@ public class GuiHandler implements IGuiHandler{
 				case GUIIDList.LETTER_STATION:
 					if (iblockstate.getBlock() instanceof BlockLetterStation ) {
 						
-						//return new ContainerLetterStation(player.inventory, world, new BlockPos(x, y, z));
+						return new ContainerLetterStation(player.inventory, world, new BlockPos(x, y, z));
 					}
 					break;
 				case GUIIDList.WALLET_SMALL: 
@@ -66,7 +68,7 @@ public class GuiHandler implements IGuiHandler{
 			switch(ID) {
 				case GUIIDList.LETTER_STATION:
 					if (iblockstate.getBlock() instanceof BlockLetterStation) {
-						//return new GuiLetterStation(player.inventory, world, new BlockPos(x, y, z));
+						return new GuiLetterStation(player.inventory, world, new BlockPos(x, y, z));
 					}
 					break;
 				case GUIIDList.WALLET_SMALL: 

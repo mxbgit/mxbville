@@ -44,7 +44,7 @@ public class ItemWallet extends ItemBase {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		String info = I18n.format(MxRef.MOD_ID + ":wallet.item.info");
+		String info = I18n.format(this.getRegistryName() + ".item.info");
 		tooltip.add(info);
 	}
 

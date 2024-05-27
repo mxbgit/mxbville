@@ -27,7 +27,7 @@ public class BlockLetterStation extends BlockFacing {
 	
 	public BlockLetterStation()
 	{
-		super("letterstation", Material.WOOD);
+		super("letterstation", Material.CARPET);
 		this.setCreativeTab(MxBville.SPECIALTAB);
 		this.setHardness(1.0F);
         this.setSoundType(SoundType.SNOW);
@@ -45,7 +45,7 @@ public class BlockLetterStation extends BlockFacing {
 									float hitZ) 
 	{
 		if(!parWorld.isRemote){
-			/*
+			
 			parPlayer.openGui(
 					MxBville.instance,
 					GUIIDList.LETTER_STATION,
@@ -53,7 +53,7 @@ public class BlockLetterStation extends BlockFacing {
 					parBlockpos.getX(),
 					parBlockpos.getY(),
 					parBlockpos.getZ()
-			); */
+			); 
 		}
 		return true;
 	}
