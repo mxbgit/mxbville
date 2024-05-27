@@ -16,7 +16,6 @@ public class ItemBase extends Item implements IHasModel {
 		ModelRegister.LIST.add(this);
 	}
 	
-	
 	@Override
 	public void registerModels() {
 		MxBville.proxy.registerItemRenderer(this, 0);

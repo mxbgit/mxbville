@@ -4,6 +4,7 @@ import mxbville.common.items.coins.ItemCoin;
 import mxbville.common.items.coins.ItemWalletLarge;
 import mxbville.common.items.coins.ItemWalletSmall;
 import mxbville.common.items.documents.ItemInvitation;
+import mxbville.common.items.documents.ItemInvitation.InvitationType;
 import mxbville.common.items.food.ItemCornSeeds;
 import mxbville.common.items.food.ItemHorseAppleSlice;
 import mxbville.common.items.food.ItemHorseCorn;
@@ -11,7 +12,6 @@ import mxbville.common.items.food.ItemHorseSugar;
 import mxbville.util.MxRef;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
@@ -28,8 +28,14 @@ public class ModItems {
 	public static final Item CORN_SEED = null; 
 	public static final Item CORN_HORSE = null; 
 	
-	public static final Item LETTER_INVITATION = null;
+	public static final Item LETTER_APPROVEMEND_SEAL = null;
 	
+	public static final Item LETTER_INVITATION_APPROVED = null;
+	public static final Item LETTER_INVITATION_BAIT 	= null;
+	public static final Item LETTER_INVITATION_JOB 		= null;
+	public static final Item LETTER_INVITATION_NORMAL 	= null;
+	public static final Item LETTER_INVITATION_OFFICIAL = null;
+
 	public static final Item SUGAR_LUMPS = null; 
 	public static final Item WALLET_SMALL = null;
 	public static final Item WALLET_LARGE = null;
@@ -50,7 +56,12 @@ public class ModItems {
 				new ItemCornSeeds("corn_seed"),
 				new ItemHorseCorn(),
 				new ItemHorseSugar(),
-				new ItemInvitation("letter_invitation"),
+				new ItemBase("letter_approvement_seal"),
+				new ItemInvitation("letter_invitation", InvitationType.APPROVED),
+				new ItemInvitation("letter_invitation", InvitationType.BAIT),
+				new ItemInvitation("letter_invitation", InvitationType.JOB),
+				new ItemInvitation("letter_invitation", InvitationType.NORMAL),
+				new ItemInvitation("letter_invitation", InvitationType.OFFICIAL),			
 				new ItemWalletSmall("wallet_small"),
 				new ItemWalletLarge("wallet_large")
 			};

@@ -8,16 +8,12 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import mcp.MethodsReturnNonnullByDefault;
 import mxbville.common.items.ModItems;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import scala.collection.parallel.ParIterableLike.Forall;
-
-
 
 public class LetterStationCraftingHandler
 {
@@ -35,21 +31,33 @@ public class LetterStationCraftingHandler
 	
 	public void setRecipes() {
 		// Outputs
-		ItemStack commonOutput = new ItemStack(ModItems.LETTER_INVITATION);
-		ItemStack rareOutput = new ItemStack(ModItems.LETTER_INVITATION);
-		ItemStack specialOutput = new ItemStack(Items.EMERALD);
+		ItemStack letterNormal 		= new ItemStack(ModItems.LETTER_INVITATION_NORMAL);
+		ItemStack letterBait 		= new ItemStack(ModItems.LETTER_INVITATION_BAIT);
+		ItemStack letterApproved 	= new ItemStack(ModItems.LETTER_INVITATION_APPROVED);
+
 		// Inputs
-		NonNullList<ItemStack> commonInput = NonNullList.create();
-		commonInput.add(new ItemStack(Items.FEATHER));
-		commonInput.add(new ItemStack(Items.DYE));
-		commonInput.add(new ItemStack(Items.PAPER));
+		NonNullList<ItemStack> ingridientsNormal = NonNullList.create();
+		ingridientsNormal.add(new ItemStack(Items.FEATHER));
+		ingridientsNormal.add(new ItemStack(Items.DYE));
+		ingridientsNormal.add(new ItemStack(Items.PAPER));
 		
-		NonNullList<ItemStack> rareInput = NonNullList.create();
-		rareInput.add(new ItemStack(Items.PAPER));
-		rareInput.add(new ItemStack(Items.DIAMOND));
+		NonNullList<ItemStack> ingridientsBait = NonNullList.create();
+		ingridientsBait.add(new ItemStack(ModItems.LETTER_INVITATION_NORMAL));
+		ingridientsBait.add(new ItemStack(ModItems.COIN_SILVER));
 		
-		this.addRecipe(new LetterRecipe(commonInput,commonOutput));
-		this.addRecipe(new LetterRecipe(rareInput,rareOutput));
+		NonNullList<ItemStack> ingridientsBait_2 = NonNullList.create();
+		ingridientsBait_2.add(new ItemStack(ModItems.LETTER_INVITATION_NORMAL));
+		ingridientsBait_2.add(new ItemStack(Items.GOLD_NUGGET));
+		
+		NonNullList<ItemStack> ingridientsApproved = NonNullList.create();
+		ingridientsApproved.add(new ItemStack(ModItems.LETTER_INVITATION_NORMAL));
+		ingridientsApproved.add(new ItemStack(ModItems.LETTER_APPROVEMEND_SEAL));
+		
+		// Adding the Recipes to the crafting list
+		this.addRecipe(new LetterRecipe(ingridientsNormal,letterNormal));
+		this.addRecipe(new LetterRecipe(ingridientsBait,letterBait));
+		this.addRecipe(new LetterRecipe(ingridientsBait_2,letterBait));
+		this.addRecipe(new LetterRecipe(ingridientsApproved,letterApproved));
 	}
 	
 	/**

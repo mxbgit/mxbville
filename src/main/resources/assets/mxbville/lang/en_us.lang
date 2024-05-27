@@ -16,7 +16,11 @@ item.mxbville.wallet_large.name=Purse
 item.mxbville.corn_seed.name=Corn Seeds
 item.mxbville.corn_horse.name=Corn
 item.mxbville.sugar_lumps.name=Sugar lumps
-
+item.mxbville.letter_invitation_approved.name=Invitation Letter
+item.mxbville.letter_invitation_bait.name=Invitation Letter
+item.mxbville.letter_invitation_job.name=Invitation Letter
+item.mxbville.letter_invitation_normal.name=Invitation Letter
+item.mxbville.letter_invitation_official.name=Invitation Letter
 ================================================================================
 	BLOCKS 
 ================================================================================
@@ -47,11 +51,16 @@ itemGroup.specialtab=Specials
 ================================================================================
 	INFO
 ================================================================================
-mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§7.
-mxbville:corn_horse.item.info=§7Especially good food for horses§7.
-mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§7.
-mxbville:apple_slice.item.info=§7Makes horselegs stronger§7.
-mxbville:wallet.item.info=§7Can hold an amount of §6Coins§7.
+mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§r.
+mxbville:corn_horse.item.info=§7Especially good food for horses§r.
+mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§r.
+mxbville:apple_slice.item.info=§7Makes horselegs stronger§r.
+mxbville:wallet.item.info=§7Can hold an amount of §6Coins§r.
+mxbville:letter_invitation_normal.item.info=An invitation letter for new villagers §8-§o"I hope it doesn't get in the wrong hands"-
+mxbville:letter_invitation_bait.item.info=A §cmanipulated§r letter to lure in greedy bandits §8-§o"I'm sure some will show up to get more"-
+mxbville:letter_invitation_approved.item.info=A villager invitation with an official seal. §8-§o"I'll guess less people will try to mess with the officials"-
+mxbville:letter_invitation_job.item.info=TODO.
+mxbville:letter_invitation_official.item.info=An §6official§r villager invitation from the mayor. §8-§o"No one will mess with the Villages Mayor"-
 
 ================================================================================
 	COMMANDS
