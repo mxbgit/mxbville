@@ -165,7 +165,7 @@ public class ContainerLetterStation extends Container {
 	
     /**
      * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in
-     * is null for the initial slot that was double-clicked.
+     * is null for the initial slot that was double-clicked.	
      */
 	@Override
     public boolean canMergeSlot(ItemStack stack, Slot slotIn)

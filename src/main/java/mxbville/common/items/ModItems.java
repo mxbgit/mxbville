@@ -3,6 +3,7 @@ package mxbville.common.items;
 import mxbville.common.items.coins.ItemCoin;
 import mxbville.common.items.coins.ItemWalletLarge;
 import mxbville.common.items.coins.ItemWalletSmall;
+import mxbville.common.items.documents.ItemApprovementStamp;
 import mxbville.common.items.documents.ItemInvitation;
 import mxbville.common.items.documents.ItemInvitation.InvitationType;
 import mxbville.common.items.food.ItemCornSeeds;
@@ -28,7 +29,7 @@ public class ModItems {
 	public static final Item CORN_SEED = null; 
 	public static final Item CORN_HORSE = null; 
 	
-	public static final Item LETTER_APPROVEMEND_SEAL = null;
+	public static final Item LETTER_APPROVEMEND_STAMP = null;
 	
 	public static final Item LETTER_INVITATION_APPROVED = null;
 	public static final Item LETTER_INVITATION_BAIT 	= null;
@@ -56,7 +57,7 @@ public class ModItems {
 				new ItemCornSeeds("corn_seed"),
 				new ItemHorseCorn(),
 				new ItemHorseSugar(),
-				new ItemBase("letter_approvement_seal"),
+				new ItemApprovementStamp("letter_approvement_stamp"),
 				new ItemInvitation("letter_invitation", InvitationType.APPROVED),
 				new ItemInvitation("letter_invitation", InvitationType.BAIT),
 				new ItemInvitation("letter_invitation", InvitationType.JOB),

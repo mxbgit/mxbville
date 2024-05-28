@@ -16,6 +16,7 @@ item.mxbville.wallet_large.name=Purse
 item.mxbville.corn_seed.name=Corn Seeds
 item.mxbville.corn_horse.name=Corn
 item.mxbville.sugar_lumps.name=Sugar lumps
+item.mxbville.letter_approvement_stamp=Approvement Stamp
 item.mxbville.letter_invitation_approved.name=Invitation Letter
 item.mxbville.letter_invitation_bait.name=Invitation Letter
 item.mxbville.letter_invitation_job.name=Invitation Letter
@@ -25,6 +26,12 @@ item.mxbville.letter_invitation_official.name=Invitation Letter
 	BLOCKS 
 ================================================================================
 tile.mxbville:barspanel.name=Steel Bars
+tile.mxbville:step_acacia.name=Acacia Step
+tile.mxbville:step_oak.name=Oak Step
+tile.mxbville:step_darkoak.name=Darkoak Step
+tile.mxbville:step_jungle.name=Junglewood Step
+tile.mxbville:step_birch.name=Birch Step
+tile.mxbville:step_spruce.name=Spruce Step
 tile.mxbville:table_acacia.name=Acacia Table
 tile.mxbville:table_oak.name=Oak Table
 tile.mxbville:table_darkoak.name=Darkoak Table
@@ -40,6 +47,7 @@ tile.mxbville:flower_rosyspiraea.name=Rosyspiraea
 tile.mxbville:flower_gardenia.name=Gardenia
 tile.mxbville:flower_bonsai.name=Bonsai
 tile.mxbville:cake_domino.name=Chocolate Cake
+tile.mxbville:letterstation.name=Writing Set
 
 ================================================================================
 	GUI 
@@ -55,7 +63,9 @@ mxbville:walletsmall.item.info=§7Can hold an amount of §6Coins§r.
 mxbville:corn_horse.item.info=§7Especially good food for horses§r.
 mxbville:sugar_lumps.item.info=§7Accelerates every horseback ride§r.
 mxbville:apple_slice.item.info=§7Makes horselegs stronger§r.
-mxbville:wallet.item.info=§7Can hold an amount of §6Coins§r.
+mxbville:wallet_small.item.info=§7Can hold an amount of §6Coins§r.
+mxbville:wallet_large.item.info=§7Can hold a large amount of §6Coins§r.
+mxbville:letter_approvement_stamp.item.info=§8-§o"I can seal an Invitation Letter with this after writing it"-
 mxbville:letter_invitation_normal.item.info=An invitation letter for new villagers §8-§o"I hope it doesn't get in the wrong hands"-
 mxbville:letter_invitation_bait.item.info=A §cmanipulated§r letter to lure in greedy bandits §8-§o"I'm sure some will show up to get more"-
 mxbville:letter_invitation_approved.item.info=A villager invitation with an official seal. §8-§o"I'll guess less people will try to mess with the officials"-
