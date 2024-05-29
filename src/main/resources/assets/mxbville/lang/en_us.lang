@@ -25,6 +25,12 @@ item.mxbville.letter_invitation_official.name=Invitation Letter
 ================================================================================
 	BLOCKS 
 ================================================================================
+tile.mxbville:angled_support_acacia.name=Acacia Support
+tile.mxbville:angled_support_birch.name=Birch Support
+tile.mxbville:angled_support_dark_oak.name=Darkoak Support
+tile.mxbville:angled_support_jungle.name=Junglewood Support
+tile.mxbville:angled_support_spruce.name=Spruce Support
+tile.mxbville:angled_support_oak.name=Oak Support
 tile.mxbville:barspanel.name=Steel Bars
 tile.mxbville:step_acacia.name=Acacia Step
 tile.mxbville:step_oak.name=Oak Step

@@ -149,6 +149,7 @@ public class BlockStep extends BlockFacing {
     }
     
     /**
+     * Checks if this is placed on a fence or a solid block.
      * 
      * @param worldIn Interface to the world
      * @param pos The position this block is being placed at

@@ -22,7 +22,7 @@ public class ModItems {
 
 	public static final Item APPLE_SLICE = null;
 	
-	public static final Item COIN_BRONZE = null;
+	public static final ItemCoin COIN_BRONZE = null;
 	public static final Item COIN_SILVER = null;
 	public static final Item COIN_GOLD	 = null;
 	

@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+        "when": {
+            "facing": "north"
+        },
+        "apply": {
+            "model": "mxbville:angled_support_jungle"
+        }
+    },
+    {
+        "when": {
+            "facing": "south"
+        },
+        "apply": {
+            "model": "mxbville:angled_support_jungle",
+            "y": 180
+        }
+    },
+    {
+        "when": {
+            "facing": "west"
+        },
+        "apply": {
+            "model": "mxbville:angled_support_jungle",
+            "y": 270
+        }
+    },
+      {
+        "when": {
+            "facing": "east"
+        },
+        "apply": {
+            "model": "mxbville:angled_support_jungle",
+            "y": 90
+        }
+    }
+  ]
+}

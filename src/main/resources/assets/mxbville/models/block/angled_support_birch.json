@@ -1,0 +1,7 @@
+{
+  "parent": "mxbville:custom/angled_support",
+  "textures": {
+    "particle": "mxbville:blocks/support_birch",
+    "texture": "mxbville:blocks/support_birch"
+  }
+}

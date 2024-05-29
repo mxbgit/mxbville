@@ -1,6 +1,7 @@
 package mxbville.common.blocks;
 
 import mxbville.common.blocks.crafting.BlockLetterStation;
+import mxbville.common.blocks.decorative.BlockAngledSupport;
 import mxbville.common.blocks.decorative.BlockBarsPanel;
 import mxbville.common.blocks.decorative.BlockFlowerInPot;
 import mxbville.common.blocks.decorative.BlockStep;
@@ -23,7 +24,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(MxRef.MOD_ID)
 public class ModBlocks {
 
-	public static final BlockBarsPanel BARSPANEL				= null;
+	public static final Block ANGLED_SUPPORT_ACACIA		= null;
+	public static final Block ANGLED_SUPPORT_BIRCH		= null;
+	public static final Block ANGLED_SUPPORT_DARK_OAK	= null;
+	public static final Block ANGLED_SUPPORT_JUNGLE		= null;
+	public static final Block ANGLED_SUPPORT_SPRUCE		= null;
+	public static final Block ANGLED_SUPPORT_OAK		= null;
+	
+	public static final BlockBarsPanel BARSPANEL			= null;
 	
 	public static final BlockCornplant CORNPLANT			= null; 
 	public static final BlockCornplantMid CORNPLANT_MID 	= null; 
@@ -50,6 +58,9 @@ public class ModBlocks {
 	
 	public static final BlockMxBCake CAKE_DOMINO				= null;
 	
+	
+
+	
 	public static final BlockStep STEP_ACACIA 				= null;
 	public static final BlockStep STEP_BIRCH 				= null;
 	public static final BlockStep STEP_DARK_OAK 			= null;
@@ -65,6 +76,12 @@ public class ModBlocks {
 		@SubscribeEvent
 		public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 			final Block[] blocks = {
+					new BlockAngledSupport("angled_support_acacia"),
+					new BlockAngledSupport("angled_support_birch"),
+					new BlockAngledSupport("angled_support_dark_oak"),
+					new BlockAngledSupport("angled_support_jungle"),
+					new BlockAngledSupport("angled_support_spruce"),
+					new BlockAngledSupport("angled_support_oak"),
 					new BlockBarsPanel(),
 					new BlockCornplant().setRegistryName("cornplant").setUnlocalizedName(MxRef.MOD_ID + ":cornplant"), 
 					new BlockCornplantMid().setRegistryName("cornplant_mid").setUnlocalizedName(MxRef.MOD_ID + ":cornplant_mid"), 
@@ -99,6 +116,12 @@ public class ModBlocks {
 		@SubscribeEvent
 		public static void onBlockItemRegister(RegistryEvent.Register<Item> event) {
 			final Item[] block_items = {
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_ACACIA).setRegistryName(ModBlocks.ANGLED_SUPPORT_ACACIA.getRegistryName()),
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_BIRCH).setRegistryName(ModBlocks.ANGLED_SUPPORT_BIRCH.getRegistryName()),
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_DARK_OAK).setRegistryName(ModBlocks.ANGLED_SUPPORT_DARK_OAK.getRegistryName()),
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_JUNGLE).setRegistryName(ModBlocks.ANGLED_SUPPORT_JUNGLE.getRegistryName()),
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_SPRUCE).setRegistryName(ModBlocks.ANGLED_SUPPORT_SPRUCE.getRegistryName()),
+					new ItemBlock(ModBlocks.ANGLED_SUPPORT_OAK).setRegistryName(ModBlocks.ANGLED_SUPPORT_OAK.getRegistryName()),
 					new ItemBlock(ModBlocks.BARSPANEL).setRegistryName(ModBlocks.BARSPANEL.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_REDROSE).setRegistryName(ModBlocks.FLOWER_REDROSE.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_HEARTMUSHROOM).setRegistryName(ModBlocks.FLOWER_HEARTMUSHROOM.getRegistryName()),
