@@ -10,14 +10,6 @@ import net.minecraft.world.World;
 
 public class ItemInvitation extends ItemBase
 {
-	public enum InvitationType {
-		NORMAL,
-		APPROVED,
-		BAIT,
-		OFFICIAL,
-		JOB
-	}
-	
 	protected InvitationType type;
 	
 	public ItemInvitation(String name, InvitationType type) {
@@ -25,6 +17,7 @@ public class ItemInvitation extends ItemBase
 		this.type = type;
 		this.setMaxStackSize(1);
 	}
+	
 	
 	public InvitationType getType() {
 		return this.type;

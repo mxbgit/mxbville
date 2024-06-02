@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mxbville.common.CommonProxy;
+import mxbville.common.commands.CommandResetInvitationSending;
 import mxbville.common.commands.CommandSetTreasureHuntLevel;
 import mxbville.util.MxRef;
 import net.minecraft.creativetab.CreativeTabs;
@@ -55,5 +56,6 @@ public class MxBville {
     public void serverInit(FMLServerStartingEvent event)
     {
     	event.registerServerCommand(new CommandSetTreasureHuntLevel());
+    	event.registerServerCommand(new CommandResetInvitationSending());
     }
 }

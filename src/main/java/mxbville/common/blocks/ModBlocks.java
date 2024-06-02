@@ -10,6 +10,7 @@ import mxbville.common.blocks.food.BlockCornplant;
 import mxbville.common.blocks.food.BlockCornplantMid;
 import mxbville.common.blocks.food.BlockCornplantTop;
 import mxbville.common.blocks.food.BlockMxBCake;
+import mxbville.common.blocks.interactive.BlockMailBox;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -30,6 +31,8 @@ public class ModBlocks {
 	public static final Block ANGLED_SUPPORT_JUNGLE		= null;
 	public static final Block ANGLED_SUPPORT_SPRUCE		= null;
 	public static final Block ANGLED_SUPPORT_OAK		= null;
+	
+	public static final BlockMailBox MAILBOX = null;
 	
 	public static final BlockBarsPanel BARSPANEL			= null;
 	
@@ -95,6 +98,7 @@ public class ModBlocks {
 					new BlockFlowerInPot("flower_gardenia"),
 					new BlockFlowerInPot("flower_bonsai"),
 					new BlockLetterStation(),
+					new BlockMailBox(),
 					new BlockTable("table_acacia"), 
 					new BlockTable("table_birch"), 
 					new BlockTable("table_darkoak"),
@@ -132,6 +136,7 @@ public class ModBlocks {
 					new ItemBlock(ModBlocks.FLOWER_GARDENIA).setRegistryName(ModBlocks.FLOWER_GARDENIA.getRegistryName()),
 					new ItemBlock(ModBlocks.FLOWER_BONSAI).setRegistryName(ModBlocks.FLOWER_BONSAI.getRegistryName()),
 					new ItemBlock(ModBlocks.LETTERSTATION).setRegistryName(ModBlocks.LETTERSTATION.getRegistryName()),
+					new ItemBlock(ModBlocks.MAILBOX).setRegistryName(ModBlocks.MAILBOX.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_ACACIA).setRegistryName(ModBlocks.TABLE_ACACIA.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_BIRCH).setRegistryName(ModBlocks.TABLE_BIRCH.getRegistryName()),
 					new ItemBlock(ModBlocks.TABLE_DARKOAK).setRegistryName(ModBlocks.TABLE_DARKOAK.getRegistryName()),

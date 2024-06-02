@@ -55,7 +55,7 @@ public class ContainerLetterStation extends Container {
 		this.addSlotToContainer(new Slot(this.craftColumn, 1 , 35, 8 + 1 * 23)); 
 		this.addSlotToContainer(new Slot(this.craftColumn, 2 , 35, 8 + 2 * 23)); 
 		// output Slots
-		this.addSlotToContainer(new SlotCrafting(playerRef, this.craftColumn, this.craftResult, 3, 87, 56)); 
+		this.addSlotToContainer(new SlotLetterStationCraftResult(playerRef, this.craftColumn, this.craftResult, 3, 87, 56)); 
 	}
 	
 	private void addPlayerSlots(IInventory playerInventory) 

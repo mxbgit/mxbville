@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "mxbville:mailbox" },
+        "facing=south": { "model": "mxbville:mailbox", "y": 180 },
+        "facing=west":  { "model": "mxbville:mailbox", "y": 270 },
+        "facing=east":  { "model": "mxbville:mailbox", "y": 90 }
+    }
+}

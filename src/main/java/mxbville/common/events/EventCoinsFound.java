@@ -45,7 +45,7 @@ public class EventCoinsFound {
 			event.getSource().getTrueSource() instanceof EntityPlayer)
 		{
 			if(MxBvilleConfig.killMobsDropCoins){
-				int l =  ExtendedPlayerProperties.get((EntityPlayer)event.getSource().getTrueSource()).treasureHuntLevel;
+				int l =  ExtendedPlayerProperties.get((EntityPlayer)event.getSource().getTrueSource()).getTreasureHuntLevel();
 				int base = l * 2 + 1;
 				int add = l + 3;
 				event.getEntityLiving().dropItem(ModItems.COIN_BRONZE, MxRand.get().nextInt(add) + base);
@@ -70,7 +70,7 @@ public class EventCoinsFound {
 				// arbitrary 1 out of 5 calculation
 				if(MxRand.get().nextInt(5) == 0)
 				{
-					int li = ExtendedPlayerProperties.get(event.getHarvester()).treasureHuntLevel;
+					int li = ExtendedPlayerProperties.get(event.getHarvester()).getTreasureHuntLevel();
 					int base = li + 1;
 					int add = li * 2 + 1;
 					if(isValidDimension(event.getWorld().provider.getDimension()))
