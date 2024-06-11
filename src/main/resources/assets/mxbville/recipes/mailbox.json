@@ -1,0 +1,65 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "   ",
+        "abc",
+        "   "
+    ],
+    "key":
+    {
+        "a":[
+        {
+          "item": "minecraft:planks",
+          "data": 0
+        },
+                {
+          "item": "minecraft:planks",
+          "data": 1
+        },
+                {
+          "item": "minecraft:planks",
+          "data": 2
+        },
+                {
+          "item": "minecraft:planks",
+          "data": 3
+        },
+                {
+          "item": "minecraft:planks",
+          "data": 4
+        },
+                {
+          "item": "minecraft:planks",
+          "data": 5
+        }
+        ],
+        "b":[
+        {
+          "item": "mxbville:letter_invitation_approved"
+        },
+        {
+          "item": "mxbville:letter_invitation_bait"
+        },
+        {
+          "item": "mxbville:letter_invitation_job"
+        },
+        {
+          "item": "mxbville:letter_invitation_normal"
+        },
+        {
+          "item": "mxbville:letter_invitation_official"
+        }
+        ],
+        "c":
+        {
+          "item": "minecraft:trapdoor"
+        }
+    },
+    "result":
+    {
+        "item": "mxbville:mailbox",
+        "count": 1,
+        "data": 0
+    }
+}

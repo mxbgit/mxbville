@@ -19,7 +19,8 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		//config
-		MxBvilleConfig.load(event.getModConfigurationDirectory());
+		MxBvilleConfig.loadConfig();
+		MxBvilleConfig.syncConfig();
 		
 		//gui
 		NetworkRegistry.INSTANCE.registerGuiHandler(MxBville.instance, new GuiHandler());

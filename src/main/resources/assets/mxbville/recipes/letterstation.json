@@ -2,12 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:feather",
-      "data": 0
+      "item": "minecraft:feather"
     },
       {
-      "item": "minecraft:paper",
-      "data": 0
+      "item": "minecraft:paper"
+    },
+      {
+      "item": "minecraft:wooden_pressure_plate"
     },
       {
       "item": "minecraft:dye",

@@ -1,10 +1,13 @@
 package mxbville.common.gui;
 
 import mxbville.client.gui.blockgui.GuiLetterStation;
+import mxbville.client.gui.itemgui.GuiLetterReply;
 import mxbville.client.gui.itemgui.GuiWallet;
 import mxbville.common.blocks.crafting.BlockLetterStation;
 import mxbville.common.blocks.inventories.ContainerLetterStation;
+import mxbville.common.gui.common.ContainerEmpty;
 import mxbville.common.items.coins.ItemWallet;
+import mxbville.common.items.documents.ItemReplyMail;
 import mxbville.common.items.inventories.ContainerWallet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +18,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import scala.reflect.internal.Trees.New;
 
 public class GuiHandler implements IGuiHandler{
 
@@ -35,6 +39,8 @@ public class GuiHandler implements IGuiHandler{
 						return new ContainerLetterStation(player.inventory, world, new BlockPos(x, y, z));
 					}
 					break;
+				case GUIIDList.LETTER_REPLY:
+					return new ContainerEmpty();
 				case GUIIDList.WALLET_SMALL: 
 				case GUIIDList.WALLET_LARGE: 
 					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWallet)
@@ -71,6 +77,8 @@ public class GuiHandler implements IGuiHandler{
 						return new GuiLetterStation(player.inventory, world, new BlockPos(x, y, z));
 					}
 					break;
+				case GUIIDList.LETTER_REPLY:
+					return new GuiLetterReply(player, ItemReplyMail.getAmbushFlag(heldItemStack));
 				case GUIIDList.WALLET_SMALL: 
 				case GUIIDList.WALLET_LARGE: 
 					if (heldItemStack != ItemStack.EMPTY && heldItemStack.getItem() instanceof ItemWallet)

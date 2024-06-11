@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        " s ",
+        "lcl",
+        " l "
+    ],
+    "key":
+    {
+        "s":
+        {
+          "item": "minecraft:string"
+        },
+        "c":
+        {
+          "item": "mxbville:coin_bronze"
+        },
+        "l":
+        {
+          "item": "minecraft:leather"
+        }
+    },
+    "result":
+    {
+        "item": "mxbville:wallet_small",
+        "count": 1,
+        "data": 0
+    }
+}

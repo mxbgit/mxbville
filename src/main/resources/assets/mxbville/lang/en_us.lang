@@ -22,6 +22,7 @@ item.mxbville.letter_invitation_bait.name=Invitation Letter
 item.mxbville.letter_invitation_job.name=Invitation Letter
 item.mxbville.letter_invitation_normal.name=Invitation Letter
 item.mxbville.letter_invitation_official.name=Invitation Letter
+item.mxbville.letter_reply.name=Reply Letter
 ================================================================================
 	BLOCKS 
 ================================================================================
@@ -63,6 +64,9 @@ itemGroup.blocktab=Blocks
 itemGroup.itemtab=Items
 itemGroup.specialtab=Specials
 
+mxbville:gui.letter_reply.button.approve=Approve
+mxbville:gui.letter_reply.sender=§o%s
+
 ================================================================================
 	INFO
 ================================================================================
@@ -78,7 +82,7 @@ mxbville:letter_invitation_bait.item.info=A §cmanipulated§r letter to lure in 
 mxbville:letter_invitation_approved.item.info=A villager invitation with an official seal. §8-§o"I'll guess less people will try to mess with the officials"-
 mxbville:letter_invitation_job.item.info=TODO.
 mxbville:letter_invitation_official.item.info=An §6official§r villager invitation from the mayor. §8-§o"No one will mess with the Villages Mayor"-
-
+mxbville:letter_reply.item.info=§7From §a%s
 ================================================================================
 	COMMANDS
 ================================================================================
@@ -88,7 +92,142 @@ command.mx_resetinvitationsending.usage=/mx_resetinvitationsending
 	PLAYER MESSAGES
 ================================================================================
 mxbville:message.mail.nomail=The Mailbox is empty...
+mxbville:message.mail.fail=I guess I should just try another invitation...
 mxbville:message.mail.invitefailed=Maybe I need more patience. I've already sent an invitation
-mxbville:message.mail.mailsend=The letter is on its way. I hope someone will reply soon
+mxbville:message.mail.mailsend.0=I hope someone will reply soon
+mxbville:message.mail.mailsend.1=The letter is on its way
+mxbville:message.mail.mailsend.2=I'm looking forward to the reply
 mxbville:message.mail.errortext=...Well something's happened for sure
-mxbville:message.mail.new=I should check my Mails. Maybe someone wrote back
+mxbville:message.mail.new=I should check if someone wrote back
+
+================================================================================
+	MAIL REPLYS 
+================================================================================
+mxbville:gui.letter_reply.generic_greeting=Hello, §o%s!
+mxbville:gui.letter_reply.farmer.0=I am used to tough, back-breaking labor, that puts food on the table. Sowing seeds, tending to crops and coaxing life from the soil, is my life's calling.
+mxbville:gui.letter_reply.farmer.1=It became too cramped for me at home, so I gladly accept your invitation. I can help the people nurture the land to provide sustenance for us all.
+mxbville:gui.letter_reply.farmer.2=My family sent me here to make myself useful. I find joy in the cycles of life and am adept at working with plants but I don't shy away from hard work either.
+
+mxbville:gui.letter_reply.butcher.0=At home I was the bridge between the beast and the feast. I take pride in my craft, ensuring that every cut I offer is of the highest quality and I am happy to be here. 
+mxbville:gui.letter_reply.butcher.1=My skilled hands are no longer needed at my hometown. I am a culinary artist who wields the knife with finesse and precision, here to offer my services
+mxbville:gui.letter_reply.butcher.2=If there's something to do, I'm on hand. If it has to do with meat, even better. I take pride in sourcing the finest meats, ensuring they are expertly prepared
+
+mxbville:gui.letter_reply.florist.0=I look forward to meeting you in person. With delicate hands and a keen eye, I am ready to help you build up this place, or even better, beautify it.
+mxbville:gui.letter_reply.florist.1=My passion lies in arranging petals and stems into breathtaking compositions. So if your new town have space for a passionate soul, count me in.
+mxbville:gui.letter_reply.florist.2=For generations, my ancestors have been storytellers in the language of flowers. So with my help in your village, we never get bored.
+
+mxbville:gui.letter_reply.fisherman.0=I would be happy to join your settlement. For a long time I was a humble servant of the sea and bring with me a lot of experience of hard work.
+mxbville:gui.letter_reply.fisherman.1=For a few years I served my people as seeker of the ocean's secrets. Providing for the hungry souls on land. Now the call of the sirens has brought me here.
+mxbville:gui.letter_reply.fisherman.2=I have tamed the tempestuous waters. Within these shores, I offer a glimpse into the world of the sea's harvest. May my skills be of use for your people.
+
+mxbville:gui.letter_reply.hunter.0=Whether you are in need of fresh game for a feast or guidance on the ways of the wilderness, you can count on me. My steady hand and sharp senses never disappointed me.
+mxbville:gui.letter_reply.hunter.1=I recieved a letter from you and would like to help building a new village. I can provide provisions for your travels or good advice on surviving the perils of the wilderness.
+mxbville:gui.letter_reply.hunter.2=The lands I am from became too small for me. I am a steward of the wild, a protector of the delicate balance between predator and prey and here to find a new home.
+
+mxbville:gui.letter_reply.vintner.0=A drought drove me from my home. Now I am here to help us both prosper. I used to work as a weaver of flavors and aromas, bottled to dazzle the senses.
+mxbville:gui.letter_reply.vintner.1=I had little success in the big town. Maybe this place is right suited for a provider of the nectar of the gods. A nectar as captivating as it is intoxicating.
+mxbville:gui.letter_reply.vintner.2=I am glad you invited me. Much more than my labor, I can impart knowledge about the alchemy of turning grapes into liquid poetry. Provided your soil allows it 
+
+mxbville:gui.letter_reply.miller.0=My services are needed in many places. Transforming nature's bounty into the sustenance that feeds the village is a back-breaking labor, but I am ready to help.
+mxbville:gui.letter_reply.miller.1=Invaders destroyed our village. So my brothers and I moved apart, each in search of work and a home. I used to shape wheat into flour but any work is fine with me.
+mxbville:gui.letter_reply.miller.2=On this fertile land there is only one thing missing: a steward of the grain and the fields. Let me help this land grow and feed its hard working people
+
+mxbville:gui.letter_reply.blacksmith.0=I spend my days shaping metal with fire and hammer, creating the finest tool. But any craft is fine with me, if you have a place for me to stay.
+mxbville:gui.letter_reply.blacksmith.1=I lost my home to invaders and now seeking refuge. I've been working the forge for as long as I can remember and sure be of good use for this place.
+mxbville:gui.letter_reply.blacksmith.2=For generations, my family has wielded the hammer and anvil, turning raw ore into objects of power. Now its time for me to find a place to lend a hand.
+
+mxbville:gui.letter_reply.lumberjack.0=I am glad you wrote. Back at home my duty was providing timber for construction, warmth for the hearth, and a livelihood for the community. Let me be of use here.
+mxbville:gui.letter_reply.lumberjack.1=If you're in need of logs for your hearth or tales of the forest to ignite your imagination, then you do well letting me live with you.
+mxbville:gui.letter_reply.lumberjack.2=My last contracts expired, so I'm here to find new ways to earn a living. In the past, the sturdiest trunks couldn't withstand my axe blows but any work will do.
+
+mxbville:gui.letter_reply.mason.0=If there's something to build, you called the right person. At home they call me the sculptor of stone and a builder of dreams. Where do we start?
+mxbville:gui.letter_reply.mason.1=My family sent me here. For generations, my kind has wielded chisels an mallets and now my time has come to make myself useful.
+mxbville:gui.letter_reply.mason.2=I heard that you could use someone with skilled hands. I bring strength and beauty to structures that stand the test of time. Let me bring your visions to life
+
+mxbville:gui.letter_reply.miner.0=I heard you gather workers for a new project. Lend me a pickaxe and I dig through the badrock itself. For enough food and a warm bed, of course. 
+mxbville:gui.letter_reply.miner.1=Rumor has it you're interested in digging deep into the earth and unearthing its treasures. Well let me lend a hand.
+mxbville:gui.letter_reply.miner.2=Let me settle down with you. I am well acquainted with rugged terrain and the hidden riches it conceals. Togather we help this place thrive.
+
+mxbville:gui.letter_reply.guard.0=I am gladly following your invitation. For it is my sworn duty to protect the innocent, maintain order and ensure the peace among my people.
+mxbville:gui.letter_reply.guard.1=Bandits drove me from my home. Back then I was weak. That will never happen again, neither to me nor to the people I have swear to protect.
+mxbville:gui.letter_reply.guard.2=I am used to tough labor and don't shy away from the dangers of the night. If your people need protection, you are welcome to contact me.
+
+mxbville:gui.letter_reply.tanner.0=I am looking for a new place to do business. I hope you are in need of quality leather goods or share my interest in my craft.
+mxbville:gui.letter_reply.tanner.1=As my family was told, you are reaching out for help to bring both fashion and protection to this place. I accept the assignment.
+mxbville:gui.letter_reply.tanner.2=I spent my days working with the hides of various creatures. Perhaps I can enrich the lives of the people here with some of my skills.
+
+mxbville:gui.letter_reply.weaver.0=If there's work to be done, I am on hand. I also know one thing or two about the handling of exquisite fabrics or custom-made garment. Whatever this place needs.
+mxbville:gui.letter_reply.weaver.1=The place I come from became too small for me. I simply couldn't find a place to unfold my textile craftsmanship. Maybe my luck lies here with you.
+mxbville:gui.letter_reply.weaver.2=The thread of fate has led your invitation to my humble hands. Let me 
+	
+mxbville:gui.letter_reply.healer.0=
+mxbville:gui.letter_reply.healer.1=
+mxbville:gui.letter_reply.healer.2=
+
+mxbville:gui.letter_reply.mystic.0=
+mxbville:gui.letter_reply.mystic.1=
+mxbville:gui.letter_reply.mystic.2=
+
+mxbville:gui.letter_reply.librarian.0=
+mxbville:gui.letter_reply.librarian.1=
+mxbville:gui.letter_reply.librarian.2=
+
+mxbville:gui.letter_reply.painter.0=
+mxbville:gui.letter_reply.painter.1=
+mxbville:gui.letter_reply.painter.2=
+
+mxbville:gui.letter_reply.treasurehunter.0=
+mxbville:gui.letter_reply.treasurehunter.1=
+mxbville:gui.letter_reply.treasurehunter.2=
+
+mxbville:gui.letter_reply.bard.0=
+mxbville:gui.letter_reply.bard.1=
+mxbville:gui.letter_reply.bard.2=
+
+mxbville:gui.letter_reply.brewer.0=
+mxbville:gui.letter_reply.brewer.1=
+mxbville:gui.letter_reply.brewer.2=
+
+mxbville:gui.letter_reply.mayor.0=
+mxbville:gui.letter_reply.mayor.1=
+mxbville:gui.letter_reply.mayor.2=
+
+mxbville:gui.letter_reply.jeweler.0=
+mxbville:gui.letter_reply.jeweler.1=
+mxbville:gui.letter_reply.jeweler.2=
+
+
+
+mxbville:gui.letter_reply.ambush.0=You may think you're clever, but we are always one step ahead. There is nowhere to hide from our reach. And you will experience this first-hand!
+mxbville:gui.letter_reply.ambush.1=We know who you are, and we know what you're up to. Consider this letter a warning. Get out of this land or feel the consequences! 
+mxbville:gui.letter_reply.ambush.2=Heed this warning, for it is the last you shall receive. Leave this place and never come back. Or we will come back, again and again... for you!
+mxbville:gui.letter_reply.ambush.3=So you are inviting new citizens?! I think me and the boys will pay your little settlement a visit. Prepare your gold!
+mxbville:gui.letter_reply.ambush.4=It seams to me, your havent payed your toll to build on this ground. Let us remind you kindly to to catch up on this. 
+mxbville:gui.letter_reply.ambush.5=Your invitation is in good hands. Unfortunately these hands are now cut of. Someone was unwilling to pay, you see. We hope you dont repeat this mistake.
+mxbville:gui.letter_reply.ambush.6=Unfortunately your guest cant reply to your invitation. He somehow lost his head on the way to the mailbox. A fate you will share if you dont leave right away
+mxbville:gui.letter_reply.ambush.7=You dare to cross our path and believe you can escape unscathed? We shall make you pay dearly for your insolence! In blood or in gold, you decide!
+mxbville:gui.letter_reply.ambush.8=Prepare yourself, for your settlement is about to crumble. And when we are finished with it, you will be next!
+mxbville:gui.letter_reply.ambush.9=Don't take it personal. Let's just say your wealth attracts certain unpleasant individuals. But we will gladly free you from this burden!
+================================================================================
+	VILLAGER DIALOGUES
+================================================================================
+mxbville:gui.villager.profession.personality.topic.0=
+
+mxbville:gui.villager.farmer.kind.greeting.0=Greetings, §o%s! Are you seeking some farm-fresh goods or simply passing by?
+mxbville:gui.villager.farmer.kind.greeting.1=Hello §o%s! In need of fresh produce or a friendly chat?
+mxbville:gui.villager.farmer.kind.greeting.2=Ah, welcome to my patch of paradise! What can I do for you?
+mxbville:gui.villager.farmer.kind.greeting.3=Well, hello there! If you're looking for a taste of the countryside, you've come to the right place.
+mxbville:gui.villager.farmer.kind.greeting.4=Good day to you! Welcome to my humble farm.
+
+
+mxbville:gui.villager.blacksmith.kind.greeting.0=Greetings, §o%s! If you seek quality craftsmanship, you've come to the right place.
+mxbville:gui.villager.blacksmith.kind.greeting.1=Ah, welcome to my humble forge. What brings you here today?
+mxbville:gui.villager.blacksmith.kind.greeting.2=Hello §o%s! Need a weapon repaired or perhaps a custom piece forged?
+mxbville:gui.villager.blacksmith.kind.greeting.3=Hail, adventurer! Forging is my game. If you need equipment that won't fail you, you've come to the right place, 
+mxbville:gui.villager.blacksmith.kind.greeting.4=Well met, friend! Look around. I'm sure, I have just the thing you need. 
+
+mxbville:gui.villager.blacksmith.kind.rumors.0=Word has it that a fearsome dragon has been spotted in the nearby mountains. Some say its scales are as hard as the finest steel.
+mxbville:gui.villager.blacksmith.kind.rumors.1=The villagers have been buzzing about ...
+mxbville:gui.villager.blacksmith.kind.rumors.2=Have you heard the whispers?! They say a band of bandits has been terrorizing the trade routes lately.
+mxbville:gui.villager.blacksmith.kind.rumors.3=There's talk of a hidden treasure buried
+mxbville:gui.villager.blacksmith.kind.rumors.4=

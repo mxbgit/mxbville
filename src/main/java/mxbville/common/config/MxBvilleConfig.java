@@ -1,46 +1,57 @@
 package mxbville.common.config;
 
+import mxbville.MxBville;
 import mxbville.util.MxRef;
 import java.io.File;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
+import net.minecraftforge.fml.common.Loader;
 
 public class MxBvilleConfig {
 	
-
+	public static Configuration config;
 	private static final String configFileName = MxRef.MOD_ID + ".cfg";
+	// Config Categories
+	public static final String GENERAL	 = "general";
+	public static final String MAILS 	 = "mails";
+	public static final String VILLAGERS = "villagers";
+	
+	
 	//properties
-	public static boolean 	destroyBlocksDropCoins;		//true: destroy blocks can drop coins
-	public static boolean 	killMobsDropCoins;			//true: kill mobs can drop coins
-	public static double 	invitationSuccess;			//0.55 Success means no ambush
-	public static double	baitSuccess;				//0.10 Success means no ambush
-	public static double	approvedSuccess;			//0.75 Success means no ambush
+	public boolean 	destroyBlocksDropCoins 	= true;		//true: destroy blocks can drop coins
+	public boolean 	killMobsDropCoins		= true;		//true: kill mobs can drop coins
+	public String[] affinityList 			= new String[] {"farmer","butcher","florist","fisherman","hunter","vintner","miller","blacksmith",
+															"lumberjack","mason","miner","guard","tanner","weaver","healer","mystic","librarian",
+															"painter","treasurehunter","bard","brewer","mayor","jeweler"};
+	
+	
+    public void init(Configuration config) {
+    	this.destroyBlocksDropCoins = config.getBoolean("Does destroying blocks drop coins", GENERAL, true, "Whether destroying Blocks lead to coindrops.");
+    	this.killMobsDropCoins 		= config.getBoolean("Does killing mobs drop coins", GENERAL, true, "Whether killing mobs drop coins.");
+    	this.affinityList			= config.getStringList("List of Professions, that are considered as affinity", MAILS, new String[] {
+    																		"farmer","butcher","florist","fisherman","hunter","vintner","miller","blacksmith",
+    																		"lumberjack","mason","miner","guard","tanner","weaver","healer","mystic","librarian",
+    																		"painter","treasurehunter","bard","brewer","mayor","jeweler"}, 
+    														"These professions are considered as affinity professions. Certain Villager professions can only be unlocked if the villager has the right affinity");
+    }
+	
+	public static void loadConfig() {
+        File configFile = new File(Loader.instance().getConfigDir(), configFileName);
+        if (!configFile.exists()) {
+            try {
+                configFile.createNewFile();
+            } catch (Exception e) {
+                MxBville.LOGGER.warn("Could not create a new MxBVille config file.");
+                MxBville.LOGGER.warn(e.getLocalizedMessage());
+            }
+        }
+        config = new Configuration(configFile);
+        config.load();
+    }
 
-	public static void load(File dir){
-		Configuration conf = new Configuration(new File(dir, configFileName), MxRef.VERSION);
-		Property pt = null;
-		
-		conf.load();
-		
-		//coin earning options
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "DestroyBlocksDropCoins", true);
-		pt.setComment("Does destroying blocks drop coins? (default: true)");
-		destroyBlocksDropCoins = pt.getBoolean();
-		
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "KillMobsDropCoins", false);
-		pt.setComment("Does killing mobs drop coins? (default: false)");
-		killMobsDropCoins = pt.getBoolean();
-		
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "invitationSuccess", 0.55);
-		pt.setComment("Success rate: default 55 | ambush rate 25 | failure rate 20 )");
-		
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "approvedSuccess", 0.75);
-		pt.setComment("Success rate: default 75 | ambush rate 10 | failure rate 15 )");
+    public static void syncConfig() {
+    	MxBville.MXCONFIG.init(config);
+        config.save();
+    }
 
-		pt = conf.get(Configuration.CATEGORY_GENERAL, "baitSuccess", 0.70);
-		pt.setComment("Success rate: default 10 | ambush rate 70 | failure rate 20 )");
-		
-		conf.save();
-	}
 }

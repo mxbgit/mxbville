@@ -1,5 +1,6 @@
 package mxbville.common.events;
 
+import mxbville.MxBville;
 import mxbville.common.calc.math.MxRand;
 import mxbville.common.config.MxBvilleConfig;
 import mxbville.common.items.ModItems;
@@ -44,7 +45,7 @@ public class EventCoinsFound {
 			event.getEntityLiving() instanceof EntityMob && 
 			event.getSource().getTrueSource() instanceof EntityPlayer)
 		{
-			if(MxBvilleConfig.killMobsDropCoins){
+			if(MxBville.MXCONFIG.killMobsDropCoins){
 				int l =  ExtendedPlayerProperties.get((EntityPlayer)event.getSource().getTrueSource()).getTreasureHuntLevel();
 				int base = l * 2 + 1;
 				int add = l + 3;
@@ -66,7 +67,7 @@ public class EventCoinsFound {
 	{
 		if(!event.getWorld().isRemote && event.getHarvester() != null)
 		{
-			if(MxBvilleConfig.destroyBlocksDropCoins){
+			if(MxBville.MXCONFIG.destroyBlocksDropCoins){
 				// arbitrary 1 out of 5 calculation
 				if(MxRand.get().nextInt(5) == 0)
 				{

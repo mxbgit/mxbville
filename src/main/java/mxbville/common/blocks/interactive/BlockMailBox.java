@@ -2,10 +2,9 @@ package mxbville.common.blocks.interactive;
 
 import mxbville.MxBville;
 import mxbville.common.blocks.misc.BlockFacing;
+import mxbville.common.calc.math.MxRand;
 import mxbville.common.events.EventMailArrived;
 import mxbville.common.items.ModItems;
-import mxbville.common.items.documents.InvitationType;
-import mxbville.common.items.documents.ItemApprovementStamp;
 import mxbville.common.items.documents.ItemInvitation;
 import mxbville.common.player.ExtendedPlayerProperties;
 import mxbville.util.MxRef;
@@ -122,7 +121,7 @@ public class BlockMailBox extends BlockFacing {
 			}
 			// Send Invitation
 			ExtendedPlayerProperties.get(playerIn).sendNewMail(currentInvitation.getType().name());			
-			playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID +":message.mail.mailsend"));
+			playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID +":message.mail.mailsend." + MxRand.get().nextInt(3)));
 		}
 		
 	}

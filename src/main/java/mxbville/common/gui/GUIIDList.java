@@ -4,7 +4,7 @@ public class GUIIDList {
 	//village gui (id = [100,200))
 	
 	public static final int LETTER_STATION 	= 200;
-	public static final int MAIL_REPLY 		= 201;
+	public static final int LETTER_REPLY	= 201;
 			
 	public static final int WALLET_SMALL 	= 210;
 	public static final int WALLET_LARGE 	= 211;
