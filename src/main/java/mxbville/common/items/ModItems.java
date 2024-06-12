@@ -30,7 +30,7 @@ public class ModItems {
 	public static final Item CORN_SEED = null; 
 	public static final Item CORN_HORSE = null; 
 	
-	public static final Item LETTER_APPROVEMEND_STAMP = null;
+	public static final Item LETTER_APPROVEMENT_STAMP = null;
 	
 	public static final Item LETTER_INVITATION_APPROVED = null;
 	public static final Item LETTER_INVITATION_BAIT 	= null;

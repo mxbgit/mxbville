@@ -14,6 +14,7 @@ public class ItemApprovementStamp extends ItemBase {
 
 	public ItemApprovementStamp(String name) {
 		super(name);
+		this.setMaxStackSize(1);
 	}
 
 	@Override
