@@ -51,7 +51,7 @@ public class LetterStationCraftingHandler
 		
 		NonNullList<ItemStack> ingridientsApproved = NonNullList.create();
 		ingridientsApproved.add(new ItemStack(ModItems.LETTER_INVITATION_NORMAL));
-		ingridientsApproved.add(new ItemStack(ModItems.LETTER_APPROVEMEND_STAMP));
+		ingridientsApproved.add(new ItemStack(ModItems.LETTER_APPROVEMENT_STAMP));
 		
 		// Adding the Recipes to the crafting list
 		this.addRecipe(new LetterRecipe(ingridientsNormal,letterNormal));

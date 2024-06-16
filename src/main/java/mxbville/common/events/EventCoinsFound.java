@@ -2,7 +2,6 @@ package mxbville.common.events;
 
 import mxbville.MxBville;
 import mxbville.common.calc.math.MxRand;
-import mxbville.common.config.MxBvilleConfig;
 import mxbville.common.items.ModItems;
 import mxbville.common.player.ExtendedPlayerProperties;
 import net.minecraft.entity.monster.EntityMob;

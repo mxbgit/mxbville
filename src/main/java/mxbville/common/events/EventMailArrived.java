@@ -104,8 +104,8 @@ public class EventMailArrived {
 	private static ItemStack generatePersonalReplyLetter(boolean isAmbush) {
 		ItemStack stack = ItemStack.EMPTY;
 		
-		boolean male 					= MxRand.get().nextBoolean();
-		String nameString 				= male?PersonalityGenerator.getRandomMaleName():PersonalityGenerator.getRandomFemaleName();
+		boolean isMale 					= MxRand.get().nextBoolean();
+		String nameString 				= isMale?PersonalityGenerator.getRandomMaleName():PersonalityGenerator.getRandomFemaleName();
 		String affinityString 			= PersonalityGenerator.getRandomAffinity();
 		String mailTextTranslationKey 	= "";
 		if (!isAmbush)
@@ -114,7 +114,7 @@ public class EventMailArrived {
 		}else {
 			mailTextTranslationKey = "ambush." + MxRand.get().nextInt(10);
 		}
-		stack = ItemReplyMail.generateMail(nameString, mailTextTranslationKey, affinityString, isAmbush);
+		stack = ItemReplyMail.generateMail(nameString, mailTextTranslationKey, affinityString, isAmbush, isMale);
 		
 		return stack;
 	}

@@ -4,6 +4,7 @@ import mxbville.common.config.MxBvilleConfig;
 import mxbville.common.events.EventCoinsFound;
 import mxbville.common.events.EventEntity;
 import mxbville.common.gui.GuiHandler;
+import mxbville.common.network.ModNetwork;
 import mxbville.common.player.CapExPlayerProperties;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +26,9 @@ public class CommonProxy {
 		//gui
 		NetworkRegistry.INSTANCE.registerGuiHandler(MxBville.instance, new GuiHandler());
 		
+		//messages
+		ModNetwork.init();
+				
 		//capability
 		CapExPlayerProperties.register();
 		

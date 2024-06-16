@@ -2,10 +2,13 @@ package mxbville.client.gui.itemgui;
 
 import java.io.IOException;
 
+import io.netty.handler.codec.MessageAggregationException;
 import mxbville.client.gui.GuiTextButton;
 import mxbville.common.gui.common.ContainerEmpty;
 import mxbville.common.items.ModItems;
 import mxbville.common.items.documents.ItemReplyMail;
+import mxbville.common.network.ModNetwork;
+import mxbville.common.network.messages.villager.MessageSpawnNewVillagerThroughMail;
 import mxbville.util.MxRef;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -87,7 +90,7 @@ public class GuiLetterReply extends GuiContainer{
 	protected void actionPerformed(GuiButton button) throws IOException {
 		super.actionPerformed(button);
 		if (button == buttonApprove) {
-			// magic
+			ModNetwork.getInstance().sendToServer(new MessageSpawnNewVillagerThroughMail());
 			this.mc.player.closeScreen();
 		}
 	}

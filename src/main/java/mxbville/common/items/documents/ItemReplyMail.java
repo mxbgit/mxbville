@@ -32,15 +32,17 @@ public class ItemReplyMail extends ItemBase {
 	 * @param senderName string. Name of the villager, who will be generated
 	 * @param mailText	string. Text that is displayed in the reply gui
 	 * @param affinityString string. Profession name, the villager has an affinity to
+	 * @param isMale boolean. Gender of the sending villager.
 	 * 
 	 * @return itemstack. ItemReplyMail with set content for villager generation
 	 */
-	public static ItemStack generateMail(String senderName, String mailTextTranslationKey, String affinityString, boolean ambushFlag)
+	public static ItemStack generateMail(String senderName, String mailTextTranslationKey, String affinityString, boolean ambushFlag, boolean isMale)
 	{
 		ItemStack mail = new ItemStack(ModItems.LETTER_REPLY);
 		setMailSenderName(mail, senderName);
 		setMailTextTranslationKey(mail, mailTextTranslationKey);
 		setMailAffinity(mail, affinityString);
+		setMailSenderGender(mail, isMale);
 		setAmbushFlag(mail, ambushFlag);
 		return mail;
 	}
@@ -79,6 +81,19 @@ public class ItemReplyMail extends ItemBase {
 			return isAmbush;
 		}
 		return false;
+	}
+	
+	public static void setMailSenderGender(ItemStack stack, boolean malegender){
+		if(checkStack(stack)){
+			stack.getTagCompound().setBoolean("malegender", malegender);
+		}
+	}
+	
+	public static boolean getMailSenderGender(ItemStack stack){
+		if(checkStack(stack)){
+			return stack.getTagCompound().getBoolean("malegender");
+		}
+		return true;
 	}
 	
 	public static void setMailTextTranslationKey(ItemStack stack, String content){
