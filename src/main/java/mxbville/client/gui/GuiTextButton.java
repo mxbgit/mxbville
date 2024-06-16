@@ -41,7 +41,6 @@ public class GuiTextButton extends GuiButton{
 		 if (this.visible) {
 			 FontRenderer fontrenderer = mc.fontRenderer;
 			 this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-			 int k = this.getHoverState(this.hovered);
 	         this.mouseDragged(mc, mouseX, mouseY);
 	         int l = this.colorNormal;
 	         

@@ -17,12 +17,9 @@ public class ExtendedPlayerProperties {
 	private int 			newMailTimer;			//how much time left to receive a new mail?
 	private String			currentlySendLetter;
 	private String 			currentlyRequestedJob;
-	private EntityPlayer 	player;
 	private int 			treasureHuntLevel;
 
-	public ExtendedPlayerProperties(EntityPlayer player)
-	{
-		this.player = player;
+	public ExtendedPlayerProperties(EntityPlayer player){
 	}
 
 	public void init(Entity entity, World world)

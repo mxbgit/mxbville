@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import mxbville.MxBville;
 import mxbville.common.items.ItemBase;
 import mxbville.common.items.inventories.WalletInventoryProvider;
-import mxbville.util.MxRef;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

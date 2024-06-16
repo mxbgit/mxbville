@@ -39,19 +39,19 @@ public class MxBville {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-    	this.proxy.preInit(event);
+    	proxy.preInit(event);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	this.proxy.init(event);
+    	proxy.init(event);
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-    	this.proxy.postInit(event);
+    	proxy.postInit(event);
     }
     
     @EventHandler
