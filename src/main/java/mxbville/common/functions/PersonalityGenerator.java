@@ -353,5 +353,17 @@ public class PersonalityGenerator {
 		String [] professionLiStrings = MxBville.MXCONFIG.affinityList;
 		return professionLiStrings[rand.nextInt(professionLiStrings.length)];
 	}
+
+	/**
+	 * Returns a String, that represent a personality.
+	 * The returned String is used as a key in the .lang file
+	 * for villager chat responses.
+	 * 
+	 * @return String. Key for personality
+	 */
+	public static String getRandomPersonality() {
+		String[] personalitys = {"kind","rude"};
+		return personalitys[rand.nextInt(personalitys.length)];
+	}
 	
 }

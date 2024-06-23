@@ -25,12 +25,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(MxRef.MOD_ID)
 public class ModBlocks {
 
-	public static final Block ANGLED_SUPPORT_ACACIA		= null;
-	public static final Block ANGLED_SUPPORT_BIRCH		= null;
-	public static final Block ANGLED_SUPPORT_DARK_OAK	= null;
-	public static final Block ANGLED_SUPPORT_JUNGLE		= null;
-	public static final Block ANGLED_SUPPORT_SPRUCE		= null;
-	public static final Block ANGLED_SUPPORT_OAK		= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_ACACIA	= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_BIRCH		= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_DARK_OAK	= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_JUNGLE	= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_SPRUCE	= null;
+	public static final BlockAngledSupport ANGLED_SUPPORT_OAK		= null;
 	
 	public static final BlockMailBox MAILBOX = null;
 	
@@ -50,7 +50,7 @@ public class ModBlocks {
 	public static final BlockFlowerInPot FLOWER_GARDENIA		= null; 
 	public static final BlockFlowerInPot FLOWER_BONSAI 			= null;
 	
-	public static final Block LETTERSTATION	= Blocks.AIR; 
+	public static final BlockLetterStation LETTERSTATION	= null; 
 	
 	public static final BlockTable TABLE_ACACIA 				= null;
 	public static final BlockTable TABLE_BIRCH 					= null;	

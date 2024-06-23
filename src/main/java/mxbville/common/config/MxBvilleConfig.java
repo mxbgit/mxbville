@@ -12,27 +12,34 @@ public class MxBvilleConfig {
 	public static Configuration config;
 	private static final String configFileName = MxRef.MOD_ID + ".cfg";
 	// Config Categories
-	public static final String GENERAL	 = "general";
-	public static final String MAILS 	 = "mails";
-	public static final String VILLAGERS = "villagers";
+	public static final String GENERAL	 	= "general";
+	public static final String PROFESSIONS  = "mails";
+	public static final String VILLAGERS 	= "villagers";
 	
 	
 	//properties
 	public boolean 	destroyBlocksDropCoins 	= true;		//true: destroy blocks can drop coins
 	public boolean 	killMobsDropCoins		= true;		//true: kill mobs can drop coins
+	public boolean  oneVillagerPerRoom		= true;		//true: Allows only one Villager within its found home bounds
+	public boolean  freeUpgrading			= false;	//true: no item will be cunsumed on upgrading villagers
+	public String[] bannedProfessionsList 	= new String[] {};
 	public String[] affinityList 			= new String[] {"farmer","butcher","florist","fisherman","hunter","vintner","miller","blacksmith",
 															"lumberjack","mason","miner","guard","tanner","weaver","healer","mystic","librarian",
 															"painter","treasurehunter","bard","brewer","mayor","jeweler"};
 	
 	
+	
     public void init(Configuration config) {
-    	this.destroyBlocksDropCoins = config.getBoolean("Does destroying blocks drop coins", GENERAL, true, "Whether destroying Blocks lead to coindrops.");
-    	this.killMobsDropCoins 		= config.getBoolean("Does killing mobs drop coins", GENERAL, true, "Whether killing mobs drop coins.");
-    	this.affinityList			= config.getStringList("List of Professions, that are considered as affinity", MAILS, new String[] {
+    	this.destroyBlocksDropCoins = config.getBoolean("destroyBlocksDropCoins", GENERAL, true, "Does destroying blocks drop coins?");
+    	this.killMobsDropCoins 		= config.getBoolean("killMobsDropCoins", GENERAL, true, "Does killing mobs drop coins?");
+    	this.oneVillagerPerRoom		= config.getBoolean("oneVillagerPerRoom", GENERAL, true, "Is more than one Vilager allowed in its home?");
+    	this.freeUpgrading			= config.getBoolean("freeUpgrading",GENERAL,false,"If true, no item will be cunsumed on upgrading villagers");
+    	this.bannedProfessionsList	= config.getStringList("bannedProfessionsList",PROFESSIONS, new String[] {},"Bann Professions by name");
+    	this.affinityList			= config.getStringList("affinityList", PROFESSIONS, new String[] {
     																		"farmer","butcher","florist","fisherman","hunter","vintner","miller","blacksmith",
     																		"lumberjack","mason","miner","guard","tanner","weaver","healer","mystic","librarian",
     																		"painter","treasurehunter","bard","brewer","mayor","jeweler"}, 
-    														"These professions are considered as affinity professions. Certain Villager professions can only be unlocked if the villager has the right affinity");
+    														"List of Professions, that are considered as affinity.");
     }
 	
 	public static void loadConfig() {

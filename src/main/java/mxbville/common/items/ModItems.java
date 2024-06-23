@@ -24,21 +24,21 @@ public class ModItems {
 	public static final Item APPLE_SLICE = null;
 	
 	public static final ItemCoin COIN_BRONZE = null;
-	public static final Item COIN_SILVER = null;
-	public static final Item COIN_GOLD	 = null;
+	public static final ItemCoin COIN_SILVER = null;
+	public static final ItemCoin COIN_GOLD	 = null;
 	
 	public static final Item CORN_SEED = null; 
 	public static final Item CORN_HORSE = null; 
 	
-	public static final Item LETTER_APPROVEMENT_STAMP = null;
+	public static final ItemApprovementStamp LETTER_APPROVEMENT_STAMP = null;
 	
-	public static final Item LETTER_INVITATION_APPROVED = null;
-	public static final Item LETTER_INVITATION_BAIT 	= null;
-	public static final Item LETTER_INVITATION_JOB 		= null;
-	public static final Item LETTER_INVITATION_NORMAL 	= null;
-	public static final Item LETTER_INVITATION_OFFICIAL = null;
+	public static final ItemInvitation LETTER_INVITATION_APPROVED = null;
+	public static final ItemInvitation LETTER_INVITATION_BAIT 	= null;
+	public static final ItemInvitation LETTER_INVITATION_JOB 		= null;
+	public static final ItemInvitation LETTER_INVITATION_NORMAL 	= null;
+	public static final ItemInvitation LETTER_INVITATION_OFFICIAL = null;
 	
-	public static final Item LETTER_REPLY				= null;
+	public static final ItemReplyMail LETTER_REPLY				= null;
 	
 	public static final Item SUGAR_LUMPS = null; 
 	public static final Item WALLET_SMALL = null;

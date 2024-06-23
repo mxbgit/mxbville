@@ -1,0 +1,111 @@
+package mxbville.client.renderer;
+
+import org.lwjgl.opengl.GL11;
+
+import mxbville.client.model.ModelVillager;
+import mxbville.common.entity.villager.EntityMxVillager;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+
+public class RenderVillager extends RenderBiped<EntityMxVillager> {
+	
+	private AxisAlignedBB questMarkBoundBot = new AxisAlignedBB(-0.05D,2.3D,-0.05D,0.05D,2.4D,0.05D);
+	private AxisAlignedBB questMarkBoundTop = new AxisAlignedBB(-0.05D,2.5D,-0.05D,0.05D,2.8D,0.05D);
+		
+	public RenderVillager(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelVillager(), 0.5F);
+		this.addLayer(new LayerVillagerHeldItem(this));
+	}
+
+	@Override
+	protected boolean canRenderName(EntityMxVillager entity) {
+		if(entity.previewProfession != null)
+			return false;
+		else
+			return super.canRenderName(entity);
+	}
+	
+	@Override
+	public void doRender(EntityMxVillager entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+		/* TODO: quests
+		if(entity.previewProfession == null && entity.getCurrentQuest() != null && entity.hasHome()){
+			this.renderQuestMark(x,y,z,-entityYaw);
+		}
+		*/
+	}
+	
+	private void renderQuestMark(double x, double y, double z, float rotY){
+		
+        renderColorBox(this.questMarkBoundTop,x,y,z,rotY,1.0F,1.0F,0.0F,1.0F,0.6F,0.0F);
+        renderColorBox(this.questMarkBoundBot,x,y,z,rotY,1.0F,1.0F,0.0F,1.0F,0.6F,0.0F);      
+	}
+	
+	private void renderColorBox(AxisAlignedBB boundingBox, double x, double y, double z,float rotY, float r0,float g0, float b0, float r1, float g1, float b1){
+		GlStateManager.pushMatrix();
+		GlStateManager.disableTexture2D();
+        Tessellator tessellator = Tessellator.getInstance(); 
+        BufferBuilder vertexbuffer = tessellator.getBuffer();
+        //VertexBuffer vertexbuffer = tessellator.getBuffer();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.disableLighting();
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(rotY, 0, 1, 0);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
+        vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.minZ).color(r1, g1, b1, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).color(r0, g0, b0, 1.0F).endVertex();
+        vertexbuffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ).color(r1, g1, b1, 1.0F).endVertex();
+        tessellator.draw();
+        GlStateManager.shadeModel(GL11.GL_FLAT);
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
+	}
+	
+	
+	@Override
+	protected ResourceLocation getEntityTexture(EntityMxVillager entity) {
+		int skinid = entity.get(EntityMxVillager.FACEVARIANT);
+		if(entity.previewProfession != null)
+			return entity.previewProfession.getTexture(entity.get(EntityMxVillager.GENDER), skinid);
+		else
+			return entity.getProfession().getTexture(entity.get(EntityMxVillager.GENDER), skinid);
+
+	}
+	
+	@Override
+	protected void preRenderCallback(EntityMxVillager entitylivingbaseIn, float partialTickTime) {
+		float f = 0.9375F;
+        GlStateManager.scale(f, f, f);	
+	}
+	
+}

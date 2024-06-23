@@ -1,0 +1,116 @@
+package mxbville.common.calc;
+
+import java.util.ArrayList;
+
+import mxbville.common.calc.math.IntBoundary;
+import mxbville.common.calc.math.IntVec3;
+import net.minecraft.block.BlockBed;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class HouseDetector {
+	
+	private static final int[] Dirs = new int[]{-1,0,1,0,0,-1,0,1};
+	private static final int SearchRadius = 15;
+	private static final int SearchHeight = 30;
+	
+	/**
+	 * get the closed field that contains the start position
+	 * @param world
+	 * @param start
+	 */
+	public static IntBoundary getClosedField(World world, IntVec3 start){
+		
+		ArrayList<IntVec3> closeList = new ArrayList<IntVec3>();
+		IntBoundary bound = new IntBoundary(start.x, start.y, start.z, start.x, start.y, start.z);
+		if(checkPoint(world,closeList,bound,start,start) == false)
+			return null;
+		return bound;
+	}
+	
+	private static boolean checkPoint(World world, ArrayList<IntVec3> closeList, IntBoundary bound, IntVec3 pos, IntVec3 start){
+		closeList.add(pos);
+		//check 4 directions
+		for(int i =0;i<8;i+=2){
+			IntVec3 dpos = new IntVec3(pos.x + Dirs[i], pos.y, pos.z + Dirs[i + 1]);
+			
+			//out of max distance
+			if(isOutOfRadius(pos,start)){
+				if(isEnd(world,dpos))
+					continue;
+				else
+					return false;
+			}
+			
+			//skip if has already checked
+			if(hasChecked(closeList, dpos)){
+				continue;
+			}
+			
+			if(isEnd(world,dpos)){
+				//compare the end point to the bound
+				if(dpos.x < bound.minx) bound.minx = dpos.x;
+				else if(dpos.x > bound.maxx) bound.maxx = dpos.x;
+				if(dpos.z < bound.minz) bound.minz = dpos.z;
+				else if(dpos.z > bound.maxz) bound.maxz = dpos.z;
+			}
+			else{
+				if(checkPoint(world, closeList, bound, dpos, start) == false)
+					return false;
+			}
+		}
+		
+		return checkHeight(world, bound, pos);
+	}
+	
+	public static boolean hasBed(World worldRef, IntBoundary bound) {
+		for(int x = bound.minx; x <= bound.maxx; x++ ) {
+			for(int y = bound.miny; y <= bound.maxy; y++ ) {
+				for(int z = bound.minz; z <= bound.maxz; z++ ) {
+					if (x != 0 || y != 0 || z != 0) {
+						BlockPos pos = new BlockPos(x,y,z);    
+		                if (BlockBed.class.isAssignableFrom(worldRef.getBlockState(pos).getBlock().getClass())) {
+		                	// Bed found on this position
+		                	return true;
+		                }        
+					}
+				}
+			}   
+		}
+		return false;	
+	}
+	
+	private static boolean isOutOfRadius(IntVec3 pos, IntVec3 start){
+		if(Math.abs(pos.x - start.x) > SearchRadius ||
+		   Math.abs(pos.z - start.z) > SearchRadius)
+			return true;
+		return false;
+	}
+	
+	private static boolean isEnd(World world, IntVec3 pos){
+		return world.getBlockState(new BlockPos(pos.x, pos.y, pos.z)).getMaterial().blocksMovement();
+	}
+	
+	private static boolean hasChecked(ArrayList<IntVec3> closeList, IntVec3 pos){
+		for(IntVec3 other : closeList){
+			if(other.x == pos.x && other.z == pos.z){
+				return true;
+			}
+		}
+		return false;
+	}	
+	
+	private static boolean checkHeight(World world, IntBoundary bound, IntVec3 pos){
+		IntVec3 dpos = new IntVec3(pos.x,pos.y,pos.z);
+		for(int i = 0; i<SearchHeight; i++){
+			dpos.y++;
+			if(isEnd(world,dpos)){
+				if(dpos.y > bound.maxy){
+					bound.maxy = dpos.y;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+}

@@ -89,8 +89,13 @@ public class GuiLetterReply extends GuiContainer{
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		super.actionPerformed(button);
-		if (button == buttonApprove) {
-			ModNetwork.getInstance().sendToServer(new MessageSpawnNewVillagerThroughMail());
+		if (button == buttonApprove) 
+		{
+			if (this.isAmbushLetter) {
+				
+			}else {
+				ModNetwork.getInstance().sendToServer(new MessageSpawnNewVillagerThroughMail());
+			}
 			this.mc.player.closeScreen();
 		}
 	}

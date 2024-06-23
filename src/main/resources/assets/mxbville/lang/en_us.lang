@@ -4,6 +4,35 @@ language.code=en_US
 ================================================================================
 	PROFESSIONS 
 ================================================================================
+mxbville:profession.villager.name=Villager
+mxbville:profession.worker.name=Worker
+mxbville:profession.butcher.name=Butcher
+mxbville:profession.scholar.name=Scholar
+mxbville:profession.fisherman.name=Fisherman
+mxbville:profession.peasant.name=Peasant
+mxbville:profession.farmer.name=Farmer
+mxbville:profession.hunter.name=Hunter
+mxbville:profession.florist.name=Florist
+mxbville:profession.miner.name=Miner
+mxbville:profession.lumberjack.name=Lumberjack
+mxbville:profession.carpenter.name=Carpenter
+mxbville:profession.blacksmith.name=Blacksmith
+mxbville:profession.banker.name=Banker
+- descriptions -----------------------------------------------------------------
+mxbville:profession.villager.desc=A common villager
+mxbville:profession.worker.desc=Produces tools
+mxbville:profession.butcher.desc=Prepares and cuts meat
+mxbville:profession.scholar.desc=Engages in studies
+mxbville:profession.fisherman.desc=Sells fishing gear and daily catches
+mxbville:profession.peasant.desc=Have basic farming skills
+mxbville:profession.farmer.desc=Trades crops
+mxbville:profession.hunter.desc=Hunts game and sells hides
+mxbville:profession.florist.desc=Sells flowers for decoration
+mxbville:profession.miner.desc=Works deep underground
+mxbville:profession.lumberjack.desc=Delivers logs
+mxbville:profession.carpenter.desc=Create wooden items
+mxbville:profession.blacksmith.desc=Makes Steel ingots
+mxbville:profession.banker.desc=Exchange currency
 ================================================================================
 	ITEMS 
 ================================================================================
@@ -99,6 +128,12 @@ mxbville:message.mail.mailsend.1=The letter is on its way
 mxbville:message.mail.mailsend.2=I'm looking forward to the reply
 mxbville:message.mail.errortext=...Well something's happened for sure
 mxbville:message.mail.new=I should check if someone wrote back
+
+mxbville:message.villager.died0=%s has been killed!
+mxbville:message.villager.died1=%s passed away.
+mxbville:message.villager.died2=%s bit the dust!
+mxbville:message.villager.died3=%s is about to meet his maker.
+mxbville:message.villager.died4=%s perished.
 
 ================================================================================
 	MAIL REPLYS 
@@ -219,12 +254,25 @@ mxbville:gui.villager.farmer.kind.greeting.2=Ah, welcome to my patch of paradise
 mxbville:gui.villager.farmer.kind.greeting.3=Well, hello there! If you're looking for a taste of the countryside, you've come to the right place.
 mxbville:gui.villager.farmer.kind.greeting.4=Good day to you! Welcome to my humble farm.
 
+mxbville:gui.villager.farmer.rude.greeting.0=He! Are you leaving some coins here or are you just loafing around?
+mxbville:gui.villager.farmer.rude.greeting.1=What do you want? I don't have time for pointless chatter.
+mxbville:gui.villager.farmer.rude.greeting.2=Yes, yes, welcome, welcome. Now hurry up, I have work to do.
+mxbville:gui.villager.farmer.rude.greeting.3=Now look who's there to keep hardworking people from working.
+mxbville:gui.villager.farmer.rude.greeting.4=Of all people, you had to come to me. How do I deserve the honor.
+
 
 mxbville:gui.villager.blacksmith.kind.greeting.0=Greetings, §o%s! If you seek quality craftsmanship, you've come to the right place.
 mxbville:gui.villager.blacksmith.kind.greeting.1=Ah, welcome to my humble forge. What brings you here today?
 mxbville:gui.villager.blacksmith.kind.greeting.2=Hello §o%s! Need a weapon repaired or perhaps a custom piece forged?
-mxbville:gui.villager.blacksmith.kind.greeting.3=Hail, adventurer! Forging is my game. If you need equipment that won't fail you, you've come to the right place, 
+mxbville:gui.villager.blacksmith.kind.greeting.3=Hail, adventurer! Forging is my game. If you need equipment that won't fail you, you've come to the right place. 
 mxbville:gui.villager.blacksmith.kind.greeting.4=Well met, friend! Look around. I'm sure, I have just the thing you need. 
+
+mxbville:gui.villager.blacksmith.rude.greeting.0=Hello! You get what you pay for. Choose for yourself.
+mxbville:gui.villager.blacksmith.rude.greeting.1=I work here! So don't touch anything.
+mxbville:gui.villager.blacksmith.rude.greeting.2=Need a repair? Someone must not be taking good care of their things.
+mxbville:gui.villager.blacksmith.rude.greeting.3=This is the right place, that is, if you can tell good work from scrap metal. 
+mxbville:gui.villager.blacksmith.rude.greeting.4=You again! Look. Yes, we sell things, but not if we waste the time we need to forge them by chatting.
+
 
 mxbville:gui.villager.blacksmith.kind.rumors.0=Word has it that a fearsome dragon has been spotted in the nearby mountains. Some say its scales are as hard as the finest steel.
 mxbville:gui.villager.blacksmith.kind.rumors.1=The villagers have been buzzing about ...
