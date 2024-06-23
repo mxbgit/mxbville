@@ -96,6 +96,42 @@ itemGroup.specialtab=Specials
 mxbville:gui.letter_reply.button.approve=Approve
 mxbville:gui.letter_reply.sender=§o%s
 
+
+mxbville:gui.villagermain.menu.progress=> Progress
+mxbville:gui.villagermain.menu.upgrade=> Upgrade
+mxbville:gui.villagermain.menu.trade=> Trade
+mxbville:gui.villagermain.menu.back=> Back
+mxbville:gui.villagermain.menu.follow.start=> Follow me
+mxbville:gui.villagermain.menu.follow.stop=> Stop following me
+mxbville:gui.villagermain.menu.wait.start=> Can you wait here
+mxbville:gui.villagermain.menu.wait.stop=> Dont wait anymore
+mxbville:gui.villagermain.menu.home.movein=> Set home here
+mxbville:gui.villagermain.menu.home.moveout=> Move out from home
+
+mxbville:gui.villagermain.button.lock.title=§cLocked
+mxbville:gui.villagermain.button.lock.desc=§7Set home for the villager to unlock
+mxbville:gui.villagermain.button.lockupgrade.title=§cLocked
+mxbville:gui.villagermain.button.lockupgrade.desc=§7Needs more Expirience to be promoted
+mxbville:gui.villagermain.button.maxupgrade.title=§cMaximal upgrades
+mxbville:gui.villagermain.button.maxupgrade.desc=§7No advanced upgrade
+mxbville:gui.villagermain.button.wait.title=§cWaiting
+mxbville:gui.villagermain.button.wait.desc=§7Tell the Villager to wait here
+mxbville:gui.villagermain.button.newquest.title=§eNew Quest
+mxbville:gui.villagermain.button.newquest.desc=§7The villager needs your help
+mxbville:gui.villagermain.menu.chat.common0=Hey, %s.
+mxbville:gui.villagermain.menu.chat.common1=How is going? %s.
+mxbville:gui.villagermain.menu.chat.common2=Nice to meet you, %s.
+mxbville:gui.villagermain.menu.chat.hashome0=I love living here!
+mxbville:gui.villagermain.menu.chat.hashome1=Do you want to trade with me?
+mxbville:gui.villagermain.menu.chat.nohome0=I want a place to live.
+mxbville:gui.villagermain.menu.chat.nohome1=Could you build a home for me?
+
+mxbville:gui.villagermain.menu.chat.movein=I love my new home!
+mxbville:gui.villagermain.menu.chat.moveout=I'm homeless again T_T
+mxbville:gui.villagermain.menu.chat.followstart=I'm following you!
+mxbville:gui.villagermain.menu.chat.followstop=OK, see you later!
+mxbville:gui.villagermain.menu.chat.waitstart=I'm staying here!
+mxbville:gui.villagermain.menu.chat.waitstop=OK, see you later!
 ================================================================================
 	INFO
 ================================================================================

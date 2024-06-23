@@ -3,6 +3,7 @@ package mxbville.common.entity.villager;
 import java.util.ArrayList;
 import java.util.List;
 
+import mxbville.MxBville;
 import mxbville.common.calc.HouseDetector;
 import mxbville.common.calc.math.IntBoundary;
 import mxbville.common.calc.math.IntVec3;
@@ -10,6 +11,8 @@ import mxbville.common.calc.math.MxRand;
 import mxbville.common.entity.ai.VillagerAILookAtInteractPlayer;
 import mxbville.common.entity.ai.VillagerAIWander;
 import mxbville.common.functions.PersonalityGenerator;
+import mxbville.common.gui.GUIIDList;
+import mxbville.common.items.ModItems;
 import mxbville.common.village.data.DataVillage;
 import mxbville.common.village.profession.Profession;
 import mxbville.common.village.profession.Profession.TradingRecipeList;
@@ -124,13 +127,11 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	
 	@Override
 	public EntityJumpHelper getJumpHelper() {
-		// TODO Auto-generated method stub
 		return super.getJumpHelper();
 	}
 
 	@Override
 	protected float getJumpUpwardsMotion() {
-		// TODO Auto-generated method stub
 		return super.getJumpUpwardsMotion();
 	}
 	
@@ -185,9 +186,39 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	@Override
 	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
 		if(!player.world.isRemote){
-			//TODO: interaction Logic 
+			if (!this.isBusy(player)) {
+				//interact with the villager
+				// Interact with the Villager
+				ItemStack playerHoldItemStack = player.inventory.getCurrentItem();
+				if (!playerHoldItemStack.isEmpty() && player.getHeldItem(hand).getCount() > 0 ) 
+				{
+					// interact with player items
+					if (playerHoldItemStack.getItem() == ModItems.RESET_SCROLL && this.downgrade()) {
+						this.consumeItemFromStack(player,playerHoldItemStack);
+					}else {
+						player.openGui(MxBville.instance, GUIIDList.VILLAGER_MAIN, player.world, player.dimension, this.getEntityId(), 0);
+					}	
+				}else {
+					//interact empty handed
+					player.openGui(MxBville.instance, GUIIDList.VILLAGER_MAIN, player.world, player.dimension, this.getEntityId(), 0);
+				}
+				
+			}else {
+				player.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.villager.isbusy"));
+			}
 		}
 		return true;
+	}
+	
+	protected void consumeItemFromStack(EntityPlayer player, ItemStack stack){
+		if (!player.capabilities.isCreativeMode){
+            stack.shrink(1);
+        }
+	}
+	
+	private boolean isBusy(EntityPlayer player) {
+		return ((this.get(IS_INTERACTING) && this.interactionTarget.isEntityAlive() && this.interactionTarget != player) 
+				|| (this.get(IS_FOLLOWING) && this.followTarget.isEntityAlive() && this.followTarget != player));
 	}
 	
 	@Override

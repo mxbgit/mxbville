@@ -99,7 +99,18 @@ public class DataLoader {
 		profession.textureName = "peasant";
 		
 		data.professions.add(profession);
+		
+		//====== Caveman ====== 
+		profession = new JsonProfession();
+		profession.name = "caveman";
+		
+		profession.tradingRecipes.add(new JsonTradingRecipe(new String[]{"minecraft,cobblestone,10,0"}, "minecraft,bone,1,0"));
 
+		profession.upgradeProfessionIDs = new String[]{"villager"};
+		profession.holdItems = new String[]{"minecraft,diamond,1,0"};
+		profession.textureName = "caveman";
+		
+		data.professions.add(profession);
 		return data;
 	}
 }

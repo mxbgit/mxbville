@@ -7,6 +7,7 @@ import mxbville.common.items.documents.InvitationType;
 import mxbville.common.items.documents.ItemApprovementStamp;
 import mxbville.common.items.documents.ItemInvitation;
 import mxbville.common.items.documents.ItemReplyMail;
+import mxbville.common.items.documents.ItemResetScroll;
 import mxbville.common.items.food.ItemCornSeeds;
 import mxbville.common.items.food.ItemHorseAppleSlice;
 import mxbville.common.items.food.ItemHorseCorn;
@@ -40,6 +41,7 @@ public class ModItems {
 	
 	public static final ItemReplyMail LETTER_REPLY				= null;
 	
+	public static final ItemResetScroll RESET_SCROLL = null;
 	public static final Item SUGAR_LUMPS = null; 
 	public static final Item WALLET_SMALL = null;
 	public static final Item WALLET_LARGE = null;
@@ -67,6 +69,7 @@ public class ModItems {
 				new ItemInvitation("letter_invitation", InvitationType.NORMAL),
 				new ItemInvitation("letter_invitation", InvitationType.OFFICIAL),		
 				new ItemReplyMail(),
+				new ItemResetScroll("reset_scroll"),
 				new ItemWalletSmall("wallet_small"),
 				new ItemWalletLarge("wallet_large")
 			};

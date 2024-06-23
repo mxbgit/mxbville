@@ -3,9 +3,12 @@ package mxbville.common.gui;
 import mxbville.client.gui.blockgui.GuiLetterStation;
 import mxbville.client.gui.itemgui.GuiLetterReply;
 import mxbville.client.gui.itemgui.GuiWallet;
+import mxbville.client.gui.villager.GuiVillagerMain;
 import mxbville.common.blocks.crafting.BlockLetterStation;
 import mxbville.common.blocks.inventories.ContainerLetterStation;
+import mxbville.common.entity.villager.EntityMxVillager;
 import mxbville.common.gui.common.ContainerEmpty;
+import mxbville.common.gui.villager.ContainerVillagerMain;
 import mxbville.common.items.coins.ItemWallet;
 import mxbville.common.items.documents.ItemReplyMail;
 import mxbville.common.items.inventories.ContainerWallet;
@@ -18,14 +21,29 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import scala.reflect.internal.Trees.New;
+import scala.reflect.internal.Trees.Return;
 
 public class GuiHandler implements IGuiHandler{
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		// Villager guis =================================================================
-		if(ID >= 100 && ID <200){
-		
+		if(ID >= 100 && ID <200)
+		{
+			int dimension = x;
+			int entityID = y;
+			if(world.provider.getDimension() == dimension)
+			{
+				EntityMxVillager villager = (EntityMxVillager) world.getEntityByID(entityID);
+				if(villager != null)
+				{
+					switch(ID){
+					case GUIIDList.VILLAGER_MAIN: return new ContainerVillagerMain();
+					default:break;
+					}
+				}
+			}
 		// Item and Block guis ============================================================
 		}else {
 			ItemStack heldItemStack = player.inventory.getCurrentItem();
@@ -63,8 +81,21 @@ public class GuiHandler implements IGuiHandler{
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		// Villager guis =================================================================
-		if(ID >= 100 && ID <200){
-		
+		if(ID >= 100 && ID <200)
+		{
+			int dimension = x;
+			int entityID = y;
+			if(world.provider.getDimension() == dimension)
+			{
+				EntityMxVillager villager = (EntityMxVillager) world.getEntityByID(entityID);
+				if(villager != null)
+				{
+					switch(ID){
+					case GUIIDList.VILLAGER_MAIN: return new GuiVillagerMain(player,villager);
+					default:break;
+					}
+				}
+			}
 		// Item and Block guis ============================================================
 		}else {
 			ItemStack heldItemStack = player.inventory.getCurrentItem();
