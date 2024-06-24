@@ -9,6 +9,7 @@ import mxbville.common.entity.villager.EntityMxVillager;
 import mxbville.common.gui.villager.ContainerVillagerMain;
 import mxbville.common.network.ModNetwork;
 import mxbville.common.network.messages.villager.MessageGuiSetInteracting;
+import mxbville.common.village.profession.Profession;
 import mxbville.util.MxRef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -27,32 +28,33 @@ public class GuiVillagerMain extends GuiContainer {
 	//protected int xSize = 176;
 	//protected int ySize = 182;
     protected int xSize = 256;
-    protected int ySize = 97;
+    protected int ySize = 100;
     protected int guiYOffset = 85;
     
     protected int chatButtonOffsetY = 18;
-    protected int chatButtonOffsetX = 188;
+    protected int chatButtonOffsetX = 190;
     protected int chatButtonHight = 15;
-    protected int villagerNameOffsetY = 3;
+    protected int villagerNameOffsetY = 4;
 
     protected int offsetX = 12;
-
-    TextButton buttonUpgrade;
-    TextButton buttonTrade;
-    TextButton buttonFollow;
-    TextButton buttonWait;
-    TextButton buttonHome;
- 
-    TextButton buttonChatAbout;
-    TextButton buttonChatRumors;
     
     TextButton buttonChat;
+    TextButton buttonTrade;
     TextButton buttonAction;
-    TextButton buttonBackChat;
+    TextButton buttonProfession;
     TextButton buttonBackAction;
     
-    QuestButton buttonQuest;
+   
+    TextButton buttonFollow;
+    TextButton buttonWait;
+    TextButton buttonSetHome;
+    TextButton buttonGoHome;
     
+    TextButton buttonUpgrade;
+ 	TextButton buttonOutfit;
+    
+    QuestButton buttonQuest;
+   
     private String chatContent;
     private String chatContentDisplay;
     private ArrayList<String> chatStringList = new ArrayList<String>();
@@ -118,34 +120,36 @@ public class GuiVillagerMain extends GuiContainer {
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize + this.guiYOffset) / 2;  
         
-        String strUpgrade = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.upgrade");
-        String strTrade = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.trade");
         String strChat = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat");
+        String strTrade = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.trade");
         String strAction = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.action");
-        String strBack = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.back");
-        String strChatAbout = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat.about");
-        String strChatRumors = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat.rumors");
+        String strProfession = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.profession");
+        String strBack = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.close");
         
-        // 0. Button Position
-        this.buttonList.add(buttonTrade = new TextButton(6, x + chatButtonOffsetX, y + chatButtonOffsetY + 0 * chatButtonHight, strTrade));   
+        String strGoHome = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.gohome");
         
-        // 1st Button Position
-        this.buttonList.add(buttonChat = new TextButton(0, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, strChat));     
-        this.buttonList.add(buttonChatAbout = new TextButton(3, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, strChatAbout));     
-        this.buttonList.add(buttonUpgrade = new TextButton(7, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, strUpgrade));
+        String strUpgrade = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.upgrade");
+        String strOutfit = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.outfit");
         
-        // 2nd Button Position 
-        this.buttonList.add(buttonAction = new TextButton(1, x + chatButtonOffsetX, y + chatButtonOffsetY + 2 * chatButtonHight, strAction));     
-        this.buttonList.add(buttonChatRumors = new TextButton(4, x + chatButtonOffsetX, y + chatButtonOffsetY + 2 * chatButtonHight, strChatRumors));     
-        this.buttonList.add(buttonHome = new TextButton(8, x + chatButtonOffsetX, y + chatButtonOffsetY + 2 * chatButtonHight, ""));
+        // Index 0: First Menu Screen
+        this.buttonList.add(buttonChat = new TextButton(0, x + chatButtonOffsetX, y + chatButtonOffsetY + 0 * chatButtonHight, strChat)); 
+        this.buttonList.add(buttonTrade = new TextButton(1, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, strTrade));   
+        this.buttonList.add(buttonAction = new TextButton(2, x + chatButtonOffsetX, y + chatButtonOffsetY + 2 * chatButtonHight, strAction));
+        this.buttonList.add(buttonProfession = new TextButton(3, x + chatButtonOffsetX, y + chatButtonOffsetY + 3 * chatButtonHight, strProfession));
+        this.buttonList.add(buttonBackAction = new TextButton(4, x + chatButtonOffsetX, y + chatButtonOffsetY + 4 * chatButtonHight, strBack));
         
-        // 3rd Button Position and following
-        this.buttonList.add(buttonWait = new TextButton(2, x + chatButtonOffsetX, y + chatButtonOffsetY + 3 * chatButtonHight, ""));
-        this.buttonList.add(buttonBackChat = new TextButton(5, x + chatButtonOffsetX, y + chatButtonOffsetY + 3 * chatButtonHight, strBack));
-        this.buttonList.add(buttonFollow = new TextButton(9, x + chatButtonOffsetX, y + chatButtonOffsetY + 3 * chatButtonHight, ""));
-  
-        this.buttonList.add(buttonBackAction = new TextButton(10, x + chatButtonOffsetX, y + chatButtonOffsetY + 4 * chatButtonHight, strBack));
+        // Index 1: Action Menu Screen 
+        this.buttonList.add(buttonFollow = new TextButton(5, x + chatButtonOffsetX, y + chatButtonOffsetY + 0 * chatButtonHight, ""));
+        this.buttonList.add(buttonWait = new TextButton(6, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, ""));
+        this.buttonList.add(buttonSetHome = new TextButton(7, x + chatButtonOffsetX, y + chatButtonOffsetY + 2 * chatButtonHight, ""));
+        this.buttonList.add(buttonGoHome = new TextButton(8, x + chatButtonOffsetX, y + chatButtonOffsetY + 3 * chatButtonHight, strGoHome));
+        // Move Back Action button here (pos +4)  or on Position +3
         
+        // Index 2: Profession Menu Screen 
+        this.buttonList.add(buttonUpgrade = new TextButton(9, x + chatButtonOffsetX, y + chatButtonOffsetY + 0 * chatButtonHight, strUpgrade));
+        this.buttonList.add(buttonOutfit = new TextButton(10, x + chatButtonOffsetX, y + chatButtonOffsetY + 1 * chatButtonHight, strOutfit));
+	    // Move Back Action button here (pos +2)
+	
         this.buttonList.add(buttonQuest = new QuestButton(100,x + 190,y + 2));
         
         this.refreshButtons(); 
@@ -161,47 +165,71 @@ public class GuiVillagerMain extends GuiContainer {
 	
     private void disableButtons() {
     	buttonChat.enabled 			= false;
-    	buttonAction.enabled 		= false;
-    	buttonChatAbout.enabled 	= false;
-    	buttonChatRumors.enabled 	= false;
-    	buttonBackChat.enabled 		= false;
     	buttonTrade.enabled 		= false;
-    	buttonUpgrade.enabled 		= false;
-    	buttonHome.enabled 			= false;
+    	buttonAction.enabled 		= false;
+    	buttonProfession.enabled 	= false;
+    	buttonBackAction.enabled 	= false;
+    	
     	buttonFollow.enabled		= false;
     	buttonWait.enabled 			= false;
-    	buttonBackAction.enabled 	= false;
+    	buttonSetHome.enabled 		= false;
+    	buttonGoHome.enabled 		= false;
+    	
+    	buttonUpgrade.enabled 		= false;
+    	buttonOutfit.enabled 		= false;
     }
 	
     private void refreshButtons(){
+    	
+    	boolean hasHome = this.villager.get(EntityMxVillager.HAS_HOME);
+    	
     	String toggled_bt_text = this.villager.get(EntityMxVillager.IS_FOLLOWING)?"stop":"start";
     	buttonFollow.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.follow." + toggled_bt_text));
     	
-    	toggled_bt_text = this.villager.get(EntityMxVillager.HAS_HOME)?"moveout":"movein";
-    	buttonHome.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.home." + toggled_bt_text));
+    	toggled_bt_text = hasHome?"moveout":"movein";
+    	buttonSetHome.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.home." + toggled_bt_text));
     	
     	toggled_bt_text = this.villager.get(EntityMxVillager.IS_WAITING)?"stop":"start";
     	buttonWait.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.wait." + toggled_bt_text));
+    	
+    	toggled_bt_text = this.subMenuIndex==0?"close":"back"; 
+    	buttonBackAction.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu." + toggled_bt_text));
     	
     	disableButtons();
     	switch (this.subMenuIndex) {
     	case 0:
     		/* Main Menu */
-    		buttonChat.enabled		= true;
-    		buttonAction.enabled 	= true;
-        	buttonWait.enabled 		= true;
+    		buttonChat.enabled			= true;
+    		buttonAction.enabled 		= true;
+    		buttonBackAction.enabled 	= true;
+    		if(hasHome) {
+    			buttonTrade.enabled			= true;
+    			buttonProfession.enabled	= true;
+    		}
     		break;
     	case 1:
     		/* Chat Menu */
-    		buttonChatAbout.enabled 	= true;
-    		buttonChatRumors.enabled 	= true;
-    		buttonBackChat.enabled 		= true;
+    		buttonFollow.enabled		= true;
+        	buttonWait.enabled 			= true;
+        	buttonSetHome.enabled 		= true;
+        	if(hasHome) {
+        		buttonGoHome.enabled 		= true;
+        	}
+    		break;
+    	case 2:
+    		/* Chat Menu */
+    		Profession[] upgradeOptions = this.villager.getPersonalUpgradeOptions();
+    		
+    		buttonUpgrade.enabled	= hasHome && (upgradeOptions != null && upgradeOptions.length > 0);
+        	buttonOutfit.enabled	= true;
     		break;
     	default:
     		break;
     	}
+    	repositionButtons(hasHome);
     	//TODO: quests
-    	//buttonQuest.enabled = this.villager.hasHome() &&  (this.villager.getCurrentQuest() != null)
+    	buttonQuest.enabled = false;
+    	//buttonQuest.enabled = this.villager.hasHome() &&  (this.villager.getCurrentQuest() != null);
     }
     
     private void repositionButtons(boolean homeSet) {
@@ -214,15 +242,48 @@ public class GuiVillagerMain extends GuiContainer {
     	int pos4 = y_pos + chatButtonOffsetY + 4 * chatButtonHight;
     	
     	if (homeSet) {
-    		buttonTrade.y 		= pos0;
-    		buttonUpgrade.y 	= pos1;
-      		buttonHome.y 		= pos2;
-	  		buttonFollow.y 		= pos3;
-	  		buttonBackAction.y 	= pos4;
+    		switch (this.subMenuIndex) {
+	        	case 0: 
+	        		buttonChat.y		= pos0;
+	        		buttonTrade.y 		= pos1;
+	        		buttonAction.y 		= pos2;
+	        		buttonProfession.y	= pos3;
+	        		buttonBackAction.y 	= pos4;
+	        		break;
+	        	case 1: 
+	        		buttonFollow.y 		= pos0;
+	        		buttonWait.y 		= pos1;
+	        		buttonSetHome.y 	= pos2;
+	        		buttonGoHome.y 		= pos3;
+	        		buttonBackAction.y 	= pos4;
+	        		break;
+	        	case 2: 
+	        		buttonUpgrade.y 	= pos0;
+	        		buttonOutfit.y 		= pos1;
+	        		buttonBackAction.y 	= pos2;
+	        		break;
+	    		default: break;
+    		}
     	} else {
-      		buttonHome.y 		= pos1;
-	  		buttonFollow.y 		= pos2;
-	  		buttonBackAction.y 	= pos3;
+    		switch (this.subMenuIndex) {
+        	case 0: 
+        		buttonChat.y		= pos0;
+        	    buttonAction.y 		= pos1;
+        		buttonBackAction.y 	= pos2;
+        		break;
+        	case 1: 
+        		buttonFollow.y 		= pos0;
+        		buttonWait.y 		= pos1;
+        		buttonSetHome.y 	= pos2;
+        		buttonBackAction.y 	= pos3;
+        		break;
+        	case 2: 
+        		buttonUpgrade.y 	= pos0;
+        		buttonOutfit.y 		= pos1;
+        		buttonBackAction.y 	= pos2;
+        		break;
+    		default: break;
+		}
     	}
     	
     }
@@ -300,21 +361,24 @@ public class GuiVillagerMain extends GuiContainer {
         this.lastNanotime = currentNanotime;
         this.fontRenderer.drawSplitString(this.chatContentDisplay,x + offsetX, y + 20, this.xSize - offsetX * 2, 0xF9ECD3);
         
-        if (this.subMenuIndex == 2) {
-            if(!this.buttonTrade.enabled){
-        		this.drawButtonHoverText(this.buttonHome, mouseX, mouseY, 
+        if (this.subMenuIndex == 1) {
+            if(!this.buttonGoHome.enabled){
+        		this.drawButtonHoverText(this.buttonSetHome, mouseX, mouseY, 
         			I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.title"), 
         			I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.desc"));
             }
-            
-            if(!this.buttonUpgrade.enabled){
-            	if(this.villager.hasHome()) {
-            		this.drawButtonHoverText(this.buttonUpgrade, mouseX, mouseY, 
-            				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.title"), 
-            				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.desc"));
-            	}
-            }
         }
+        
+        if (this.subMenuIndex == 2) {
+	        if(!this.buttonUpgrade.enabled){
+	          	if(this.villager.hasHome()) {
+	           		this.drawButtonHoverText(this.buttonUpgrade, mouseX, mouseY, 
+	           				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.title"), 
+	           				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.desc"));
+	           	}
+	        }
+        }
+        
 
         if(this.buttonQuest.enabled){
     		this.drawButtonHoverText(this.buttonQuest, mouseX, mouseY, 
@@ -375,8 +439,8 @@ public class GuiVillagerMain extends GuiContainer {
                 mc.getTextureManager().bindTexture(VillagerMainGuiTexture);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 boolean flag = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-                int x = 190;
-                int y = 110;
+                int x = 190; // Where are the button pixels on the background png
+                int y = 115; // Where are the button pixels on the background png
 
                 if (flag)
                 {
@@ -412,8 +476,8 @@ public class GuiVillagerMain extends GuiContainer {
                 mc.getTextureManager().bindTexture(VillagerMainGuiTexture);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 boolean flag = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-                int x = 182;
-                int y = 122;
+                int x = 182; // Where are the button pixels on the background png
+                int y = 127; // Where are the button pixels on the background png
 
                 if (flag)
                 {

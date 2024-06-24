@@ -18,6 +18,7 @@ mxbville:profession.lumberjack.name=Lumberjack
 mxbville:profession.carpenter.name=Carpenter
 mxbville:profession.blacksmith.name=Blacksmith
 mxbville:profession.banker.name=Banker
+mxbville:profession.caveman.name=Caveman
 - descriptions -----------------------------------------------------------------
 mxbville:profession.villager.desc=A common villager
 mxbville:profession.worker.desc=Produces tools
@@ -33,6 +34,7 @@ mxbville:profession.lumberjack.desc=Delivers logs
 mxbville:profession.carpenter.desc=Create wooden items
 mxbville:profession.blacksmith.desc=Makes Steel ingots
 mxbville:profession.banker.desc=Exchange currency
+mxbville:profession.caveman.desc=Prehistoric ancestors
 ================================================================================
 	ITEMS 
 ================================================================================
@@ -96,17 +98,22 @@ itemGroup.specialtab=Specials
 mxbville:gui.letter_reply.button.approve=Approve
 mxbville:gui.letter_reply.sender=§o%s
 
+mxbville:gui.villagermain.menu.chat=Chat
+mxbville:gui.villagermain.menu.trade=Trade
+mxbville:gui.villagermain.menu.action=Action
+mxbville:gui.villagermain.menu.profession=Profession
+mxbville:gui.villagermain.menu.close=Bye
+mxbville:gui.villagermain.menu.back=Back
 
-mxbville:gui.villagermain.menu.progress=> Progress
-mxbville:gui.villagermain.menu.upgrade=> Upgrade
-mxbville:gui.villagermain.menu.trade=> Trade
-mxbville:gui.villagermain.menu.back=> Back
-mxbville:gui.villagermain.menu.follow.start=> Follow me
-mxbville:gui.villagermain.menu.follow.stop=> Stop following me
-mxbville:gui.villagermain.menu.wait.start=> Can you wait here
-mxbville:gui.villagermain.menu.wait.stop=> Dont wait anymore
-mxbville:gui.villagermain.menu.home.movein=> Set home here
-mxbville:gui.villagermain.menu.home.moveout=> Move out from home
+mxbville:gui.villagermain.menu.follow.start=Follow me
+mxbville:gui.villagermain.menu.follow.stop=Stop following me
+mxbville:gui.villagermain.menu.wait.start=Wait here
+mxbville:gui.villagermain.menu.wait.stop=Stop waiting
+mxbville:gui.villagermain.menu.home.movein=Set home here
+mxbville:gui.villagermain.menu.home.moveout=Move out
+mxbville:gui.villagermain.menu.home.gohome=Go home
+
+mxbville:gui.villagermain.menu.upgrade=Upgrade
 
 mxbville:gui.villagermain.button.lock.title=§cLocked
 mxbville:gui.villagermain.button.lock.desc=§7Set home for the villager to unlock
@@ -118,6 +125,8 @@ mxbville:gui.villagermain.button.wait.title=§cWaiting
 mxbville:gui.villagermain.button.wait.desc=§7Tell the Villager to wait here
 mxbville:gui.villagermain.button.newquest.title=§eNew Quest
 mxbville:gui.villagermain.button.newquest.desc=§7The villager needs your help
+mxbville:gui.villagermain.button.hint.title=§cHintd
+mxbville:gui.villagermain.button.hint.desc=§7Set home for the villager to unlock more interactions
 mxbville:gui.villagermain.menu.chat.common0=Hey, %s.
 mxbville:gui.villagermain.menu.chat.common1=How is going? %s.
 mxbville:gui.villagermain.menu.chat.common2=Nice to meet you, %s.
