@@ -33,13 +33,15 @@ public class MessageSpawnNewVillagerThroughMail implements IMessage {
 			EntityPlayer player = ctx.getServerHandler().player;
 			ItemStack currentlyHoldItemstack = player.getHeldItemMainhand();
 			
-			if(currentlyHoldItemstack.getItem() instanceof ItemReplyMail){
+			if(currentlyHoldItemstack.getItem() instanceof ItemReplyMail)
+			{
+				String villagerName     = ItemReplyMail.getMailSenderName(currentlyHoldItemstack);
+				boolean isMale 		    = ItemReplyMail.getMailSenderGender(currentlyHoldItemstack);
+                String affinity	        = ItemReplyMail.getMailAffinity(currentlyHoldItemstack); 
+                String affinityOrigin   = ItemReplyMail.getMailTextTranslationKey(currentlyHoldItemstack); 
 				
-				String villagerName = ItemReplyMail.getMailSenderName(currentlyHoldItemstack);
-				boolean isMale 		= ItemReplyMail.getMailSenderGender(currentlyHoldItemstack);
-				String affinity		= ItemReplyMail.getMailAffinity(currentlyHoldItemstack);
-				
-				EntityMxVillager villager = new EntityMxVillager(player.world,
+                
+                EntityMxVillager villager = new EntityMxVillager(player.world,
 																villagerName,
 																affinity,
 																isMale );

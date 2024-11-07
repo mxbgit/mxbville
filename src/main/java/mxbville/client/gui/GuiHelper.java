@@ -11,13 +11,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiHelper {
 
 	public static void drawNameAndProfession(FontRenderer fontRendererIn, EntityMxVillager villager, int x, int y){
-		// Quick Sphax GUI Fix:
-		y -= 2;
+
+		String villagerName = villager.getName();
+		String professionName = I18n.format(villager.getProfession().getUnloalizedDisplayName());
 		
-		drawCenteredStringNoshadow(fontRendererIn, villager.getName(), x, y, 9999999); // Old Color: 6316128
-        drawCenteredStringNoshadow(fontRendererIn, I18n.format(villager.getProfession().getUnloalizedDisplayName()), x, y + 10, 0000000); // Old Color: 8421504
+		int villagerNameWidth = fontRendererIn.getStringWidth(villagerName);
+		int spaceBetweenNames = 6;
+		
+		fontRendererIn.drawString(villagerName + ",", x, y, 0000000);
+		fontRendererIn.drawString(professionName, x + villagerNameWidth + spaceBetweenNames, y, 6316128);
 	}
-	
+		
 	public static void drawCenteredStringNoshadow(FontRenderer fontRendererIn, String text, int x, int y, int color) {
         fontRendererIn.drawString(text, x - fontRendererIn.getStringWidth(text) / 2, y, color);
 	}

@@ -1,5 +1,6 @@
 package mxbville.common.network;
 
+import mxbville.common.network.messages.villager.MessageGuiSetFollowing;
 import mxbville.common.network.messages.villager.MessageGuiSetInteracting;
 import mxbville.common.network.messages.villager.MessageSpawnNewVillagerThroughMail;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -23,5 +24,6 @@ public class ModNetwork {
 		int id = 0;
 		networkInstance.registerMessage(MessageSpawnNewVillagerThroughMail.Handler.class, MessageSpawnNewVillagerThroughMail.class, id++, Side.SERVER);
 		networkInstance.registerMessage(MessageGuiSetInteracting.Handler.class, MessageGuiSetInteracting.class, id++, Side.SERVER);
+		networkInstance.registerMessage(MessageGuiSetFollowing.Handler.class, MessageGuiSetFollowing.class, id++, Side.SERVER);
 	}
 }

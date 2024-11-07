@@ -13,7 +13,6 @@ import mxbville.common.blocks.food.BlockMxBCake;
 import mxbville.common.blocks.interactive.BlockMailBox;
 import mxbville.util.MxRef;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

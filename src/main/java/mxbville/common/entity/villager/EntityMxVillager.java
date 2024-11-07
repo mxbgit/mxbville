@@ -8,6 +8,7 @@ import mxbville.common.calc.HouseDetector;
 import mxbville.common.calc.math.IntBoundary;
 import mxbville.common.calc.math.IntVec3;
 import mxbville.common.calc.math.MxRand;
+import mxbville.common.entity.ai.VillagerAIFollowing;
 import mxbville.common.entity.ai.VillagerAILookAtInteractPlayer;
 import mxbville.common.entity.ai.VillagerAIWander;
 import mxbville.common.functions.PersonalityGenerator;
@@ -20,7 +21,6 @@ import mxbville.common.village.trading.ITrading;
 import mxbville.util.MxRef;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -75,15 +75,15 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	private EntityPlayer followTarget;
 	private Profession  profession;
 	
-	
 	private IntBoundary home;
+	
+	private String currentChatStateString;
 	
 	//the center of wandering when no home has been set to this villager
 	private Vec3d wanderCenter;	
 	
 	//the upgrading history. Holds profession name strings
 	private List<String> upgradingHistory = new ArrayList<>();
-	
 	
 	public EntityMxVillager(World worldIn) {
 		this(worldIn, MxRand.get().nextBoolean());
@@ -92,7 +92,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	}
 	
 	public EntityMxVillager(World worldIn, boolean isMale) {
-		this(worldIn, isMale?PersonalityGenerator.getRandomMaleName():PersonalityGenerator.getRandomFemaleName(),PersonalityGenerator.getRandomAffinity(), isMale);
+		this(worldIn, isMale?PersonalityGenerator.getRandomMaleName():PersonalityGenerator.getRandomFemaleName(), PersonalityGenerator.getRandomAffinity(), isMale);
 	}
 	
 	public EntityMxVillager(World worldIn, String name, String affinityProfession, boolean isMale) {
@@ -115,6 +115,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		}
 		
 		this.initEntityAI();
+		this.resetCurrentChatState();
 	}
 	
     public <T> T get(DataParameter<T> key) {
@@ -149,7 +150,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
      //  }
         this.tasks.addTask(1, new VillagerAILookAtInteractPlayer(this));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        //this.tasks.addTask(5, new VillagerAIFollowing(this,0.6F));
+        this.tasks.addTask(5, new VillagerAIFollowing(this,0.6F));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.3D));
         this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(9, new VillagerAIWander(this, 0.4D));
@@ -180,7 +181,6 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		this.getDataManager().register(HAS_HOME, false);
 		//quest
 		this.getDataManager().register(QUEST, Integer.valueOf(-1));
-		
 	}
 	
 	@Override
@@ -221,6 +221,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 				|| (this.get(IS_FOLLOWING) && this.followTarget.isEntityAlive() && this.followTarget != player));
 	}
 	
+
 	@Override
 	public TradingRecipeList getTradingRecipeList() {
 		return this.profession.getTradingRecipeList();
@@ -249,6 +250,13 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		}	
 	}
 	
+	public String getCurrentChatState() {
+	    return currentChatStateString;
+	}
+
+	public void resetCurrentChatState() {
+	    this.currentChatStateString = "greeting";
+	}
 	/**
 	 * Toggles the interaction status of a villager.
 	 * If given a EntityPlayer instance, the interaction is ON.
@@ -305,22 +313,22 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		//scan home boundary
 		IntBoundary potentialHomeBound = HouseDetector.getClosedField(this.world, new IntVec3(this.posX,this.posY,this.posZ));
 		if(potentialHomeBound == null){
-			//TODO: Respond with "OpenSpace"
+		    this.currentChatStateString = "home.openspace";
 		}else if (HouseDetector.hasBed(this.world, potentialHomeBound) == false)
 		{
-			//TODO: respond with "no bed"
+		    this.currentChatStateString = "home.nobed";
 		}else 
 		{
 			String oldOwner = DataVillage.get(this.world).addHome(this.getName(),potentialHomeBound);
 			if (oldOwner != null)
 			{
-				//TODO: respond with "Home existed"
+			    this.currentChatStateString = "home.existsalready";
 			}else {
 				//remove old home
 				if(this.home != null){
 					DataVillage.get(this.world).removeHome(this.getName(),home);
 				}
-				//TODO: respond
+				this.currentChatStateString = "home.success";
 				this.setFollowing(null);
 				this.setHome(potentialHomeBound);
 			}
@@ -563,11 +571,9 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		}
 	}
 	
-	//----------------------------------
+        //----------------------------------
 		//upgrading preview
 		@SideOnly(Side.CLIENT)
 		public Profession previewProfession;
-
-
 
 }

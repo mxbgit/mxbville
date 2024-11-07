@@ -8,6 +8,7 @@ import mxbville.common.calc.math.MxRand;
 import mxbville.common.entity.villager.EntityMxVillager;
 import mxbville.common.gui.villager.ContainerVillagerMain;
 import mxbville.common.network.ModNetwork;
+import mxbville.common.network.messages.villager.MessageGuiSetFollowing;
 import mxbville.common.network.messages.villager.MessageGuiSetInteracting;
 import mxbville.common.village.profession.Profession;
 import mxbville.util.MxRef;
@@ -25,18 +26,56 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiVillagerMain extends GuiContainer {
 	
 	private static final ResourceLocation VillagerMainGuiTexture = new ResourceLocation(MxRef.MOD_ID + ":textures/gui/villager/mainmenu.png");
-	//protected int xSize = 176;
-	//protected int ySize = 182;
+	private static final ResourceLocation ChatTopicGuiTexture = new ResourceLocation(MxRef.MOD_ID + ":textures/gui/villager/chat_topics.png");
+
+	/**
+	 *  Width of the menu picture in  <code>VillagerMainGuiTexture</code>
+	 */
     protected int xSize = 256;
+	/**
+	 *  Height of the menu picture in  <code>VillagerMainGuiTexture</code>
+	 */
     protected int ySize = 100;
+    
+	/**
+	 *  Y-Startposition of the menu picture on the screen
+	 */
     protected int guiYOffset = 85;
     
+    /**
+     * Y-Startposition of the chat button
+     */
     protected int chatButtonOffsetY = 18;
-    protected int chatButtonOffsetX = 190;
+    /**
+     * X-Startposition of the chat button
+     */
+    protected int chatButtonOffsetX = 179;
+    
+    /**
+     * Actual chatButton height spacing
+     */
     protected int chatButtonHight = 15;
-    protected int villagerNameOffsetY = 4;
+    
+    /**
+     * Y-Startposition of the villager name and profession text
+     */
+    protected int villagerNameOffsetY = 3;
 
-    protected int offsetX = 12;
+    /**
+     * X-Startposition of the villager name and profession text
+     */
+    protected int villagerNameOffsetX = 18;
+    
+    /**
+     * X-Startposition of the villager chat text
+     */
+    protected int textOffsetX = 12;
+    
+    protected int topicPanelHeight = 165;
+    
+    protected int topicPanelWidth = 90;
+    
+    //private DialogueManager dialogues;
     
     TextButton buttonChat;
     TextButton buttonTrade;
@@ -44,7 +83,6 @@ public class GuiVillagerMain extends GuiContainer {
     TextButton buttonProfession;
     TextButton buttonBackAction;
     
-   
     TextButton buttonFollow;
     TextButton buttonWait;
     TextButton buttonSetHome;
@@ -65,17 +103,23 @@ public class GuiVillagerMain extends GuiContainer {
     private boolean isFollowingStatusLast;
     private boolean hasHomeStatusLast;
     private boolean isWaitingStatusLast;
-    
-    // Keeps track of where we are in the menu right now
-    // 0 = Main Menu
-    // 1 = Chat Menu
-    // 2 = Action Menu
-    // >2 = Error, revert to 0
+    private boolean chatTopicsVisible; 
+  
+    /**
+     * Keeps track of the menu page, that is currently displayed.
+     * 0 = Main Menu.
+     * 1 = Chat Menu.
+     * 2 = Action Menu.
+     * >2 = Error, revert to 0.
+     */
     private int subMenuIndex;
     
     private EntityPlayer player;
     private EntityMxVillager villager;
     
+    /**
+     * Both needed for the calculation of chat display speed
+     */
     private long lastNanotime;
     private long chatTimer;
     
@@ -87,11 +131,12 @@ public class GuiVillagerMain extends GuiContainer {
         this.isFollowingStatusLast = this.villager.get(EntityMxVillager.IS_FOLLOWING);
         this.hasHomeStatusLast = this.villager.get(EntityMxVillager.HAS_HOME);
         this.isWaitingStatusLast = this.villager.get(EntityMxVillager.IS_WAITING);
+        this.chatTopicsVisible = false;
         
         this.lastNanotime = System.nanoTime();
-        
         this.subMenuIndex = 0;
         
+        //dialogues = new DialogueManager(this.player, this.villager); 
         prepareStringList();
         refreshChatContent();
         
@@ -99,18 +144,35 @@ public class GuiVillagerMain extends GuiContainer {
 	}
 	
     /**
+     * TODO: Check the current profession of the villager and chose the possible Strings accordingly.
      * Preloads all possible chat answers of the current villager
      */
     private void prepareStringList() {
-    	    		
-    	for(int i =0;i<3;i++){
-    		chatStringList.add(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat.common" + i, player.getName()));
-    	}
+        String professionString = villager.get(EntityMxVillager.PROFESSIONID);
+        String personality      = villager.get(EntityMxVillager.PERSONALITY);
+        String currentChatState = villager.getCurrentChatState();
+        
+        if (currentChatState.contains("home")) {
+            
+        }else {
+            for(int i =0;i<4;i++){
+                chatStringList.add(I18n.format(MxRef.MOD_ID 
+                        + ":gui.villager."
+                        + professionString 
+                        + "." 
+                        + personality
+                        + "."
+                        + i, player.getName()));
+            }
+        }
+     
+        /*
+
     	String home = villager.hasHome()?"hashome":"nohome";
     	for(int i =0;i<2;i++){
     		chatStringList.add(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat."+ home + i));
     	}
-    	
+    	*/
     }
 	
 	@Override
@@ -208,20 +270,22 @@ public class GuiVillagerMain extends GuiContainer {
     		}
     		break;
     	case 1:
-    		/* Chat Menu */
+    		/* Action Menu */
     		buttonFollow.enabled		= true;
         	buttonWait.enabled 			= true;
         	buttonSetHome.enabled 		= true;
         	if(hasHome) {
-        		buttonGoHome.enabled 		= true;
+        		buttonGoHome.enabled 	= true;
         	}
+        	buttonBackAction.enabled 	= true;
     		break;
     	case 2:
-    		/* Chat Menu */
+    		/* Profession Menu */
     		Profession[] upgradeOptions = this.villager.getPersonalUpgradeOptions();
     		
     		buttonUpgrade.enabled	= hasHome && (upgradeOptions != null && upgradeOptions.length > 0);
         	buttonOutfit.enabled	= true;
+        	buttonBackAction.enabled 	= true;
     		break;
     	default:
     		break;
@@ -294,13 +358,12 @@ public class GuiVillagerMain extends GuiContainer {
     }
     
     /**
-     * Displays a random String form the chatStringList
-     * in the villager chat
+     * Assigns a randomly selected String from chatStringList as 
+     * the current message displayed in the villager chat
      */
     private void refreshChatContent(){
     	this.chatContent = chatStringList.get(MxRand.get().nextInt(chatStringList.size()));
     	this.chatContentDisplay = "";
-    	
     	this.calculateChatSpeed();
     } 
     
@@ -334,10 +397,15 @@ public class GuiVillagerMain extends GuiContainer {
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize + this.guiYOffset) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+        
+        if (chatTopicsVisible) {
+        	this.mc.getTextureManager().bindTexture(ChatTopicGuiTexture);
+        	 int xTopics = (this.width + this.xSize) / 2 - 9;
+        	 int yTopics = (this.height - this.topicPanelHeight) / 2 + 9;
+        	 this.drawTexturedModalRect(xTopics, yTopics, 0, 0, this.topicPanelWidth, this.topicPanelHeight);
+        }
 		
-        //GuiHelper.drawNameAndProfession(this.mc.fontRenderer, villager, this.width / 2, y + villagerNameOffsetY);
-        GuiHelper.drawNameAndProfession(this.mc.fontRenderer, villager, (this.width - this.xSize) / 2 + 43, y + villagerNameOffsetY);
-		
+        GuiHelper.drawNameAndProfession(this.mc.fontRenderer, villager, x + villagerNameOffsetX , y + villagerNameOffsetY);
 	}
 
 	@Override
@@ -348,42 +416,52 @@ public class GuiVillagerMain extends GuiContainer {
 		int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize + this.guiYOffset) / 2;
         
+        this.animateChatString(x, y);
+        this.drawCurrentButtonTexts(mouseX, mouseY);
+	}
+	
+	/**
+	 * Displays a String in the villager's chat box, 
+	 * revealing it letter by letter at a speed calculated based on its length.
+	 */
+	private void animateChatString(int x, int y) {
         long currentNanotime = System.nanoTime();
         //chat text animation
         if(this.chatContent.length() > this.chatContentDisplay.length()){
-        	chatTimer += (currentNanotime - this.lastNanotime) / 1000000;
-        	if(chatTimer >= this.chatDisplayInterval){
-        		chatTimer -= this.chatDisplayInterval;
-        		this.chatContentDisplay = this.chatContent.substring(0, this.chatContentDisplay.length() + 1);
-        	}
+            chatTimer += (currentNanotime - this.lastNanotime) / 1000000;
+            if(chatTimer >= this.chatDisplayInterval){
+                chatTimer -= this.chatDisplayInterval;
+                this.chatContentDisplay = this.chatContent.substring(0, this.chatContentDisplay.length() + 1);
+            }
         }
         
         this.lastNanotime = currentNanotime;
-        this.fontRenderer.drawSplitString(this.chatContentDisplay,x + offsetX, y + 20, this.xSize - offsetX * 2, 0xF9ECD3);
-        
-        if (this.subMenuIndex == 1) {
+        this.fontRenderer.drawSplitString(this.chatContentDisplay,x + textOffsetX, y + 20, this.xSize - textOffsetX * 2, 0xF9ECD3);
+	}
+	
+	private void drawCurrentButtonTexts(int mouseX, int mouseY) {
+	    if (this.subMenuIndex == 1) {
             if(!this.buttonGoHome.enabled){
-        		this.drawButtonHoverText(this.buttonSetHome, mouseX, mouseY, 
-        			I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.title"), 
-        			I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.desc"));
+                this.drawButtonHoverText(this.buttonSetHome, mouseX, mouseY, 
+                    I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.title"), 
+                    I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.hint.desc"));
             }
         }
         
         if (this.subMenuIndex == 2) {
-	        if(!this.buttonUpgrade.enabled){
-	          	if(this.villager.hasHome()) {
-	           		this.drawButtonHoverText(this.buttonUpgrade, mouseX, mouseY, 
-	           				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.title"), 
-	           				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.desc"));
-	           	}
-	        }
+            if(!this.buttonUpgrade.enabled){
+                if(this.villager.hasHome()) {
+                    this.drawButtonHoverText(this.buttonUpgrade, mouseX, mouseY, 
+                            I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.title"), 
+                            I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.maxupgrade.desc"));
+                }
+            }
         }
-        
 
         if(this.buttonQuest.enabled){
-    		this.drawButtonHoverText(this.buttonQuest, mouseX, mouseY, 
-    				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.newquest.title"), 
-    				I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.newquest.desc"));
+            this.drawButtonHoverText(this.buttonQuest, mouseX, mouseY, 
+                    I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.newquest.title"), 
+                    I18n.format(MxRef.MOD_ID + ":gui.villagermain.button.newquest.desc"));
         }
 	}
 	
@@ -398,14 +476,73 @@ public class GuiVillagerMain extends GuiContainer {
     
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		//TODO: button handling
+
+		if (button == buttonBackAction)  { this.pressedBackAction(); }
+		else if (button == buttonAction) { this.pressedAction(); }
+		else if (button == buttonChat)	{ this.pressedChat(); }
+		else if (button == buttonFollow){ this.pressedFollow(); }
+		//TODO: expand button handling
 		super.actionPerformed(button);
+	}
+	
+	private void pressedBackAction() {
+		if (subMenuIndex == 0) {
+			setInteracting(false);
+			this.mc.player.closeScreen();
+		}else {
+			subMenuIndex--;
+			refreshButtons();
+		}
+	}
+	
+	private void pressedChat() {
+		chatTopicsVisible = !chatTopicsVisible;
+		//TODO: change the chat message
+		//TODO: display chat Topics as textbuttons
+	}
+	private void pressedAction() {
+		subMenuIndex = 1;
+		chatTopicsVisible = false;
+		refreshButtons();
+	}
+	private void pressedTopic() {
+		
+	}
+	
+	private void pressedFollow() {
+		// toggle follow status
+		boolean enable = !this.villager.get(EntityMxVillager.IS_FOLLOWING);
+		// deactivate waiting
+		// send package to server
+		ModNetwork.getInstance().sendToServer(new MessageGuiSetFollowing(this.villager.getEntityId(), this.villager.dimension, enable));
+	}
+	private void pressedWait() {
+		
+	}
+	private void pressedTrade() {
+		
+	}
+	private void pressedSetHome() {
+		
+	}
+	private void pressedGoHome() {
+		
+	}
+	private void pressedUpgrade() {
+		
+	}
+	private void pressedQuest() {
+		
+	}
+	private void pressedProfession() {
+		
 	}
     
     @Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		super.keyTyped(typedChar, keyCode);
 		
+		// Escape Key or the bound inventory key
 		if (keyCode == 1 || keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()){
 			setInteracting(false);
 		}

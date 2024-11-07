@@ -106,10 +106,10 @@ mxbville:gui.villagermain.menu.close=Bye
 mxbville:gui.villagermain.menu.back=Back
 
 mxbville:gui.villagermain.menu.follow.start=Follow me
-mxbville:gui.villagermain.menu.follow.stop=Stop following me
+mxbville:gui.villagermain.menu.follow.stop=Stop following
 mxbville:gui.villagermain.menu.wait.start=Wait here
 mxbville:gui.villagermain.menu.wait.stop=Stop waiting
-mxbville:gui.villagermain.menu.home.movein=Set home here
+mxbville:gui.villagermain.menu.home.movein=Set home
 mxbville:gui.villagermain.menu.home.moveout=Move out
 mxbville:gui.villagermain.menu.home.gohome=Go home
 
@@ -125,7 +125,7 @@ mxbville:gui.villagermain.button.wait.title=§cWaiting
 mxbville:gui.villagermain.button.wait.desc=§7Tell the Villager to wait here
 mxbville:gui.villagermain.button.newquest.title=§eNew Quest
 mxbville:gui.villagermain.button.newquest.desc=§7The villager needs your help
-mxbville:gui.villagermain.button.hint.title=§cHintd
+mxbville:gui.villagermain.button.hint.title=§cHint
 mxbville:gui.villagermain.button.hint.desc=§7Set home for the villager to unlock more interactions
 mxbville:gui.villagermain.menu.chat.common0=Hey, %s.
 mxbville:gui.villagermain.menu.chat.common1=How is going? %s.
@@ -292,6 +292,36 @@ mxbville:gui.letter_reply.ambush.9=Don't take it personal. Let's just say your w
 	VILLAGER DIALOGUES
 ================================================================================
 mxbville:gui.villager.profession.personality.topic.0=
+
+
+mxbville:gui.villager.villager.kind.news=
+mxbville:gui.villager.villager.kind.origin=
+
+mxbville:gui.villager.villager.kind.villager=
+mxbville:gui.villager.villager.kind.rumors=
+
+
+mxbville:gui.villager.villager.kind.greeting.0=Hello there. What can I do for you?
+mxbville:gui.villager.villager.kind.greeting.1=Greetings. What may I help you with?
+mxbville:gui.villager.villager.kind.greeting.2=Hello good sir. You want something from me?
+mxbville:gui.villager.villager.kind.greeting.3=Well, hello. How can I assist you?
+mxbville:gui.villager.villager.kind.greeting.4=What a lovely day for a chat.
+
+mxbville:gui.villager.villager.kind.home.openspace=I am very sorry, but this seam to be a little bit to open for an appropriate home.
+mxbville:gui.villager.villager.kind.home.nobed=I'd rather would have a bed to sleep on.
+mxbville:gui.villager.villager.kind.home.existsalready=This already looks inhabited.
+mxbville:gui.villager.villager.kind.home.success=Very nice. I'll settle in right away.
+
+mxbville:gui.villager.villager.rude.home.openspace=Are you kidding me? This isn't even an enclosed space! 
+mxbville:gui.villager.villager.rude.home.nobed=And where do you think I should sleep? On the floor?
+mxbville:gui.villager.villager.rude.home.existsalready=How many of us do you want to shove in here?
+mxbville:gui.villager.villager.rude.home.success=Well, at least I don't have to sleep under a bridge tonight.
+
+mxbville:gui.villager.villager.rude.greeting.0=What are you staring at?
+mxbville:gui.villager.villager.rude.greeting.1=And what might you need? Hmm?
+mxbville:gui.villager.villager.rude.greeting.2=What is it? I don't owe you gold, do I?
+mxbville:gui.villager.villager.rude.greeting.3=Well, look at you. If only everyone acted like you did.
+mxbville:gui.villager.villager.rude.greeting.4=Make it quick.
 
 mxbville:gui.villager.farmer.kind.greeting.0=Greetings, §o%s! Are you seeking some farm-fresh goods or simply passing by?
 mxbville:gui.villager.farmer.kind.greeting.1=Hello §o%s! In need of fresh produce or a friendly chat?
