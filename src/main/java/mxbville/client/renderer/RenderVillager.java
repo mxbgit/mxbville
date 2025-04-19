@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import mxbville.client.model.ModelVillager;
 import mxbville.common.entity.villager.EntityMxVillager;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

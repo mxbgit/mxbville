@@ -21,8 +21,6 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import scala.reflect.internal.Trees.New;
-import scala.reflect.internal.Trees.Return;
 
 public class GuiHandler implements IGuiHandler{
 

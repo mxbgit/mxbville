@@ -2,7 +2,6 @@ package mxbville.client.gui.itemgui;
 
 import java.io.IOException;
 
-import io.netty.handler.codec.MessageAggregationException;
 import mxbville.client.gui.GuiTextButton;
 import mxbville.common.gui.common.ContainerEmpty;
 import mxbville.common.items.ModItems;
@@ -38,9 +37,8 @@ public class GuiLetterReply extends GuiContainer{
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
-        this.buttonList.add(this.buttonApprove = new GuiTextButton(this.mc, 0, 0,y + 130, I18n.format(MxRef.MOD_ID + ":gui.letter_reply.button.approve")));
+        this.buttonList.add(this.buttonApprove = new GuiTextButton(this.mc, 0, 0, y + 130, I18n.format(MxRef.MOD_ID + ":gui.letter_reply.button.approve")));
         this.buttonApprove.x = this.width / 2 - this.buttonApprove.width / 2;
         this.buttonApprove.setColors(0xFF006400, 0xFF32CD32);
         this.buttonApprove.setShadow(false);

@@ -7,13 +7,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import scala.collection.script.Update;
 
 public class GuiLetterStation extends GuiContainer {
 	public static final int WIDTH = 175;
 	public static final int HEIGHT = 166;
 	private static final ResourceLocation background = new ResourceLocation(MxRef.MOD_ID, "textures/gui/letterstation_gui.png");
-	private ContainerLetterStation ContainerLetterStationReference ;
 	private boolean markedSlot_0 = false;
 	private boolean markedSlot_1 = false;
 	private boolean markedSlot_2 = false;

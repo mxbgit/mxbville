@@ -3,11 +3,9 @@ package mxbville.common.network.messages.villager;
 import io.netty.buffer.ByteBuf;
 import mxbville.common.entity.villager.EntityMxVillager;
 import mxbville.common.items.documents.ItemReplyMail;
-import mxbville.util.MxRef;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -38,8 +36,8 @@ public class MessageSpawnNewVillagerThroughMail implements IMessage {
 				String villagerName     = ItemReplyMail.getMailSenderName(currentlyHoldItemstack);
 				boolean isMale 		    = ItemReplyMail.getMailSenderGender(currentlyHoldItemstack);
                 String affinity	        = ItemReplyMail.getMailAffinity(currentlyHoldItemstack); 
-                String affinityOrigin   = ItemReplyMail.getMailTextTranslationKey(currentlyHoldItemstack); 
-				
+                //String affinityOrigin   = ItemReplyMail.getMailTextTranslationKey(currentlyHoldItemstack); 
+				//TODO: Rework the affinity origin text generation, so the villager entity remembers its origin and doesn't invent a different one from his letter
                 
                 EntityMxVillager villager = new EntityMxVillager(playerHandler.world,
 																villagerName,

@@ -2,7 +2,6 @@ package mxbville.common.network.messages.villager;
 
 import io.netty.buffer.ByteBuf;
 import mxbville.common.entity.villager.EntityMxVillager;
-import mxbville.common.network.ModNetwork;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
