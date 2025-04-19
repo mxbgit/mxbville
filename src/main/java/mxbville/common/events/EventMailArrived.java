@@ -25,100 +25,88 @@ public class EventMailArrived {
 	private World worldRef;
 	private EntityPlayer playerRef;
 	private BlockPos eventCenter;
-	private InvitationType currentlySendLetter = null;
+	private InvitationType currentlySendLetterType = null;
 
 	public EventMailArrived(World worldIn, BlockPos pos, EntityPlayer playerIn) {
 		this.worldRef = worldIn;
 		this.playerRef = playerIn;
 		this.eventCenter = pos;
 		String sendLetterString = ExtendedPlayerProperties.get(playerIn).getCurrentlySendLetter();
-		if ((sendLetterString != null) && (!sendLetterString.isEmpty()))
-		{
-			this.currentlySendLetter = InvitationType.valueOf(sendLetterString);
+		if ((sendLetterString != null) && (!sendLetterString.isEmpty())) {
+			this.currentlySendLetterType = InvitationType.valueOf(sendLetterString);
 		}
 	}
 	
-	public boolean resolve() {
-		if (this.currentlySendLetter != null) {this.recieveReplyLetter(this.calculateReplyTyp()); }
-		// must return true for the calling Block action to finish properly
-		return true;
+	public void resolve() {
+		if (this.currentlySendLetterType != null) {
+			// notify that a reply has been received.
+			ExtendedPlayerProperties.get(this.playerRef).receiveReply();
+			ReplyType type = this.calculateReplyTyp();
+			if (type == ReplyType.FAIL) {
+				this.playerRef.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.fail"));
+			}else {
+				this.dropMailStack(EventMailArrived.generatePersonalReplyLetter(type));
+			}
+		}
 	}
 	
 	/**
-	 * Calculates the odds of a successful invitation,
-	 * an ambush event or a simple fail text message.
-	 * Takes the currently send letter into account.
+	 * Calculates the odds of a successful invitation, an ambush event or a simple
+	 * fail text message. Takes the currently send letter into account.
 	 * 
 	 * @return replytype according to the calculated odds.
 	 */
 	private ReplyType calculateReplyTyp() {
-		
-		Integer result		 	= MxRand.get().nextInt(101);
-		Integer successRange 	= this.currentlySendLetter.getSuccessRate() + 1; // +1 to get the intended success range covered in the success checks later 
-		Integer ambushRange 	= successRange + this.currentlySendLetter.getAmbushRate();
-		
-		if (result > ambushRange)
-		{
+
+		Integer result = MxRand.get().nextInt(101);
+		Integer successRange = this.currentlySendLetterType.getSuccessRate() + 1; // +1 to get the intended success range
+		Integer ambushRange = successRange + this.currentlySendLetterType.getAmbushRate();
+
+		if (result > ambushRange) {
 			// random result number is bigger than the successRange + the ambushRange.
 			return ReplyType.FAIL;
-		} else if (result > successRange) 
-		{
-			// random result number is only bigger than the successRange but within the ambushRange
+		} else if (result > successRange) {
+			// random result number is bigger than the successRange but within the
+			// ambushRange
 			return ReplyType.AMBUSH;
-		} else  
-		{
-			// random result number is within the success range 
+		} else {
+			// random result number is within the success range
 			return ReplyType.SUCCESS;
 		}
 	}
-	
-	private void recieveReplyLetter(ReplyType type) {
-		
-		ExtendedPlayerProperties.get(this.playerRef).receiveReply();
-		ItemStack mail = ItemStack.EMPTY;
-		switch (type) {
-		case SUCCESS:
-			mail = EventMailArrived.generatePersonalReplyLetter(false);
-			break;
-		case AMBUSH:
-			mail = EventMailArrived.generatePersonalReplyLetter(true);
-			break;
-		case FAIL:
-			this.playerRef.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.fail"));
-		default:
-			break;
-		}
-		this.dropMailStack(mail);
-	}
 
 	/**
-	 * If false, generates the gender, name, and affinity of the Villager.
-	 * Then creates an ItemReply Itemstack to summon the Villager.
+	 * Generates the gender, name, and affinity of the Villager. If the ReplyType is
+	 * 'ambush', generates an ambush text and sets the ambush flag in the ItemReply
+	 * letter. Then creates an ItemReply Itemstack to summon the Villager or an
+	 * ambush.
 	 * 
-	 * If true, creates an ItemReply Itemstack to summon an ambush with
-	 * a fake name and an ambush reply text.
-	 * 
-	 * @param isAmbush
+	 * @param replytype ambush or success
 	 * @return ItemReply Itemstack with set nbt tags
 	 */
-	private static ItemStack generatePersonalReplyLetter(boolean isAmbush) {
+	private static ItemStack generatePersonalReplyLetter(ReplyType type) {
 		ItemStack stack = ItemStack.EMPTY;
-		
-		boolean isMale 					= MxRand.get().nextBoolean();
-		String nameString 				= isMale?PersonalityGenerator.getRandomMaleName():PersonalityGenerator.getRandomFemaleName();
-		String affinityString 			= PersonalityGenerator.getRandomAffinity();
-		String mailTextTranslationKey 	= "";
-		if (!isAmbush)
-		{
-			mailTextTranslationKey = affinityString + "." + MxRand.get().nextInt(3);
-		}else {
+
+		boolean isMale = MxRand.get().nextBoolean();
+		String nameString = isMale ? PersonalityGenerator.getRandomMaleName(): PersonalityGenerator.getRandomFemaleName();
+		String affinityString = PersonalityGenerator.getRandomAffinity();
+		String mailTextTranslationKey = "";
+		boolean isAmbush = false;
+		if (type == ReplyType.AMBUSH) {
 			mailTextTranslationKey = "ambush." + MxRand.get().nextInt(10);
+			isAmbush = true;
+		} else {
+			mailTextTranslationKey = affinityString + "." + MxRand.get().nextInt(3);
 		}
 		stack = ItemReplyMail.generateMail(nameString, mailTextTranslationKey, affinityString, isAmbush, isMale);
-		
+
 		return stack;
 	}
 
+	/**
+	 * Generates a reply letter item and spawns it in the world.
+	 * @param stack the itemstack that will be spawned
+	 */
 	private void dropMailStack(ItemStack stack) {
 		
 		if (stack != ItemStack.EMPTY)

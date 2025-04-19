@@ -136,12 +136,6 @@ public class ItemReplyMail extends ItemBase {
 		}
 	}
 	
-	/**
-	 * Flag for ambushes.
-	 * 
-	 * @param stack
-	 * @return string. A profession title or the string "ambush"
-	 */
 	public static String getMailAffinity(ItemStack stack){
 		if(checkStack(stack))
 		{

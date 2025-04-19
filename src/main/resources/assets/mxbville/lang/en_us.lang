@@ -102,13 +102,14 @@ mxbville:gui.villagermain.menu.chat=Chat
 mxbville:gui.villagermain.menu.trade=Trade
 mxbville:gui.villagermain.menu.action=Action
 mxbville:gui.villagermain.menu.profession=Profession
+mxbville:gui.villagermain.menu.outfit=Wardrobe
 mxbville:gui.villagermain.menu.close=Bye
 mxbville:gui.villagermain.menu.back=Back
 
 mxbville:gui.villagermain.menu.follow.start=Follow me
-mxbville:gui.villagermain.menu.follow.stop=Stop following
+mxbville:gui.villagermain.menu.follow.stop=Let's part
 mxbville:gui.villagermain.menu.wait.start=Wait here
-mxbville:gui.villagermain.menu.wait.stop=Stop waiting
+mxbville:gui.villagermain.menu.wait.stop=Leave
 mxbville:gui.villagermain.menu.home.movein=Set home
 mxbville:gui.villagermain.menu.home.moveout=Move out
 mxbville:gui.villagermain.menu.home.gohome=Go home
@@ -127,20 +128,7 @@ mxbville:gui.villagermain.button.newquest.title=§eNew Quest
 mxbville:gui.villagermain.button.newquest.desc=§7The villager needs your help
 mxbville:gui.villagermain.button.hint.title=§cHint
 mxbville:gui.villagermain.button.hint.desc=§7Set home for the villager to unlock more interactions
-mxbville:gui.villagermain.menu.chat.common0=Hey, %s.
-mxbville:gui.villagermain.menu.chat.common1=How is going? %s.
-mxbville:gui.villagermain.menu.chat.common2=Nice to meet you, %s.
-mxbville:gui.villagermain.menu.chat.hashome0=I love living here!
-mxbville:gui.villagermain.menu.chat.hashome1=Do you want to trade with me?
-mxbville:gui.villagermain.menu.chat.nohome0=I want a place to live.
-mxbville:gui.villagermain.menu.chat.nohome1=Could you build a home for me?
 
-mxbville:gui.villagermain.menu.chat.movein=I love my new home!
-mxbville:gui.villagermain.menu.chat.moveout=I'm homeless again T_T
-mxbville:gui.villagermain.menu.chat.followstart=I'm following you!
-mxbville:gui.villagermain.menu.chat.followstop=OK, see you later!
-mxbville:gui.villagermain.menu.chat.waitstart=I'm staying here!
-mxbville:gui.villagermain.menu.chat.waitstop=OK, see you later!
 ================================================================================
 	INFO
 ================================================================================
@@ -299,29 +287,80 @@ mxbville:gui.villager.villager.kind.origin=
 
 mxbville:gui.villager.villager.kind.villager=
 mxbville:gui.villager.villager.kind.rumors=
+_________________________________________________________________________________
+	GENERIC RESPONSES
+---------------------------------------------------------------------------------
+mxbville:gui.villager.kind.follow.start=I'm following you!
+mxbville:gui.villager.kind.follow.stop=OK, see you later!
+mxbville:gui.villager.kind.wait.start=I'm staying here!
+mxbville:gui.villager.kind.wait.stop=OK, I'll go on with my tasks then.
+mxbville:gui.villager.kind.move.in=I love it. I make myself at home here. 
+mxbville:gui.villager.kind.move.out=I guess I'll have to find a new place to live
+
+mxbville:gui.villager.kind.home.unchecked=What about this place?
+mxbville:gui.villager.kind.home.openspace=I am very sorry, but this seam to be a little bit to open for an appropriate home.
+mxbville:gui.villager.kind.home.nobed=I'd rather would have a bed to sleep on.
+mxbville:gui.villager.kind.home.occupied=This already looks inhabited.
+mxbville:gui.villager.kind.home.free=I guess I'll have to find a new place to live
+mxbville:gui.villager.kind.home.myhome=Very nice. I'll settle in right away.
+
+mxbville:gui.villager.kind.nohome.0=I’m searching for a cozy house to call my own. Might you know of one?
+mxbville:gui.villager.kind.nohome.1=Hello, friend! Do you know of any empty homes nearby I could move in?
+mxbville:gui.villager.kind.nohome.2=Well met! I’m looking for a house to settle in. Could you guide me?
+mxbville:gui.villager.kind.nohome.3=Good day, §o%s! I seek a humble home to live in. Might you know of one?
+mxbville:gui.villager.kind.nohome.4=Hail, §o%s! I’m in need of a roof over my head. Can you help?
 
 
+mxbville:gui.villager.rude.follow.start=Fine, but make it quick.
+mxbville:gui.villager.rude.follow.stop=So why exactly do you want me to be here?
+mxbville:gui.villager.rude.wait.start=And how long do I have to wait for you?
+mxbville:gui.villager.rude.wait.stop=Finally. Some people have things to do, you know
+mxbville:gui.villager.rude.move.in=Well at least I have a bed to sleep now.
+mxbville:gui.villager.rude.move.out=So you kicked me out, hm? What now?!
+
+mxbville:gui.villager.rude.home.unchecked=What about this place?
+mxbville:gui.villager.rude.home.openspace=With the draught, I might as well sleep on the street.
+mxbville:gui.villager.rude.home.nobed=And where do you suspect me to sleep? on the floor?
+mxbville:gui.villager.rude.home.occupied=How many people do you want to cram in here? Its occupied?
+mxbville:gui.villager.rude.home.free=So you kicked me out, hm? What now?!
+mxbville:gui.villager.rude.home.myhome=Well at least I have a bed to sleep now.
+
+mxbville:gui.villager.rude.nohome.0=You there! Where can I find a house? Don’t just stand there, speak up!
+mxbville:gui.villager.rude.nohome.1=I need a house to live in. Do you know anyone important I could ask about that?
+mxbville:gui.villager.rude.nohome.2=I’m looking for a place to stay. Hurry up and help me, will you?
+mxbville:gui.villager.rude.nohome.3=What’s the hold up? I need a house, not your blank stares.
+mxbville:gui.villager.rude.nohome.4=You invited me here, so get me place to stay already!
+
+mxbville:gui.villagermain.menu.chat.common0=Hey, %s.
+mxbville:gui.villagermain.menu.chat.common1=How is going? %s.
+mxbville:gui.villagermain.menu.chat.common2=Nice to meet you, %s.
+mxbville:gui.villagermain.menu.chat.hashome0=I love living here!
+mxbville:gui.villagermain.menu.chat.hashome1=Do you want to trade with me?
+mxbville:gui.villagermain.menu.chat.nohome0=I want a place to live.
+mxbville:gui.villagermain.menu.chat.nohome1=Could you build a home for me?
+
+mxbville:gui.villagermain.menu.chat.movein=I love my new home!
+mxbville:gui.villagermain.menu.chat.moveout=I'm homeless again T_T
+mxbville:gui.villagermain.menu.chat.followstart=I'm following you!
+mxbville:gui.villagermain.menu.chat.followstop=OK, see you later!
+mxbville:gui.villagermain.menu.chat.waitstart=I'm staying here!
+mxbville:gui.villagermain.menu.chat.waitstop=OK, see you later!
+
+_________________________________________________________________________________
+	PROFESSION RESPONSES
+---------------------------------------------------------------------------------
 mxbville:gui.villager.villager.kind.greeting.0=Hello there. What can I do for you?
 mxbville:gui.villager.villager.kind.greeting.1=Greetings. What may I help you with?
 mxbville:gui.villager.villager.kind.greeting.2=Hello good sir. You want something from me?
 mxbville:gui.villager.villager.kind.greeting.3=Well, hello. How can I assist you?
 mxbville:gui.villager.villager.kind.greeting.4=What a lovely day for a chat.
 
-mxbville:gui.villager.villager.kind.home.openspace=I am very sorry, but this seam to be a little bit to open for an appropriate home.
-mxbville:gui.villager.villager.kind.home.nobed=I'd rather would have a bed to sleep on.
-mxbville:gui.villager.villager.kind.home.existsalready=This already looks inhabited.
-mxbville:gui.villager.villager.kind.home.success=Very nice. I'll settle in right away.
-
-mxbville:gui.villager.villager.rude.home.openspace=Are you kidding me? This isn't even an enclosed space! 
-mxbville:gui.villager.villager.rude.home.nobed=And where do you think I should sleep? On the floor?
-mxbville:gui.villager.villager.rude.home.existsalready=How many of us do you want to shove in here?
-mxbville:gui.villager.villager.rude.home.success=Well, at least I don't have to sleep under a bridge tonight.
-
 mxbville:gui.villager.villager.rude.greeting.0=What are you staring at?
 mxbville:gui.villager.villager.rude.greeting.1=And what might you need? Hmm?
 mxbville:gui.villager.villager.rude.greeting.2=What is it? I don't owe you gold, do I?
 mxbville:gui.villager.villager.rude.greeting.3=Well, look at you. If only everyone acted like you did.
 mxbville:gui.villager.villager.rude.greeting.4=Make it quick.
+
 
 mxbville:gui.villager.farmer.kind.greeting.0=Greetings, §o%s! Are you seeking some farm-fresh goods or simply passing by?
 mxbville:gui.villager.farmer.kind.greeting.1=Hello §o%s! In need of fresh produce or a friendly chat?

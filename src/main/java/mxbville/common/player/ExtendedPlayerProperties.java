@@ -10,25 +10,25 @@ import net.minecraft.world.World;
 
 public class ExtendedPlayerProperties {
 	
-	public static final ResourceLocation key = new ResourceLocation(MxRef.MOD_ID + ".expp");
+	public static final ResourceLocation key = new ResourceLocation(MxRef.MOD_ID + ".expp");;
 	
 	public static final int NewMailTimerTotal = 300; //2000 Default
 	private boolean 		invitationSent;			//has the player sent an invivation?
 	private int 			newMailTimer;			//how much time left to receive a new mail?
-	private String			currentlySendLetter;
-	private String 			currentlyRequestedJob;
+	private String			currentlySendLetter = "";
 	private int 			treasureHuntLevel;
+	public EntityPlayer player;
 
 	public ExtendedPlayerProperties(EntityPlayer player){
+		this.player = player;
 	}
 
-	public void init(Entity entity, World world)
+	public void init(Entity entity)
 	{
 		this.resetMailTimer();
 		this.invitationSent = false;
 		this.treasureHuntLevel = 0;
-		this.currentlySendLetter = "";
-		this.currentlyRequestedJob = "";
+		this.currentlySendLetter = "normal";
 	}
 	
 	public static ExtendedPlayerProperties get(EntityPlayer player)
@@ -89,7 +89,6 @@ public class ExtendedPlayerProperties {
 		compound.setBoolean("invited", this.invitationSent);
 		compound.setInteger("newmailtimer", this.newMailTimer);
 		compound.setString("currentlySendLetter", this.currentlySendLetter);
-		compound.setString("currentlyRequestedJob", this.currentlyRequestedJob);
 	}
 	
 	public void loadNBTData(NBTTagCompound compound)
@@ -98,6 +97,5 @@ public class ExtendedPlayerProperties {
 		this.invitationSent		= compound.getBoolean("invited");
 		this.newMailTimer		= compound.getInteger("newmailtimer");
 		this.currentlySendLetter = compound.getString("currentlySendLetter");
-		this.currentlyRequestedJob = compound.getString("currentlyRequestedJob");
 	}
 }

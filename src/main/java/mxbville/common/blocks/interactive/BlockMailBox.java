@@ -38,61 +38,52 @@ public class BlockMailBox extends BlockFacing {
 		this.setCreativeTab(MxBville.SPECIALTAB);	
 	}
 	
+	/**
+	 * Covers the following three cases: 
+	 * 1. Checks the player hand for a valid letter item to send.
+	 *	  If the held item is valid, tries to send a letter.
+	 * 2. If no item or no valid item is held, checks for the arrival of a response letter.
+	 *    Triggers MailArrived Event if possible. 
+	 * 3. If no letter has been sent, outputs a text message to the current player.
+	 */
 	@Override
-	public boolean onBlockActivated(World worldIn, 
-									BlockPos pos, 
-									IBlockState state, 
-									EntityPlayer playerIn,
-									EnumHand hand, 
-									EnumFacing side, 
-									float hitX, 
-									float hitY, 
-									float hitZ) 
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		if(!worldIn.isRemote)
-		{
-			if(this.isHeldItemValid(playerIn, hand))
-			{
+		if (!worldIn.isRemote) {
+			if (this.isHeldItemValid(playerIn, hand)) {
 				this.sendLetterIfPossible(playerIn, hand);
-			}else {
-				// No invitation in hand.
-				// Check for current mail status
-				if (ExtendedPlayerProperties.get(playerIn).hasNewVillagerMail())
-				{
-					//recieve the reply letter
-					return new EventMailArrived(worldIn, pos, playerIn).resolve();
-					//this.spawnMailItem(worldIn, pos, playerIn);
-				}else {
-					// no Invitation was send
+			} else {
+				if (ExtendedPlayerProperties.get(playerIn).hasNewVillagerMail()) {
+					EventMailArrived event = new EventMailArrived(worldIn, pos, playerIn);
+					event.resolve();
+				} else {
 					playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.nomail"));
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
 	/**
-	 * Returns true if the itemstack in the mainhand of the given player
-	 * is in the local list of valid items. Returns false otherwise.
-	 * An Empty Hand returns always false.
+	 * Returns true if the itemstack in the mainhand of the given player is in the
+	 * local list of valid items. Returns false otherwise. An Empty Hand returns
+	 * always false.
 	 * 
-	 * @param playerIn Player reference to read the extended player properties
-	 * @param hand The hand, that will be checked
+	 * @param playerIn Player reference to check the held item.
+	 * @param hand     The hand, that will be checked.
 	 * @return true if item in hand is in local list, false otherwise
 	 */
 	private boolean isHeldItemValid(EntityPlayer playerIn, EnumHand hand) {
-		if (playerIn.getHeldItem(hand) != null )
-		{
+		if (playerIn.getHeldItem(hand) != null) {
 			Item heldItem = playerIn.getHeldItem(hand).getItem();
 			if (heldItem instanceof ItemInvitation && (
-					heldItem == ModItems.LETTER_INVITATION_APPROVED ||
-					heldItem == ModItems.LETTER_INVITATION_BAIT ||
-					heldItem == ModItems.LETTER_INVITATION_JOB ||
-					heldItem == ModItems.LETTER_INVITATION_NORMAL ||
-					heldItem == ModItems.LETTER_INVITATION_OFFICIAL)
-				)
-			{
+					heldItem == ModItems.LETTER_INVITATION_APPROVED
+					|| heldItem == ModItems.LETTER_INVITATION_BAIT 
+					|| heldItem == ModItems.LETTER_INVITATION_JOB
+					|| heldItem == ModItems.LETTER_INVITATION_NORMAL
+					|| heldItem == ModItems.LETTER_INVITATION_OFFICIAL)) {
 				return true;
 			}
 		}
@@ -102,28 +93,29 @@ public class BlockMailBox extends BlockFacing {
 	
 	
 	/**
-	 * TODO
+	 * Tries to consume the player held item and send an invitation. Fails with a
+	 * text prompt if an invitation has been send recently.
+	 * 
 	 * @param playerIn
 	 * @param hand
 	 */
 	private void sendLetterIfPossible(EntityPlayer playerIn, EnumHand hand) {
-		if(ExtendedPlayerProperties.get(playerIn).hasSentInvitation()){
-			playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID +":message.mail.invitefailed"));	
+		if (ExtendedPlayerProperties.get(playerIn).hasSentInvitation()) {
+			// invitation has been sent recently.
+			playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.invitefailed"));
 		} else {
-			//If not creativemode
 			ItemStack currentStack = playerIn.getHeldItem(hand);
-			ItemInvitation currentInvitation = (ItemInvitation)currentStack.getItem();
-			
-			if (!playerIn.capabilities.isCreativeMode)
-			{
-				// remove Item from Hand
+			ItemInvitation currentInvitation = (ItemInvitation) currentStack.getItem();
+			if (!playerIn.capabilities.isCreativeMode) {
+				// remove Item from player hand
 				currentStack.shrink(1);
 			}
 			// Send Invitation
-			ExtendedPlayerProperties.get(playerIn).sendNewMail(currentInvitation.getType().name());			
-			playerIn.sendMessage(new TextComponentTranslation(MxRef.MOD_ID +":message.mail.mailsend." + MxRand.get().nextInt(3)));
+			ExtendedPlayerProperties.get(playerIn).sendNewMail(currentInvitation.getType().name());
+			playerIn.sendMessage(
+					new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.mailsend." + MxRand.get().nextInt(3)));
 		}
-		
+
 	}
 
 	@Override

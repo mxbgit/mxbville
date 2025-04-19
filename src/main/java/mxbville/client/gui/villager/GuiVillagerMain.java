@@ -3,14 +3,16 @@ package mxbville.client.gui.villager;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import mxbville.client.gui.DialogManager;
 import mxbville.client.gui.GuiHelper;
 import mxbville.common.calc.math.MxRand;
 import mxbville.common.entity.villager.EntityMxVillager;
 import mxbville.common.gui.villager.ContainerVillagerMain;
 import mxbville.common.network.ModNetwork;
 import mxbville.common.network.messages.villager.MessageGuiSetFollowing;
+import mxbville.common.network.messages.villager.MessageGuiSetHome;
 import mxbville.common.network.messages.villager.MessageGuiSetInteracting;
-import mxbville.common.village.profession.Profession;
+import mxbville.common.network.messages.villager.MessageGuiSetWaiting;
 import mxbville.util.MxRef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -102,15 +104,13 @@ public class GuiVillagerMain extends GuiContainer {
     
     private boolean isFollowingStatusLast;
     private boolean hasHomeStatusLast;
+    private String setHomeStateLast;
     private boolean isWaitingStatusLast;
     private boolean chatTopicsVisible; 
   
     /**
      * Keeps track of the menu page, that is currently displayed.
      * 0 = Main Menu.
-     * 1 = Chat Menu.
-     * 2 = Action Menu.
-     * >2 = Error, revert to 0.
      */
     private int subMenuIndex;
     
@@ -131,48 +131,29 @@ public class GuiVillagerMain extends GuiContainer {
         this.isFollowingStatusLast = this.villager.get(EntityMxVillager.IS_FOLLOWING);
         this.hasHomeStatusLast = this.villager.get(EntityMxVillager.HAS_HOME);
         this.isWaitingStatusLast = this.villager.get(EntityMxVillager.IS_WAITING);
+        this.setHomeStateLast = this.villager.get(EntityMxVillager.SET_HOME_STATE);
         this.chatTopicsVisible = false;
         
         this.lastNanotime = System.nanoTime();
         this.subMenuIndex = 0;
         
-        //dialogues = new DialogueManager(this.player, this.villager); 
+        DialogManager dialog = DialogManager.getInstance();
+        dialog.prepareDialog(villager, player);
         prepareStringList();
         refreshChatContent();
         
         setInteracting(true);
 	}
 	
-    /**
-     * TODO: Check the current profession of the villager and chose the possible Strings accordingly.
-     * Preloads all possible chat answers of the current villager
-     */
     private void prepareStringList() {
-        String professionString = villager.get(EntityMxVillager.PROFESSIONID);
-        String personality      = villager.get(EntityMxVillager.PERSONALITY);
-        String currentChatState = villager.getCurrentChatState();
-        
-        if (currentChatState.contains("home")) {
-            
-        }else {
-            for(int i =0;i<4;i++){
-                chatStringList.add(I18n.format(MxRef.MOD_ID 
-                        + ":gui.villager."
-                        + professionString 
-                        + "." 
-                        + personality
-                        + "."
-                        + i, player.getName()));
-            }
+        for(int i =0;i<5;i++){
+            chatStringList.add( DialogManager.getInstance().getTranslationKey("greeting", i) );
         }
-     
-        /*
-
-    	String home = villager.hasHome()?"hashome":"nohome";
-    	for(int i =0;i<2;i++){
-    		chatStringList.add(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat."+ home + i));
-    	}
-    	*/
+        if(!hasHomeStatusLast ) {
+        	for(int i =0;i<5;i++){
+        		chatStringList.add( DialogManager.getInstance().getGenericTranslationKey("nohome", i) );
+        	}
+        }
     }
 	
 	@Override
@@ -188,7 +169,7 @@ public class GuiVillagerMain extends GuiContainer {
         String strProfession = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.profession");
         String strBack = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.close");
         
-        String strGoHome = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.gohome");
+        String strGoHome = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.home.gohome");
         
         String strUpgrade = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.upgrade");
         String strOutfit = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.outfit");
@@ -241,8 +222,9 @@ public class GuiVillagerMain extends GuiContainer {
     	buttonOutfit.enabled 		= false;
     }
 	
-    private void refreshButtons(){
+    private void refreshButtons() {
     	
+    	disableButtons();
     	boolean hasHome = this.villager.get(EntityMxVillager.HAS_HOME);
     	
     	String toggled_bt_text = this.villager.get(EntityMxVillager.IS_FOLLOWING)?"stop":"start";
@@ -257,7 +239,6 @@ public class GuiVillagerMain extends GuiContainer {
     	toggled_bt_text = this.subMenuIndex==0?"close":"back"; 
     	buttonBackAction.setText(I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu." + toggled_bt_text));
     	
-    	disableButtons();
     	switch (this.subMenuIndex) {
     	case 0:
     		/* Main Menu */
@@ -281,9 +262,9 @@ public class GuiVillagerMain extends GuiContainer {
     		break;
     	case 2:
     		/* Profession Menu */
-    		Profession[] upgradeOptions = this.villager.getPersonalUpgradeOptions();
+    		//Profession[] upgradeOptions = this.villager.getPersonalUpgradeOptions();
     		
-    		buttonUpgrade.enabled	= hasHome && (upgradeOptions != null && upgradeOptions.length > 0);
+    		buttonUpgrade.enabled	= hasHome; //TODO: && (upgradeOptions != null && upgradeOptions.length > 0);
         	buttonOutfit.enabled	= true;
         	buttonBackAction.enabled 	= true;
     		break;
@@ -330,24 +311,24 @@ public class GuiVillagerMain extends GuiContainer {
     		}
     	} else {
     		switch (this.subMenuIndex) {
-        	case 0: 
-        		buttonChat.y		= pos0;
-        	    buttonAction.y 		= pos1;
-        		buttonBackAction.y 	= pos2;
-        		break;
-        	case 1: 
-        		buttonFollow.y 		= pos0;
-        		buttonWait.y 		= pos1;
-        		buttonSetHome.y 	= pos2;
-        		buttonBackAction.y 	= pos3;
-        		break;
-        	case 2: 
-        		buttonUpgrade.y 	= pos0;
-        		buttonOutfit.y 		= pos1;
-        		buttonBackAction.y 	= pos2;
-        		break;
-    		default: break;
-		}
+	        	case 0: 
+	        		buttonChat.y		= pos0;
+	        	    buttonAction.y 		= pos1;
+	        		buttonBackAction.y 	= pos2;
+	        		break;
+	        	case 1: 
+	        		buttonFollow.y 		= pos0;
+	        		buttonWait.y 		= pos1;
+	        		buttonSetHome.y 	= pos2;
+	        		buttonBackAction.y 	= pos3;
+	        		break;
+	        	case 2: 
+	        		buttonUpgrade.y 	= pos0;
+	        		buttonOutfit.y 		= pos1;
+	        		buttonBackAction.y 	= pos2;
+	        		break;
+	    		default: break;
+    		}	
     	}
     	
     }
@@ -368,8 +349,8 @@ public class GuiVillagerMain extends GuiContainer {
     } 
     
     
-    private void setChatContent(String type){
-    	this.chatContent = I18n.format(MxRef.MOD_ID + ":gui.villagermain.menu.chat." + type);
+    private void setGenericChatContent(String key1, String key2){
+    	this.chatContent = DialogManager.getInstance().getGenericTranslationKey(key1, key2);
     	this.chatContentDisplay = "";
     	
     	this.calculateChatSpeed();
@@ -379,15 +360,19 @@ public class GuiVillagerMain extends GuiContainer {
     	boolean isFollowingCurrentState = this.villager.get(EntityMxVillager.IS_FOLLOWING);
     	boolean hasHomeCurrentState 	= this.villager.get(EntityMxVillager.HAS_HOME);
     	boolean isWaitingCurrentState 	= this.villager.get(EntityMxVillager.IS_WAITING);
+    	String setHomeCurrentState		= this.villager.get(EntityMxVillager.SET_HOME_STATE);
     	
-    	if(!this.isFollowingStatusLast && isFollowingCurrentState) setChatContent("followstart");
-    	else if(this.isFollowingStatusLast && !isFollowingCurrentState) setChatContent("followstop");
+    	if(!this.isFollowingStatusLast && isFollowingCurrentState) setGenericChatContent("follow","start");
+    	else if(this.isFollowingStatusLast && !isFollowingCurrentState) setGenericChatContent("follow","stop");
     	
-    	if(!this.isWaitingStatusLast && isWaitingCurrentState) setChatContent("waitstart");
-    	else if(this.isWaitingStatusLast && !isWaitingCurrentState) setChatContent("waitstop");
+    	if(!this.isWaitingStatusLast && isWaitingCurrentState) setGenericChatContent("wait","start");
+    	else if(this.isWaitingStatusLast && !isWaitingCurrentState) setGenericChatContent("wait","stop");
     	  	
-    	if(!this.hasHomeStatusLast && hasHomeCurrentState) setChatContent("movein");
-    	else if(this.hasHomeStatusLast && !hasHomeCurrentState) setChatContent("moveout");
+    	if(!this.hasHomeStatusLast && hasHomeCurrentState) setGenericChatContent("move","in");
+    	else if(this.hasHomeStatusLast && !hasHomeCurrentState) setGenericChatContent("move","out");
+    	
+    	if(!setHomeCurrentState.equals(this.setHomeStateLast)) setGenericChatContent("home", setHomeCurrentState);
+    	
     }
     
 	@Override
@@ -436,7 +421,7 @@ public class GuiVillagerMain extends GuiContainer {
         }
         
         this.lastNanotime = currentNanotime;
-        this.fontRenderer.drawSplitString(this.chatContentDisplay,x + textOffsetX, y + 20, this.xSize - textOffsetX * 2, 0xF9ECD3);
+        this.fontRenderer.drawSplitString(this.chatContentDisplay,x + textOffsetX, y + 20, this.chatButtonOffsetX - textOffsetX, 0xF9ECD3);
 	}
 	
 	private void drawCurrentButtonTexts(int mouseX, int mouseY) {
@@ -474,24 +459,62 @@ public class GuiVillagerMain extends GuiContainer {
 		}
 	}
     
+	/**
+	 * 
+	 */
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
+		switch (button.id) {
+			case 0:
+				pressedChat();
+				break;
+			case 1:
+				pressedTrade();
+				break;
+			case 2:
+				pressedAction();
+				break;
+			case 3:
+				pressedProfession();
+				break;
+			case 4:
+				pressedBackAction();
+				break;
+			case 5:
+				pressedFollow();
+				break;
+			case 6:
+				pressedWait();
+				break;
+			case 7:
+				pressedSetHome();
+				break;
+			case 8:
+				pressedGoHome();
+				break;
+			case 9:
+				pressedUpgrade();
+				break;
+			case 10:
+				pressedOutfit();
+				break;
+			case 100:
+				pressedQuest();
+				break;
+			default:
+				pressedBackAction();
+				break;
+		}
 
-		if (button == buttonBackAction)  { this.pressedBackAction(); }
-		else if (button == buttonAction) { this.pressedAction(); }
-		else if (button == buttonChat)	{ this.pressedChat(); }
-		else if (button == buttonFollow){ this.pressedFollow(); }
-		//TODO: expand button handling
 		super.actionPerformed(button);
 	}
 	
 	private void pressedBackAction() {
 		if (subMenuIndex == 0) {
-			setInteracting(false);
+			cleanUpOnClose();
 			this.mc.player.closeScreen();
 		}else {
 			subMenuIndex--;
-			refreshButtons();
 		}
 	}
 	
@@ -503,9 +526,6 @@ public class GuiVillagerMain extends GuiContainer {
 	private void pressedAction() {
 		subMenuIndex = 1;
 		chatTopicsVisible = false;
-		refreshButtons();
-	}
-	private void pressedTopic() {
 		
 	}
 	
@@ -513,38 +533,65 @@ public class GuiVillagerMain extends GuiContainer {
 		// toggle follow status
 		boolean enable = !this.villager.get(EntityMxVillager.IS_FOLLOWING);
 		// deactivate waiting
-		// send package to server
-		ModNetwork.getInstance().sendToServer(new MessageGuiSetFollowing(this.villager.getEntityId(), this.villager.dimension, enable));
+		ModNetwork.getInstance().sendToServer(
+				new MessageGuiSetWaiting(this.villager.getEntityId(), this.villager.dimension, false));
+		// send follow state
+		ModNetwork.getInstance().sendToServer(
+				new MessageGuiSetFollowing(this.villager.getEntityId(), this.villager.dimension, enable));
 	}
+	
 	private void pressedWait() {
-		
+		// toggle waiting status
+		boolean enable = !this.villager.get(EntityMxVillager.IS_WAITING);
+		// deactivate following
+		ModNetwork.getInstance().sendToServer(
+				new MessageGuiSetFollowing(this.villager.getEntityId(), this.villager.dimension, false));
+		// send waiting state
+		ModNetwork.getInstance().sendToServer(
+				new MessageGuiSetWaiting(this.villager.getEntityId(), this.villager.dimension, enable));
 	}
+	
 	private void pressedTrade() {
 		
 	}
+	
 	private void pressedSetHome() {
-		
+		ModNetwork.getInstance().sendToServer(
+				new MessageGuiSetHome(this.villager.getEntityId(), this.villager.dimension, !this.villager.get(EntityMxVillager.HAS_HOME)));
 	}
+	
 	private void pressedGoHome() {
 		
 	}
 	private void pressedUpgrade() {
 		
 	}
+	private void pressedOutfit() {
+		
+	}
 	private void pressedQuest() {
 		
 	}
 	private void pressedProfession() {
-		
+		subMenuIndex = 2;
+		chatTopicsVisible = false;
+	
 	}
     
+	public void cleanUpOnClose() {
+		setInteracting(false);
+		chatStringList.clear();
+		DialogManager.getInstance().endDialog();
+	}
+	
+	
     @Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		super.keyTyped(typedChar, keyCode);
 		
 		// Escape Key or the bound inventory key
 		if (keyCode == 1 || keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()){
-			setInteracting(false);
+			cleanUpOnClose();
 		}
     }
     
@@ -557,8 +604,9 @@ public class GuiVillagerMain extends GuiContainer {
 	    this.isFollowingStatusLast = this.villager.get(EntityMxVillager.IS_FOLLOWING);
 	    this.hasHomeStatusLast = this.villager.get(EntityMxVillager.HAS_HOME);
 	    this.isWaitingStatusLast = this.villager.get(EntityMxVillager.IS_WAITING);
+	    this.setHomeStateLast = this.villager.get(EntityMxVillager.SET_HOME_STATE);
     }
-	
+    
     @SideOnly(Side.CLIENT)
     static class QuestButton extends GuiButton {
 		

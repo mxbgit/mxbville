@@ -44,7 +44,7 @@ public class CommandResetInvitationSending extends CommandBase  {
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender; 
-			ExtendedPlayerProperties.get(player).init(player, null);
+			ExtendedPlayerProperties.get(player).init(player);
 		}
 	}
 }

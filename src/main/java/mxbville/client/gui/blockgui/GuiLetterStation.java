@@ -14,7 +14,9 @@ public class GuiLetterStation extends GuiContainer {
 	public static final int HEIGHT = 166;
 	private static final ResourceLocation background = new ResourceLocation(MxRef.MOD_ID, "textures/gui/letterstation_gui.png");
 	private ContainerLetterStation ContainerLetterStationReference ;
-	
+	private boolean markedSlot_0 = false;
+	private boolean markedSlot_1 = false;
+	private boolean markedSlot_2 = false;
 	
 	public GuiLetterStation(InventoryPlayer parPlayerInventory, World parWorld, BlockPos parBlockpos) 
 	{
@@ -23,7 +25,6 @@ public class GuiLetterStation extends GuiContainer {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		// TODO Auto-generated method stub
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
@@ -38,29 +39,35 @@ public class GuiLetterStation extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, WIDTH, HEIGHT);
-        
+        this.markSlotIfFilled();
         // update the letter-ui when an item is inserted
         // in three consecutive steps
-        if (firstCraftingCondition())
+        if (oneSlotFilled())
         	drawTexturedModalRect(guiLeft + 54, guiTop + 3, 0, 166, 80, 21);
         
-        if (secondCraftingCondition())
+        if (twoSlotsFilled())
         	drawTexturedModalRect(guiLeft + 54, guiTop + 24, 0, 187, 80, 21);
         
-        if (thirdCraftingCondition())
+        if (threeSlotsFilled())
         	drawTexturedModalRect(guiLeft + 54, guiTop + 45, 0, 208, 80, 21);
 	}
-	
-	private boolean firstCraftingCondition() {
-		return this.inventorySlots.getSlot(0).getHasStack();
+
+	private void markSlotIfFilled() {
+		this.markedSlot_0 = (this.inventorySlots.getSlot(0).getHasStack())?true:false;
+		this.markedSlot_1 = (this.inventorySlots.getSlot(1).getHasStack())?true:false;
+		this.markedSlot_2 = (this.inventorySlots.getSlot(2).getHasStack())?true:false;
 	}
 	
-	private boolean secondCraftingCondition() {
-		return (firstCraftingCondition()  && this.inventorySlots.getSlot(1).getHasStack());
+	private boolean oneSlotFilled() {
+		return (markedSlot_0 || markedSlot_1 || markedSlot_2 ); 
 	}
 	
-	private boolean thirdCraftingCondition() {
-		return (secondCraftingCondition() && this.inventorySlots.getSlot(2).getHasStack());
+	private boolean twoSlotsFilled() {
+		return ((markedSlot_2 && (markedSlot_0 || markedSlot_1)) || (markedSlot_0 && markedSlot_1)); 
+	}
+	
+	private boolean threeSlotsFilled() {
+		return (markedSlot_0 && markedSlot_1 && markedSlot_2 );
 	}
 	
 	@Override

@@ -30,8 +30,8 @@ public class MessageSpawnNewVillagerThroughMail implements IMessage {
 		@Override
 		public IMessage onMessage(MessageSpawnNewVillagerThroughMail message, MessageContext ctx) {
 			
-			EntityPlayer player = ctx.getServerHandler().player;
-			ItemStack currentlyHoldItemstack = player.getHeldItemMainhand();
+			EntityPlayer playerHandler = ctx.getServerHandler().player;
+			ItemStack currentlyHoldItemstack = playerHandler.getHeldItemMainhand();
 			
 			if(currentlyHoldItemstack.getItem() instanceof ItemReplyMail)
 			{
@@ -41,16 +41,15 @@ public class MessageSpawnNewVillagerThroughMail implements IMessage {
                 String affinityOrigin   = ItemReplyMail.getMailTextTranslationKey(currentlyHoldItemstack); 
 				
                 
-                EntityMxVillager villager = new EntityMxVillager(player.world,
+                EntityMxVillager villager = new EntityMxVillager(playerHandler.world,
 																villagerName,
 																affinity,
 																isMale );
 				
-				BlockPos spawnPos = this.calculateSpawnPos(player);
-				villager.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), player.rotationYaw + 180, 0);
+				BlockPos spawnPos = this.calculateSpawnPos(playerHandler);
+				villager.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), playerHandler.rotationYaw + 180, 0);
 				ctx.getServerHandler().player.world.spawnEntity(villager);
 				
-				player.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.mail.errortext", ""));
 				currentlyHoldItemstack.shrink(1);
 			}
 			

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
+
 public class ClientProxy extends CommonProxy{
 
 	public void registerItemRenderer(Item item, int meta)
@@ -38,4 +39,5 @@ public class ClientProxy extends CommonProxy{
 	{
 		super.postInit(event);
 	}
+	
 }

@@ -51,6 +51,28 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityMxVillager extends EntityCreature implements ITrading {
 	
+    public enum Set_Home_State {
+        UNCHECKED("unchecked"), 
+        OPENSPACE("openspace"), 
+        NOBED("nobed"), 
+        OCCUPIED("occupied"),
+        FREE("free"),
+        MYHOME("myhome");
+
+        // String-Wert des Enums
+        private final String description;
+
+        // Konstruktor des Enums
+        Set_Home_State(String description) {
+            this.description = description;
+        }
+
+        // Methode, um den String-Wert des Enums abzurufen
+        public String toString() {
+            return description;
+        }
+    }
+	
 	// Personality
 	public static final DataParameter<String> VILLAGER_NAME = EntityDataManager.<String>createKey(EntityMxVillager.class, DataSerializers.STRING);
 	public static final DataParameter<String> PROFESSIONID = EntityDataManager.<String>createKey(EntityMxVillager.class, DataSerializers.STRING);
@@ -62,7 +84,8 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	// A number between 0 and 9
 	public static final DataParameter<Integer> FACEVARIANT = EntityDataManager.<Integer>createKey(EntityMxVillager.class, DataSerializers.VARINT);
 	public static final DataParameter<BlockPos> HOME_POS = EntityDataManager.createKey(EntityMxVillager.class, DataSerializers.BLOCK_POS);
-
+	public static final DataParameter<String> SET_HOME_STATE = EntityDataManager.<String>createKey(EntityMxVillager.class, DataSerializers.STRING);
+	
     public static final DataParameter<Boolean> IS_INTERACTING = EntityDataManager.createKey(EntityMxVillager.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> IS_FOLLOWING = EntityDataManager.createKey(EntityMxVillager.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> IS_WAITING = EntityDataManager.createKey(EntityMxVillager.class, DataSerializers.BOOLEAN);
@@ -76,9 +99,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 	private Profession  profession;
 	
 	private IntBoundary home;
-	
-	private String currentChatStateString;
-	
+
 	//the center of wandering when no home has been set to this villager
 	private Vec3d wanderCenter;	
 	
@@ -115,7 +136,6 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		}
 		
 		this.initEntityAI();
-		this.resetCurrentChatState();
 	}
 	
     public <T> T get(DataParameter<T> key) {
@@ -175,6 +195,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		this.getDataManager().register(GENDER, false);
 		this.getDataManager().register(FACEVARIANT, Integer.valueOf(0));
 		this.getDataManager().register(HOME_POS,BlockPos.ORIGIN);
+		this.getDataManager().register(SET_HOME_STATE, Set_Home_State.UNCHECKED.toString());
 		this.getDataManager().register(IS_FOLLOWING, false);
 		this.getDataManager().register(IS_INTERACTING, false);
 		this.getDataManager().register(IS_WAITING, false);
@@ -249,14 +270,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 			}
 		}	
 	}
-	
-	public String getCurrentChatState() {
-	    return currentChatStateString;
-	}
 
-	public void resetCurrentChatState() {
-	    this.currentChatStateString = "greeting";
-	}
 	/**
 	 * Toggles the interaction status of a villager.
 	 * If given a EntityPlayer instance, the interaction is ON.
@@ -293,6 +307,12 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		}
 	}
 	
+	public void setWaiting(boolean wait) {
+		if (!this.world.isRemote) {
+			set(IS_WAITING, wait);
+		}
+	}
+	
 	public EntityPlayer getFollowingPlayer() {
 		return this.followTarget;
 	}
@@ -304,35 +324,54 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		return this.wanderCenter;
 	}
 	
-	public void setCurrentPosAsHome(EntityPlayer playerRef) {
+	
+	/**
+	 * Checks the surrounding of the current villager position for different states.
+	 * Sets the internal SET_HOME_STATE flag accordingly
+	 */
+	public void checkCurrentPosForHome() {
+		if(this.world.isRemote)
+			return;
+		//scan home boundary
+		IntBoundary potentialHomeBound = HouseDetector.getClosedField(this.world, new IntVec3(this.posX,this.posY,this.posZ));
+		if(potentialHomeBound == null) {
+			set(SET_HOME_STATE,Set_Home_State.OPENSPACE.toString());
+ 		}else if (HouseDetector.hasBed(this.world, potentialHomeBound) == false) {
+ 			set(SET_HOME_STATE,Set_Home_State.NOBED.toString());
+ 		}else {
+			// remove outlines
+			potentialHomeBound = potentialHomeBound.extend(-1, 0, -1);
+			potentialHomeBound.maxy -= 1;
+			
+			String oldOwner = DataVillage.get(this.world).addHome(this.getName(),potentialHomeBound);
+			if (oldOwner != null) {
+				set(SET_HOME_STATE,Set_Home_State.OCCUPIED.toString());
+			}else {
+				set(SET_HOME_STATE,Set_Home_State.FREE.toString());
+			}
+ 		}
+	}
+	
+	/**
+	 * Tries to set the current position as the villager home.
+	 * Works only, if the current position is sufficient (see method checkCurrentPosForHome() )
+	 */
+	public void trySetCurrentPosAsHome() {
 		// server side only
 		if(this.world.isRemote)
 			return;
+		if(!(this.get(SET_HOME_STATE).equals(Set_Home_State.FREE.toString())))
+			return;
 		
-		//TODO: Housedetector
-		//scan home boundary
-		IntBoundary potentialHomeBound = HouseDetector.getClosedField(this.world, new IntVec3(this.posX,this.posY,this.posZ));
-		if(potentialHomeBound == null){
-		    this.currentChatStateString = "home.openspace";
-		}else if (HouseDetector.hasBed(this.world, potentialHomeBound) == false)
-		{
-		    this.currentChatStateString = "home.nobed";
-		}else 
-		{
-			String oldOwner = DataVillage.get(this.world).addHome(this.getName(),potentialHomeBound);
-			if (oldOwner != null)
-			{
-			    this.currentChatStateString = "home.existsalready";
-			}else {
-				//remove old home
-				if(this.home != null){
-					DataVillage.get(this.world).removeHome(this.getName(),home);
-				}
-				this.currentChatStateString = "home.success";
-				this.setFollowing(null);
-				this.setHome(potentialHomeBound);
-			}
+		IntBoundary homeBound = HouseDetector.getClosedField(this.world, new IntVec3(this.posX,this.posY,this.posZ));
+		homeBound = homeBound.extend(-1, 0, -1);
+		homeBound.maxy -= 1;
+		//remove old home
+		if(this.home != null){
+			DataVillage.get(this.world).removeHome(this.getName(),home);
 		}
+		this.setFollowing(null);
+		this.setHome(homeBound);
 	}
 	
 	public void setHome(IntBoundary home) {
@@ -340,6 +379,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		set(HAS_HOME, true);
 		BlockPos homePos = new BlockPos(home.getRandomPosInsideBoundary());
 		set(HOME_POS, homePos);
+		set(SET_HOME_STATE, Set_Home_State.MYHOME.toString());
 	}
 	
 	public void moveOutHome(EntityPlayer player){
@@ -348,11 +388,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 			this.home = null;
 			set(HAS_HOME, false);
 			set(HOME_POS, BlockPos.ORIGIN);
-			// Send Message message
-			if (player != null) {
-				player.sendMessage(new TextComponentTranslation(MxRef.MOD_ID + ":message.villager.home.moveout",this.getName()));
-			}
-			
+			set(SET_HOME_STATE, Set_Home_State.FREE.toString());
 		}
 	}
 	
@@ -510,6 +546,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		nbt.setBoolean("gender", get(GENDER));
 		nbt.setInteger("facevariant", get(FACEVARIANT));
 		nbt.setBoolean("iswaiting", get(IS_WAITING));
+		nbt.setString("sethomestate", get(SET_HOME_STATE));
 		if(this.home != null) {
 			nbt.setIntArray("homebounds", new int[] {
 				this.home.minx,
@@ -552,6 +589,7 @@ public class EntityMxVillager extends EntityCreature implements ITrading {
 		set(GENDER, nbt.getBoolean("gender"));
 		set(FACEVARIANT, nbt.getInteger("facevariant"));
 		set(IS_WAITING, nbt.getBoolean("iswaiting"));
+		set(SET_HOME_STATE, nbt.getString("sethomestate"));
 		
 		int[] homeBounds = nbt.getIntArray("homebounds");
 		if(homeBounds == null || homeBounds.length == 0)
